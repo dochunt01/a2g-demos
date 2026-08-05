@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A2G Systems — Client Demos</title>
+<style>
+  :root{
+    --paper:#12100E; --raise:#1B1714; --text:#EDE7DE; --dim:#9A8E82;
+    --line:rgba(237,231,222,.14); --mark:#D8451F;
+    --fd:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--paper);color:var(--text);
+    font:16px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .w{max-width:760px;margin:0 auto;padding:72px 24px 96px}
+  .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mark);margin:0 0 16px}
+  h1{font-family:var(--fd);font-size:clamp(30px,6vw,44px);line-height:1.08;margin:0 0 14px;font-weight:600}
+  .sub{color:var(--dim);margin:0 0 48px;max-width:52ch}
+  .card{display:block;text-decoration:none;color:inherit;background:var(--raise);
+    border:1px solid var(--line);border-left:3px solid var(--mark);padding:22px 24px;
+    margin-bottom:12px;transition:background .18s}
+  .card:hover{background:#241d19}
+  .card h2{font-family:var(--fd);font-size:21px;margin:0 0 6px;font-weight:600}
+  .card p{margin:0;color:var(--dim);font-size:14.5px}
+  .card .meta{display:block;margin-top:10px;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--mark)}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);
+    color:var(--dim);font-size:13.5px}
+  a{color:var(--mark)}
+  :focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+</style>
+</head><body>
+<div class="w">
+  <p class="eyebrow">A2G Systems</p>
+  <h1>Client demos.</h1>
+  <p class="sub">Working mock-ups, shared for review. Nothing here is live and nothing here takes a real booking.</p>
+
+  <a class="card" href="savoirfaire/">
+    <h2>Savoirfaire — Chicago jazz violinist</h2>
+    <p>Full site mock-up with a working booking flow: a few questions, a real price at the end, and the enquiry captured either way.</p>
+    <span class="meta">Sam Williams · August 2026</span>
+  </a>
+
+  <a class="card" href="savoirfaire/booking-flow.html">
+    <h2>Savoirfaire — booking flow on its own</h2>
+    <p>The same flow isolated, with the pricing rules written out underneath it.</p>
+    <span class="meta">Reference · August 2026</span>
+  </a>
+
+  <footer>Prices shown are Sam’s own as of 5 August 2026. A few figures — the sound engineer above 150 guests, the deposit, and travel beyond Chicago — are still to be set and are quoted with the date rather than guessed at here.</footer>
+</div>
+</body></html>
