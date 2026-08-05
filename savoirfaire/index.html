@@ -311,7 +311,7 @@
           <span class="pr">$2,500<small>Violin and DJ · from</small></span>
         </article>
       </div>
-      <div class="nt up" data-d="2" style="margin-top:1.6rem"><b>Prices are Sam’s, as of 5 August</b>Base rates and the $500 second-setup are his. Still open: the sound-engineer cost above 150 guests, the deposit amount, and travel beyond Chicago — all quoted with the date until he sets them.</div>
+      <div class="nt up" data-d="2" style="margin-top:1.6rem"><b>Prices are Sam’s, as of 5 August</b>Base rates and the $500 second-setup are his. Still open: the deposit amount and travel beyond Chicago — quoted with the date until he sets them.</div>
     </div></section>
 
     <hr class="hard">
@@ -401,7 +401,7 @@
         <article><span class="no">A3</span><h3>Violin and DJ</h3><p>Live violin over a DJ set — the shape that keeps a room moving after dinner without losing the live instrument.</p><span class="pr">$2,500<small>Duo</small></span></article>
         <article><span class="no">A4</span><h3>Violin and a second player</h3><p>Piano, guitar or harp. All acoustic, for a smaller room and a quieter evening.</p><span class="pr">$3,500<small>Duo</small></span></article>
       </div>
-      <div class="nt up" data-d="1" style="margin-top:1.6rem"><b>One rule underneath all of it</b>He charges for a day and a setup, not for hours. Music in a second space — a garden ceremony and a ballroom reception — means a second sound system carried and set up, and that is $500. Over 150 guests he brings a larger rig and an engineer, quoted with your date.</div>
+      <div class="nt up" data-d="1" style="margin-top:1.6rem"><b>One rule underneath all of it</b>He charges for a day and a setup, not for hours. Music in a second space — a garden ceremony and a ballroom reception — means a second sound system carried and set up, and that is $500. Over 150 guests it is a larger rig and an engineer to run it, $1,000.</div>
     </div></section>
 
     <section class="sec" style="padding-top:0"><div class="w">
@@ -412,7 +412,7 @@
         <article><span class="no">B3</span><h4>Your music</h4><p>Up to ten requests, arranged for violin and recorded in advance so you hear the aisle before you walk it.</p></article>
         <article><span class="no">B4</span><h4>Presence</h4><p>Formal attire, on site forty-five minutes early, forty years of knowing when to play and when to stop.</p></article>
       </div>
-      <div class="nt up" data-d="2" style="margin-top:1.6rem"><b>Still to be set</b>The sound-engineer cost above 150 guests, the deposit amount, and travel beyond Chicagoland. Until Sam sets them they are quoted with your date rather than guessed at here.</div>
+      <div class="nt up" data-d="2" style="margin-top:1.6rem"><b>Still to be set</b>The deposit amount, and travel beyond Chicagoland. Until Sam sets them they are quoted with your date rather than guessed at here.</div>
       <div class="up" data-d="3" style="margin-top:2.4rem"><a class="b" href="#book" data-go="book">Book a date</a></div>
     </div></section>
   </div>
@@ -545,6 +545,11 @@
     font-variant-numeric:tabular-nums}
   #bf .bf-line .v.tbd{font-family:var(--fb);font-weight:400;font-style:italic;color:var(--faint)}
   #bf .stp h2{margin-bottom:.7rem}
+  #bf .chips.stack{flex-direction:column;align-items:stretch}
+  #bf .chips.stack .chip{text-align:left;padding:1.05em 1.25em}
+  #bf .chip small{display:block;font-family:var(--fb);font-weight:400;text-transform:none;
+    letter-spacing:0;font-size:.83rem;opacity:.68;margin-top:.35rem}
+  #bf .chip[aria-pressed="true"] small{opacity:.85}
 </style>
 <div class="rt" data-rt="book">
   <section class="sec"><div class="w">
@@ -663,20 +668,21 @@
    small set of modifiers. Nothing is computed from a slider, because the
    pricing itself isn't hourly — he charges for a day and a setup.
 
-   base            solo 1500 · violin+DJ 2500 · violin+acoustic partner 3500
-   + each extra space          500   (a second room = a second sound setup)
+   base            solo 1500 · duo with DJ 2500 · duo with a player 3500
+   + each extra space               500   (a second room = a second setup)
    + each extra hour (non-wedding)  250 solo / 400 duo
-   + over 150 guests           quoted, never priced in the form
+   + over 150 guests               1000   (larger system + an engineer)
 
    Weddings are priced by parts and spaces, never hours. Other events use
-   coverage tiers. Guest count is captured but never gates the flow.        */
+   coverage tiers. Outdoors is a stated condition, not a questionnaire.    */
 (function(){
   var BASE  = {solo:1500, dj:2500, acoustic:3500};
   var HOUR  = {solo:250,  dj:400,  acoustic:400};
+  var ENGINEER = 1000;
   var LABEL = {
-    solo:'Solo violin with tracks',
-    dj:'Violin and DJ',
-    acoustic:'Violin and piano, guitar or harp'
+    solo:'Solo violin',
+    dj:'Duo — violin and DJ',
+    acoustic:'Duo — violin and a second player'
   };
 
   var box = document.getElementById('bf');
@@ -685,28 +691,26 @@
   var progEl = document.getElementById('bf-prog');
 
   var st, idx;
-  function reset(){ st = {parts:[], spaces:1, out:{}}; idx = 0; }
+  function reset(){ st = {parts:[], spaces:1}; idx = 0; }
   reset();
 
   function steps(){
     var s = ['occasion'];
     if(!st.track) return s;
-    s.push('when');
+    s.push('when','guests');
     if(st.track === 'wedding'){
       s.push('parts');
       if(st.parts.length > 1) s.push('spaces');
       s.push('setting');
-      if(st.setting !== 'indoor' && st.setting) s.push('outdoor');
+      if(st.setting && st.setting !== 'indoor') s.push('outdoor');
       s.push('lineup');
-      if(st.lineup === 'acoustic') s.push('piano');
     } else {
       /* lineup before duration — the extra-hour rate depends on it, so the
          other order would show a number we'd have to take back */
-      s.push('etype','lineup');
-      if(st.lineup === 'acoustic') s.push('piano');
-      s.push('duration','spaces','setting');
-      if(st.setting !== 'indoor' && st.setting) s.push('outdoor');
+      s.push('etype','lineup','duration','spaces','setting');
+      if(st.setting && st.setting !== 'indoor') s.push('outdoor');
     }
+    if(st.lineup === 'acoustic') s.push('piano');
     s.push('contact','estimate');
     return s;
   }
@@ -718,28 +722,21 @@
   }
   function money(n){ return '$' + n.toLocaleString('en-US'); }
 
-  function chip(key, val, label){
+  function chip(key, val, label, note){
     return '<button class="chip" data-k="' + key + '" data-v="' + val + '" aria-pressed="' +
-      (String(st[key]) === String(val) ? 'true' : 'false') + '">' + label + '</button>';
+      (String(st[key]) === String(val) ? 'true' : 'false') + '">' + label +
+      (note ? '<small>' + note + '</small>' : '') + '</button>';
   }
   function chipMulti(val, label){
     return '<button class="chip" data-m="' + val + '" aria-pressed="' +
       (st.parts.indexOf(val) > -1 ? 'true' : 'false') + '">' + label + '</button>';
   }
-  function chipOut(key, label){
-    var v = st.out[key];
-    function b(val, txt){
-      return '<button class="chip" data-o="' + key + '" data-v="' + val + '" aria-pressed="' +
-        (v === val ? 'true' : 'false') + '">' + txt + '</button>';
-    }
-    return '<div class="fgrp"><span>' + label + '</span><div class="chips">' +
-      b('yes','Yes') + b('no','No') + b('unsure','Not sure yet') + '</div></div>';
-  }
-  /* Back on every screen past the first, whether or not it has a Continue */
+  /* Back sits on the left, Continue on the right — and every screen past
+     the first gets a row, including the ones whose chips advance on their own */
   function navrow(cta){
     var h = '<div class="navrow">';
-    if(cta) h += '<button class="b" data-fwd>' + cta + '</button>';
     if(idx > 0) h += '<button class="b o" data-bk>Back</button>';
+    if(cta)     h += '<button class="b" data-fwd>' + cta + '</button>';
     return h + '</div>';
   }
 
@@ -760,7 +757,7 @@
     if(id === 'occasion'){
       h += '<h2>What is the occasion?</h2>' +
            '<p class="lead">So he knows what kind of room this is.</p>' +
-           '<div class="chips">' +
+           '<div class="chips stack">' +
              chip('track','wedding','A wedding') +
              chip('track','event','Another kind of event') +
            '</div>' +
@@ -773,11 +770,19 @@
            '<p class="lead">The date is the first thing he checks.</p>' +
            '<div class="r2">' +
              '<div class="fl"><label for="bf-dt">Date</label><input id="bf-dt" type="date" value="' + esc(st.date) + '"></div>' +
-             '<div class="fl"><label for="bf-gu">Guests, roughly</label><input id="bf-gu" type="number" min="1" placeholder="120" value="' + esc(st.guests) + '"></div>' +
-           '</div>' +
-           '<div class="fl"><label for="bf-vn">Venue or neighbourhood</label>' +
-           '<input id="bf-vn" type="text" placeholder="e.g. Salvage One, West Loop" value="' + esc(st.venue) + '"></div>' +
-           navrow('Continue');
+             '<div class="fl"><label for="bf-vn">Venue or neighbourhood</label>' +
+             '<input id="bf-vn" type="text" placeholder="e.g. Salvage One" value="' + esc(st.venue) + '"></div>' +
+           '</div>' + navrow('Continue');
+    }
+
+    else if(id === 'guests'){
+      h += '<h2>How many people?</h2>' +
+           '<p class="lead">His own system covers a room of about 150. Past that he brings a larger rig and an engineer to run it.</p>' +
+           '<div class="chips stack">' +
+             chip('guests','under','Under 150') +
+             chip('guests','over','Over 150', 'Larger system and an engineer &middot; +' + money(ENGINEER)) +
+             chip('guests','unsure','Not sure yet') +
+           '</div>';
     }
 
     else if(id === 'parts'){
@@ -796,10 +801,10 @@
             ? 'Same space, or different ones?'
             : 'Will the music be in more than one space?') + '</h2>' +
            '<p class="lead">Each separate space needs its own sound setup, which adds $500.</p>' +
-           '<div class="chips">' +
+           '<div class="chips stack">' +
              chip('spaces','1','One space') +
-             chip('spaces','2','Two spaces &nbsp;+$500') +
-             (cap >= 3 ? chip('spaces','3','Three spaces &nbsp;+$1,000') : '') +
+             chip('spaces','2','Two spaces', '+$500') +
+             (cap >= 3 ? chip('spaces','3','Three spaces', '+$1,000') : '') +
            '</div>';
     }
 
@@ -815,18 +820,17 @@
     else if(id === 'lineup'){
       h += '<h2>What should it sound like?</h2>' +
            '<p class="lead">He will tell you which one your room needs — including when that is the cheaper answer.</p>' +
-           '<div class="chips">' +
-             chip('lineup','solo','Solo violin &nbsp;$1,500') +
-             chip('lineup','dj','Violin and DJ &nbsp;$2,500') +
-             chip('lineup','acoustic','Violin and piano, guitar or harp &nbsp;$3,500') +
-           '</div>' +
-           '<p style="margin-top:1.3rem;font-size:.9rem;color:var(--soft)">Solo includes his own sound system.</p>';
+           '<div class="chips stack">' +
+             chip('lineup','solo','Solo violin', 'His own sound system &middot; $1,500') +
+             chip('lineup','dj','Duo — violin and DJ', 'Live violin over a DJ set &middot; $2,500') +
+             chip('lineup','acoustic','Duo — violin and a second player', 'Piano, guitar or harp &middot; $3,500') +
+           '</div>';
     }
 
     else if(id === 'piano'){
       h += '<h2>Does the venue have a piano?</h2>' +
            '<p class="lead">If not we bring a keyboard, which just means one more outlet to plan for.</p>' +
-           '<div class="chips">' +
+           '<div class="chips stack">' +
              chip('piano','yes','Yes') +
              chip('piano','no','No') +
              chip('piano','unsure','Not sure yet') +
@@ -837,16 +841,16 @@
       var r = HOUR[st.lineup || 'solo'];
       h += '<h2>How much music?</h2>' +
            '<p class="lead">Time on site, breaks included.</p>' +
-           '<div class="chips">' +
+           '<div class="chips stack">' +
              chip('duration','2','Up to 2 hours') +
-             chip('duration','3','Up to 3 hours &nbsp;+' + money(r)) +
-             chip('duration','4','Up to 4 hours &nbsp;+' + money(r * 2)) +
-             chip('duration','more','Longer than that') +
+             chip('duration','3','Up to 3 hours', '+' + money(r)) +
+             chip('duration','4','Up to 4 hours', '+' + money(r * 2)) +
+             chip('duration','more','Longer than that', 'He will price the day with you') +
            '</div>';
     }
 
     else if(id === 'setting'){
-      h += '<h2>Indoors or outdoors?</h2><div class="chips">' +
+      h += '<h2>Indoors or outdoors?</h2><div class="chips stack">' +
              chip('setting','indoor','Indoors') +
              chip('setting','outdoor','Outdoors') +
              chip('setting','both','Some of each') +
@@ -854,12 +858,17 @@
     }
 
     else if(id === 'outdoor'){
-      h += '<h2>Two things for playing outside.</h2>' +
-           '<div class="nt" style="margin-bottom:1.8rem"><b>Outdoors</b>' +
-           'Rain can damage the violin, so he needs a covered spot to play &mdash; a tent, a porch, ' +
-           'anything with a roof. And an outlet nearby for sound.</div>' +
-           chipOut('cover','Is there a covered spot?') +
-           chipOut('power','Is there power nearby?') +
+      /* a stated condition, not a questionnaire — the answer is the same
+         whatever they'd click, so asking only adds a screen to abandon */
+      h += '<h2>Two things about playing outside.</h2>' +
+           '<div class="nt" style="margin-bottom:1.4rem"><b>He cannot play in the rain</b>' +
+           'The violin is wood and rain will damage it, so there has to be something covered ' +
+           'to play under — a tent, a porch, a roofed structure. Not shade that happens to be ' +
+           'there in the afternoon.</div>' +
+           '<div class="nt"><b>And power close by</b>' +
+           'An outlet within reach of where he sets up, for the sound system.</div>' +
+           '<p class="lead" style="margin-top:1.4rem">Nothing to answer here — he will walk the details ' +
+           'through with you and your venue once the date is held.</p>' +
            navrow('Continue');
     }
 
@@ -878,8 +887,6 @@
       h += estimate();
     }
 
-    /* screens whose chips advance on their own still need a way back —
-       give every screen past the first a nav row if it hasn't got one */
     if(idx > 0 && id !== 'estimate' && h.indexOf('class="navrow"') === -1) h += navrow(null);
 
     h += '</div>';
@@ -891,7 +898,6 @@
     var lineup = st.lineup || 'solo';
     var base   = BASE[lineup], rate = HOUR[lineup];
     var custom = (st.track === 'event' && st.duration === 'more');
-    var big    = parseInt(st.guests, 10) > 150;
     var lines  = [], total = base;
 
     lines.push([LABEL[lineup] + (lineup === 'solo' ? ', sound included' : ''), money(base)]);
@@ -908,16 +914,23 @@
       lines.push([sp + (sp === 1 ? ' additional setup' : ' additional setups'), money(sp * 500)]);
       total += sp * 500;
     }
-    if(big) lines.push(['Sound engineer and larger system', 'quoted', true]);
+    if(st.guests === 'over'){
+      lines.push(['Larger system and a sound engineer', money(ENGINEER)]);
+      total += ENGINEER;
+    } else if(st.guests === 'unsure'){
+      /* carried as a conditional line rather than folded into the number —
+         they told us they don't know, so quoting them as if they did is a lie */
+      lines.push(['If you go over 150 guests', 'add ' + money(ENGINEER), true]);
+    }
 
     var h = '';
     if(custom){
       h += '<h2>Let us talk.</h2>' +
            '<p class="lead">A day that long he would rather price with you than guess at. ' +
-           'He has everything else &mdash; you will hear from him today.</p>';
+           'He has everything else — you will hear from him today.</p>';
     } else {
       h += '<span class="bf-cap">Your estimate</span>' +
-           '<p class="bf-fig">' + (big ? '<em>from</em> ' : '') + money(total) + '</p>' +
+           '<p class="bf-fig">' + money(total) + '</p>' +
            '<div class="bf-lines">';
       lines.forEach(function(l){
         h += '<div class="bf-line"><span class="k">' + l[0] + '</span><span class="dots"></span>' +
@@ -927,31 +940,30 @@
     }
 
     h += '<div class="nt"><b>Holding the date</b>' +
-         'A non-refundable deposit holds it; the balance is due the week of the event.' +
-         (big ? '' : ' Over 150 guests he brings a larger system and a sound engineer, and will confirm that cost with you.') +
-         ' He will confirm ' + (st.date ? esc(st.date) : 'your date') +
+         'A non-refundable deposit holds it; the balance is due the week of the event. ' +
+         'He will confirm ' + (st.date ? esc(st.date) : 'your date') +
          ' and send a firm quote today. Nothing is booked until you have seen it in writing.</div>';
 
     if(st.sent){
       h += '<div class="done-c" style="padding-top:1.6rem"><div class="tick">&#10003;</div>' +
            '<h2>Got it.</h2>' +
            '<p class="lead" style="margin-block:1rem 1.6rem">You will hear back today. ' +
-           'Meanwhile &mdash; sixteen records to get through.</p>' +
+           'Meanwhile — sixteen records to get through.</p>' +
            '<div class="navrow" style="margin-top:0">' +
            '<a class="b o" href="#music" data-go="music">The catalogue</a>' +
            '<button class="b o" data-again>Start again</button></div></div>';
     } else {
       h += '<div class="fl" style="margin-top:1.8rem"><label for="bf-ms">Anything else he should know?</label>' +
            '<textarea id="bf-ms" placeholder="A first-dance song, a timeline, a question about the space…">' + esc(st.notes) + '</textarea></div>' +
-           '<div class="navrow"><button class="b" data-send>I am interested &rarr;</button>' +
-           '<button class="b o" data-bk>Back</button></div>';
+           '<div class="navrow"><button class="b o" data-bk>Back</button>' +
+           '<button class="b" data-send>I am interested &rarr;</button></div>';
     }
     return h;
   }
 
   function commit(){
     var g = function(id){ var e = document.getElementById(id); return e ? e.value : undefined; };
-    if(document.getElementById('bf-dt')){ st.date = g('bf-dt'); st.venue = g('bf-vn'); st.guests = g('bf-gu'); }
+    if(document.getElementById('bf-dt')){ st.date = g('bf-dt'); st.venue = g('bf-vn'); }
     if(document.getElementById('bf-nm')){ st.name = g('bf-nm'); st.phone = g('bf-ph'); st.email = g('bf-em'); }
     if(document.getElementById('bf-ms')) st.notes = g('bf-ms');
   }
@@ -976,10 +988,6 @@
         if(st.parts.length < 2) st.spaces = 1;
         render();
       });
-    });
-
-    stepEl.querySelectorAll('[data-o]').forEach(function(b){
-      b.addEventListener('click', function(){ st.out[b.dataset.o] = b.dataset.v; render(); });
     });
 
     var f = stepEl.querySelector('[data-fwd]');
