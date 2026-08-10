@@ -236,15 +236,45 @@ h1 em{font-style:italic; color:var(--blue-lift); text-shadow:0 0 40px var(--glow
 /* ============ SECTIONS AS FEED CARDS ============ */
 main{display:flex; flex-direction:column; gap:clamp(.9rem,2vw,1.4rem); padding:clamp(.9rem,2vw,1.4rem) 0 0}
 section{
-  padding:clamp(2rem,5vw,3.2rem) 0;
   background:var(--ground-2);
   border:1px solid var(--line-soft);
   border-radius:clamp(14px,2vw,20px);
   width:var(--wide); margin-inline:auto;
-  scroll-margin-top:70px;
+  scroll-margin-top:76px;
+  overflow:hidden; transition:border-color .25s;
 }
 section[hidden]{display:none}
-section .wrap{width:100%; padding-inline:clamp(1.1rem,4vw,2.6rem)}
+section:has(.fold[open]){border-color:color-mix(in srgb,var(--blue) 45%,transparent)}
+section .wrap{width:100%; padding:clamp(1.5rem,3.4vw,2.2rem) clamp(1.1rem,4vw,2.6rem) clamp(2rem,5vw,3rem)}
+
+/* ---- the fold header: reads as a contents row when closed ---- */
+.fold > summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; gap:1.2rem;
+  padding:clamp(1.15rem,3vw,1.6rem) clamp(1.1rem,4vw,2.6rem);
+  transition:background .2s;
+}
+.fold > summary::-webkit-details-marker{display:none}
+.fold > summary::marker{content:""}
+.fold > summary:hover{background:var(--raise)}
+.fhead{display:flex; flex-direction:column; gap:.5rem; flex:1; min-width:0}
+.fcat{
+  font-family:var(--data); font-size:.62rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3); transition:color .25s;
+}
+.ftitle{
+  font-family:var(--display); font-weight:400; letter-spacing:-.015em;
+  font-size:clamp(1.28rem,3vw,1.95rem); line-height:1.12; text-wrap:balance;
+}
+.fmark{
+  flex:none; width:32px; height:32px; border-radius:50%;
+  display:grid; place-items:center; font-family:var(--data); font-size:1.15rem;
+  color:var(--blue-lift); border:1px solid var(--line);
+  transition:transform .3s cubic-bezier(.22,1,.36,1), background .25s, border-color .25s;
+}
+.fold > summary:hover .fmark{border-color:var(--blue); background:color-mix(in srgb,var(--blue) 16%,transparent)}
+.fold[open] > summary .fmark{transform:rotate(45deg); background:var(--blue); border-color:var(--blue); color:#fff}
+.fold[open] > summary .fcat{color:var(--blue-lift)}
+.fold[open] > summary{border-bottom:1px solid var(--line-soft)}
 /* nested surfaces lift off the card ground */
 section .card,section .day,section table,section details,section .finals li{background:var(--ground-3)}
 section .day[data-open="true"]{background:color-mix(in srgb,var(--blue) 12%,var(--ground-3))}
@@ -252,7 +282,7 @@ h2{
   font-family:var(--display); font-weight:400;
   font-size:clamp(1.9rem,4.6vw,3.1rem); line-height:1.06; letter-spacing:-.015em;
 }
-h2 + .sub{color:var(--ink-2); margin-top:1rem; max-width:56ch}
+.sub{color:var(--ink-2); margin-top:0; max-width:56ch}
 h3{font-size:1.08rem; font-weight:650; letter-spacing:-.01em}
 
 /* ============ A/B CHART ============ */
@@ -419,25 +449,25 @@ tr:last-child td{border-bottom:none}
 td b{color:var(--ink)}
 td:first-child{color:var(--blue-lift); font-weight:600}
 
-/* ============ DETAILS ============ */
-details{
-  border:1px solid var(--line-soft); border-radius:14px; background:var(--ground-2);
+/* ============ NESTED DETAILS (inside a fold body) ============ */
+.wrap details{
+  border:1px solid var(--line-soft); border-radius:14px; background:var(--ground-3);
   padding:0 1.3rem; margin-top:.75rem; transition:.25s;
 }
-details[open]{border-color:var(--blue); background:var(--ground-3)}
-summary{
+.wrap details[open]{border-color:var(--blue)}
+.wrap details > summary{
   cursor:pointer; padding:1.1rem 0; list-style:none;
   display:flex; align-items:center; justify-content:space-between; gap:1rem;
   font-weight:600; font-size:1rem;
 }
-summary::-webkit-details-marker{display:none}
-summary::after{
+.wrap details > summary::-webkit-details-marker{display:none}
+.wrap details > summary::after{
   content:"+"; font-family:var(--data); font-size:1.2rem; color:var(--blue-lift);
   transition:transform .3s; flex:none;
 }
-details[open] summary::after{transform:rotate(45deg)}
-details .inner{padding-bottom:1.3rem; color:var(--ink-2); font-size:.94rem}
-details .inner p{margin-bottom:.7em}
+.wrap details[open] > summary::after{transform:rotate(45deg)}
+.wrap details .inner{padding-bottom:1.3rem; color:var(--ink-2); font-size:.94rem}
+.wrap details .inner p{margin-bottom:.7em}
 
 /* ============ FOOT ============ */
 footer{padding:clamp(3rem,7vh,4.5rem) 0 5rem; color:var(--ink-3); font-size:.86rem}
@@ -502,6 +532,7 @@ footer .col{line-height:1.75}
         <button class="chip" data-filter="act" aria-pressed="false">Do this week</button>
         <button class="chip" data-filter="why" aria-pressed="false">Why</button>
         <button class="chip" data-filter="later" aria-pressed="false">After the show</button>
+        <button class="chip" id="allBtn" type="button" aria-pressed="false" style="margin-left:auto">Open all</button>
       </div>
       <ul class="toclist" id="toc"></ul>
     </div>
@@ -511,9 +542,12 @@ footer .col{line-height:1.75}
 <main>
 
 <section id="start" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Start here</span><span class="ftitle">Nine things, and four of them are free and instant.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Start here</p>
-    <h2>Nine things, and four of them are free and instant.</h2>
     <p class="sub">Everything below this section is the reasoning. This is the doing. Tick them off as they're done — the rest of the page explains any line you want the argument for.</p>
 
     <ul class="todo">
@@ -528,12 +562,16 @@ footer .col{line-height:1.75}
       <li><label><input type="checkbox"><span class="txt">Email <b>Haven</b> and ask them to add Aniba's Meta pixel to the Eventbrite listing<small>Five minutes on their end. If yes, real ticket tracking becomes possible. Worth knowing either way.</small></span></label></li>
     </ul>
   </div>
+</details>
 </section>
 
 <section id="evidence" data-cat="why">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">The Evidence</span><span class="ftitle">Two posts. One of them told us everything.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">The Evidence</p>
-    <h2>Two posts. One of them told us everything.</h2>
     <p class="sub">Back-to-back nights, same page, nearly identical reach. Then the numbers split. Switch the metric and watch where they come apart.</p>
 
     <div class="metricbar" role="group" aria-label="Choose metric">
@@ -559,12 +597,16 @@ footer .col{line-height:1.75}
       On <b>views</b> they're within 11% of each other. On <b>engagement rate</b> the first one wins by <b>56%</b>. Nothing about the production changed — one post made a claim about a shared memory and <b>named a specific artist</b>. The other described the weather.
     </div>
   </div>
+</details>
 </section>
 
 <section id="rules" data-cat="why">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">The Grammar</span><span class="ftitle">Six rules, written for Facebook.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">The Grammar</p>
-    <h2>Six rules, written for Facebook.</h2>
     <p class="sub">Facebook is where the audience is — 6,900 following Aniba Tha Messenger, against 3,141 on the band's Instagram. That changes the rules, and three of them are the opposite of what works on Reels.</p>
 
     <div class="grid">
@@ -600,13 +642,17 @@ footer .col{line-height:1.75}
       </div>
     </div>
   </div>
+</details>
 </section>
 
 <section id="move" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">The One Move</span><span class="ftitle">Worth more than every hook on this page.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">The One Move</p>
     <div class="move">
-      <h2>Worth more than every hook on this page.</h2>
       <p class="quote">“Comment TAKE ME BACK and I'll send you the link.”</p>
       <p style="color:var(--ink-2);max-width:52ch">Not a link in the post. A comment prompt, answered by DM. It costs nothing and it's the only thing here that still exists on August 22nd.</p>
       <ul class="why">
@@ -617,12 +663,16 @@ footer .col{line-height:1.75}
       </ul>
     </div>
   </div>
+</details>
 </section>
 
 <section id="countdown" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Days 1–8</span><span class="ftitle">The setlist is the content calendar.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Days 1–8</p>
-    <h2>The setlist is the content calendar.</h2>
     <p class="sub">Eight artists on the bill means eight days of the format that already worked. Same frame, same overlay style, one name a day. Tap any card for the overlay line and the caption.</p>
 
     <div class="deckctl">
@@ -631,24 +681,32 @@ footer .col{line-height:1.75}
 
     <div class="deckgrid" id="deck"></div>
   </div>
+</details>
 </section>
 
 <section id="final3" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Days 9–11</span><span class="ftitle">Then change registers.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Days 9–11</p>
-    <h2>Then change registers.</h2>
     <ul class="finals">
       <li><span class="tag">Day 09</span><div><b>The Best Dressed contest</b><p>It's on the ticket page and it isn't in the content. “Show me your neo-soul fit in the comments.” Free participation, free wardrobe photos, and it pre-sells the atmosphere of the room.</p></div></li>
       <li><span class="tag">Day 10</span><div><b>Soundcheck. The empty room.</b><p>Anticipation outperforms invitation. Lights up, nobody in it yet, the band running one bar over and over.</p></div></li>
       <li><span class="tag">Day 11</span><div><b>The real number</b><p>“Room holds ___.” Scarcity only works when it's true — so only post this one if it is.</p></div></li>
     </ul>
   </div>
+</details>
 </section>
 
 <section id="timing" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Timing</span><span class="ftitle">9PM is working. That doesn't make it best.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Timing</p>
-    <h2>9PM is working. That doesn't make it best.</h2>
     <p class="sub">Both measured posts went up around 9PM — one at 8:58, one at 9:31. Same hour, no second time slot to compare against. So the honest read is that 9PM <em>works</em>, not that it wins. Nothing in the data has been tested against it yet.</p>
 
     <div class="verdict">
@@ -705,12 +763,16 @@ footer .col{line-height:1.75}
       <b>One caveat on reading the result.</b> The probes carry different artists than the anchors, so if midday underperforms we won't know for certain whether it was the hour or the name. With eleven posts there's no way around that. What comes out is a direction worth acting on, not proof — and it's still eleven days and zero dollars to get it.
     </div>
   </div>
+</details>
 </section>
 
 <section id="links" data-cat="why">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Links</span><span class="ftitle">Keep the link out of the post.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Links</p>
-    <h2>Keep the link out of the post.</h2>
     <p class="sub">Not for the reason everyone repeats. The “link posts get 80% less reach” figure floating around traces back to marketing blogs, not to data, and it's shakier than it sounds — Facebook referral traffic to news sites actually <em>rose</em> sharply through 2026. The real reason is narrower and much more concrete.</p>
 
     <div class="grid">
@@ -736,12 +798,16 @@ footer .col{line-height:1.75}
       </div>
     </div>
   </div>
+</details>
 </section>
 
 <section id="paid" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Paid</span><span class="ftitle">Ticket ads can't work. Event ads can.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Paid</p>
-    <h2>Ticket ads can't work. Event ads can.</h2>
     <p class="sub">There's a specific reason paid traffic can't be optimized <em>toward a ticket sale</em> for August 21 — and one clean way around it that costs nothing to set up. Both come down to where the conversion happens.</p>
 
     <div class="note">
@@ -797,12 +863,16 @@ footer .col{line-height:1.75}
       <b>The real lesson is the same one as the ticketing.</b> Spending to fill a room you don't own, through a checkout you can't see, is how you spend money and learn nothing. The version of this worth doing properly is a show where the band holds the ticket link — then the pixel, the retargeting, and the numbers all become available at once.
     </div>
   </div>
+</details>
 </section>
 
 <section id="event" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">The Event Page</span><span class="ftitle">The best asset here is already built, and barely being used.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">The Event Page</p>
-    <h2>The best asset here is already built, and barely being used.</h2>
     <p class="sub">The Facebook event for August 21 exists, and the band hosts it — not the venue. Aniba &amp; The Sol Starz, Neri Honey and Ishmael are all listed as hosts. As of today it shows <b>38 people responded</b>, with tickets running $25.61–$43.30.</p>
 
     <div class="move">
@@ -843,12 +913,16 @@ footer .col{line-height:1.75}
       <b>And the thing sitting right there on the event page.</b> Facebook's own suggested-events panel shows <b>Jill Scott at The Chicago Theatre on Sunday, August 23 — with 10,078 people interested.</b> That's two days after this show, in the same city, and Jill Scott is on the tribute setlist. Ten thousand Chicagoans have just publicly raised their hand for exactly this music, on exactly this weekend. The Friday show is the warm-up for the weekend they're already planning — and that's a post, an ad audience, and an argument, all free.
     </div>
   </div>
+</details>
 </section>
 
 <section id="groups" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">The Groups</span><span class="ftitle">Seven real ones. The best isn't a music group.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">The Groups</p>
-    <h2>Seven real ones. The best isn't a music group.</h2>
     <p class="sub">Every group below was opened and checked on August 10, 2026 — names, sizes and privacy settings are what Facebook showed on the day. Ranked by how well the room matches the room at The Haven, not by size.</p>
 
     <div class="scroller">
@@ -926,12 +1000,16 @@ footer .col{line-height:1.75}
       <b>What I couldn't check.</b> Group rules aren't visible from outside, so somebody has to read each one before posting — several of these will ban promotion outright, and that's the admin's call, not a negotiation. Two others surfaced that couldn't be verified: <b>Old School Soul RnB Lovers</b>, which appears to be national rather than Chicago, and <b>Eventos En Chicago</b>, which is Spanish-language. Neither looks worth the effort for a local show.
     </div>
   </div>
+</details>
 </section>
 
 <section id="volume" data-cat="why">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Volume</span><span class="ftitle">Organic already beats the ad budget. Posting more won't extend that.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Volume</p>
-    <h2>Organic already beats the ad budget. Posting more won't extend that.</h2>
     <p class="sub">Two separate questions live in “should we post more” — is free traffic actually competitive with paid, and does doubling the posts double the reach. The first answer is yes. The second is no, and pushing it backfires.</p>
 
     <div class="verdict">
@@ -968,12 +1046,16 @@ footer .col{line-height:1.75}
       <b>One number worth pulling.</b> Both screenshots read “#1 out of 10” and “#2 out of 10,” which means the dashboard was ranking against ten recent posts — so there's already a posting history to compare against, and I don't know what window it covers. If that's ten posts in two weeks, the cadence is roughly right already and this is about format, not frequency. Worth a glance before changing anything.
     </div>
   </div>
+</details>
 </section>
 
 <section id="tiktok" data-cat="later">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">TikTok</span><span class="ftitle">103 videos. Not one has reached 2,000 views.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">TikTok</p>
-    <h2>103 videos. Not one has reached 2,000 views.</h2>
     <p class="sub">The account is <b>@anibathesolstarz</b> — 385 followers, 102 following, 103 posts. Here's what the whole catalogue actually looks like, counted one by one on August 10, 2026.</p>
 
     <div class="clock" style="margin-top:2rem">
@@ -1050,12 +1132,16 @@ footer .col{line-height:1.75}
       <b>One strategic thing, plainly: TikTok will not sell tickets to August 21st.</b> It distributes by interest, not by neighbourhood — there's no way to aim it at people who could drive to 43rd Street on Friday. With 385 followers and eleven days, it isn't the instrument. Facebook and the event page are. <b>TikTok is the long game</b> — where an audience for Aniba's own music gets built once the covers show is behind them. Fix the format now, but don't spend the eleven days there.
     </div>
   </div>
+</details>
 </section>
 
 <section id="measure" data-cat="act">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Scoreboard</span><span class="ftitle">Four numbers. Ignore the rest.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">Scoreboard</p>
-    <h2>Four numbers. Ignore the rest.</h2>
     <div class="scroller">
       <table>
         <thead><tr><th>Track this</th><th>Because</th></tr></thead>
@@ -1069,12 +1155,16 @@ footer .col{line-height:1.75}
     </div>
     <p style="margin-top:1.5rem;color:var(--ink-3);font-size:.9rem">Ignore raw views. Ignore “approximate earnings” entirely — at this volume it's nowhere near a payout threshold, so it's noise.</p>
   </div>
+</details>
 </section>
 
 <section id="after" data-cat="later">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">After August</span><span class="ftitle">When the covers are behind you.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
   <div class="wrap">
-    <p class="eyebrow">After August</p>
-    <h2>When the covers are behind you.</h2>
     <p class="sub">This whole plan is built for a tribute night. Aniba's own music needs a different engine — six series that compound instead of counting down.</p>
 
     <details>
@@ -1106,6 +1196,7 @@ footer .col{line-height:1.75}
       <div class="inner"><p>Out in the world right now there's Aniba Tha Messenger, Aniba &amp; The Sol Starz, Aniba Hotep &amp; The Sol Collective, and anibahoteptsc.com. Someone who hears her once and searches a week later has to guess right. Not urgent — just costly, quietly, forever.</p></div>
     </details>
   </div>
+</details>
 </section>
 
 </main>
@@ -1147,7 +1238,11 @@ footer .col{line-height:1.75}
     a.dataset.target = pair[0];
     a.innerHTML = '<span class="tocat">' + (CATNAME[cat] || "") + '</span><span></span>';
     a.lastChild.textContent = pair[1];
-    a.addEventListener("click", function(){ closePanel(); });
+    a.addEventListener("click", function(){
+      var f = sec.querySelector(".fold");
+      if(f) f.open = true;
+      closePanel();
+    });
     li.appendChild(a);
     toc.appendChild(li);
   });
@@ -1180,6 +1275,17 @@ footer .col{line-height:1.75}
       Array.prototype.forEach.call(toc.querySelectorAll("a"), function(a){
         a.hidden = !(f === "all" || a.dataset.cat === f);
       });
+    });
+  });
+
+  /* ---------- open / close all ---------- */
+  var allBtn = document.getElementById("allBtn");
+  allBtn.addEventListener("click", function(){
+    var opening = allBtn.getAttribute("aria-pressed") !== "true";
+    allBtn.setAttribute("aria-pressed", String(opening));
+    allBtn.textContent = opening ? "Close all" : "Open all";
+    Array.prototype.forEach.call(document.querySelectorAll("main .fold"), function(f){
+      f.open = opening;
     });
   });
 
