@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark light">
+<title>Aniba &middot; The 11-Day Plan</title>
+<style>
+  html{-webkit-text-size-adjust:100%}
+  img,svg,video{max-width:100%;height:auto}
+  button{font-family:inherit}
+  .themetog{
+    position:fixed; top:1rem; right:1rem; z-index:50;
+    width:40px; height:40px; border-radius:50%; cursor:pointer;
+    background:var(--ground-2); border:1px solid var(--line); color:var(--ink-2);
+    font-size:1.05rem; line-height:1; display:grid; place-items:center;
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); transition:.25s;
+  }
+  .themetog:hover{border-color:var(--blue); color:var(--blue-lift)}
+</style>
+</head>
+<body>
+<button id="themeToggle" class="themetog" type="button" aria-label="Switch between light and dark">&#9682;</button>
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ground:#070B18;
+  --ground-2:#0C1327;
+  --ground-3:#131E3C;
+  --raise:rgba(125,160,235,.07);
+  --line:rgba(140,168,232,.18);
+  --line-soft:rgba(140,168,232,.10);
+  --ink:#E9EEFC;
+  --ink-2:#94A2C6;
+  --ink-3:#63719A;
+  --blue:#3D6DFF;
+  --blue-lift:#89AEFF;
+  --blue-deep:#1B34A8;
+  --brass:#E3A85C;
+  --rose:#D4587C;
+  --glow:rgba(61,109,255,.45);
+  --shadow:0 24px 60px -28px rgba(0,0,0,.85);
+  --wash1:rgba(61,109,255,.40);
+  --wash2:rgba(120,72,220,.26);
+  --wash3:rgba(227,168,92,.10);
+
+  --display:"Didot","Bodoni 72","Bodoni MT",Baskerville,"Playfair Display",Georgia,serif;
+  --body:"Avenir Next","Avenir","Segoe UI",system-ui,-apple-system,sans-serif;
+  --data:ui-monospace,"SF Mono","IBM Plex Mono","Roboto Mono",Menlo,monospace;
+
+  --col:min(68ch,100%);
+  --wide:min(1080px,100%);
+  --pad:clamp(1.1rem,4vw,2rem);
+}
+
+@media (prefers-color-scheme:light){
+  :root{
+    --ground:#EDF0F8;
+    --ground-2:#FFFFFF;
+    --ground-3:#E1E8F8;
+    --raise:rgba(36,80,218,.05);
+    --line:rgba(26,52,120,.18);
+    --line-soft:rgba(26,52,120,.09);
+    --ink:#08122C;
+    --ink-2:#48567A;
+    --ink-3:#7482A4;
+    --blue:#2450DA;
+    --blue-lift:#1636A8;
+    --blue-deep:#B9CCFF;
+    --brass:#9A6412;
+    --rose:#A82E52;
+    --glow:rgba(36,80,218,.20);
+    --shadow:0 20px 50px -30px rgba(12,26,68,.45);
+    --wash1:rgba(36,80,218,.17);
+    --wash2:rgba(120,72,220,.10);
+    --wash3:rgba(196,138,44,.12);
+  }
+}
+:root[data-theme="light"]{
+  --ground:#EDF0F8; --ground-2:#FFFFFF; --ground-3:#E1E8F8;
+  --raise:rgba(36,80,218,.05);
+  --line:rgba(26,52,120,.18); --line-soft:rgba(26,52,120,.09);
+  --ink:#08122C; --ink-2:#48567A; --ink-3:#7482A4;
+  --blue:#2450DA; --blue-lift:#1636A8; --blue-deep:#B9CCFF;
+  --brass:#9A6412; --rose:#A82E52;
+  --glow:rgba(36,80,218,.20);
+  --shadow:0 20px 50px -30px rgba(12,26,68,.45);
+  --wash1:rgba(36,80,218,.17); --wash2:rgba(120,72,220,.10); --wash3:rgba(196,138,44,.12);
+}
+:root[data-theme="dark"]{
+  --ground:#070B18; --ground-2:#0C1327; --ground-3:#131E3C;
+  --raise:rgba(125,160,235,.07);
+  --line:rgba(140,168,232,.18); --line-soft:rgba(140,168,232,.10);
+  --ink:#E9EEFC; --ink-2:#94A2C6; --ink-3:#63719A;
+  --blue:#3D6DFF; --blue-lift:#89AEFF; --blue-deep:#1B34A8;
+  --brass:#E3A85C; --rose:#D4587C;
+  --glow:rgba(61,109,255,.45);
+  --shadow:0 24px 60px -28px rgba(0,0,0,.85);
+  --wash1:rgba(61,109,255,.40); --wash2:rgba(120,72,220,.26); --wash3:rgba(227,168,92,.10);
+}
+
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:1.0625rem; line-height:1.72;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+p{margin:0 0 1.1em}
+a{color:var(--blue-lift); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--blue-lift); outline-offset:3px; border-radius:3px}
+h1,h2,h3{text-wrap:balance; margin:0}
+strong{color:var(--ink); font-weight:650}
+
+.wrap{width:var(--wide); margin-inline:auto; padding-inline:var(--pad)}
+.col{width:var(--col); margin-inline:auto}
+
+.eyebrow{
+  font-family:var(--data); font-size:.7rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 .9rem;
+  display:flex; align-items:center; gap:.7rem;
+}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--line-soft)}
+
+/* ============ STAGE HERO ============ */
+.stage{
+  position:relative; overflow:hidden; isolation:isolate;
+  padding:clamp(3.5rem,11vh,7rem) 0 clamp(3rem,8vh,5rem);
+  border-bottom:1px solid var(--line-soft);
+}
+.stage::before{
+  content:""; position:absolute; inset:-30% -20% auto -20%; height:150%;
+  background:
+    radial-gradient(58% 46% at 22% 0%, var(--wash1), transparent 68%),
+    radial-gradient(48% 42% at 78% 6%, var(--wash2), transparent 66%),
+    radial-gradient(40% 36% at 50% 34%, var(--wash3), transparent 70%);
+  z-index:-2; animation:wash 22s ease-in-out infinite alternate;
+}
+.stage::after{
+  content:""; position:absolute; inset:0; z-index:-1; opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.35'/></svg>");
+  mix-blend-mode:overlay; pointer-events:none;
+}
+@keyframes wash{from{transform:translate3d(-2%,0,0) scale(1)}to{transform:translate3d(3%,2%,0) scale(1.08)}}
+
+.beams{position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.55}
+.beam{
+  position:absolute; top:-25%; width:34vmax; height:150%;
+  background:linear-gradient(180deg,var(--glow),transparent 62%);
+  filter:blur(38px); transform-origin:50% 0;
+}
+.beam.b1{left:-8%; transform:rotate(13deg); animation:sway 15s ease-in-out infinite alternate}
+.beam.b2{right:-6%; transform:rotate(-16deg); animation:sway 19s ease-in-out -4s infinite alternate-reverse}
+@keyframes sway{from{transform:rotate(13deg) translateX(-3vw)}to{transform:rotate(4deg) translateX(5vw)}}
+
+.badge{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:var(--data); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--brass); border:1px solid color-mix(in srgb,var(--brass) 40%,transparent);
+  background:color-mix(in srgb,var(--brass) 9%,transparent);
+  padding:.4rem .85rem; border-radius:99px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--brass);box-shadow:0 0 10px var(--brass)}
+
+h1{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(2.9rem,8.5vw,6.4rem); line-height:.94;
+  letter-spacing:-.02em; margin:1.4rem 0 0;
+}
+h1 em{font-style:italic; color:var(--blue-lift); text-shadow:0 0 40px var(--glow)}
+.deck{
+  font-size:clamp(1.05rem,2.1vw,1.3rem); color:var(--ink-2);
+  max-width:46ch; margin:1.5rem 0 0; line-height:1.6;
+}
+
+/* countdown */
+.clock{display:flex; gap:clamp(.6rem,2.4vw,1.4rem); margin-top:2.6rem; flex-wrap:wrap}
+.tick{
+  min-width:76px; padding:.75rem .9rem .6rem; border-radius:12px;
+  background:var(--raise); border:1px solid var(--line-soft); backdrop-filter:blur(6px);
+}
+.tick b{
+  display:block; font-family:var(--data); font-variant-numeric:tabular-nums;
+  font-size:clamp(1.5rem,4vw,2.1rem); font-weight:600; line-height:1; color:var(--ink);
+}
+.tick span{
+  display:block; margin-top:.45rem; font-family:var(--data);
+  font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
+}
+.venue{
+  margin-top:2rem; font-family:var(--data); font-size:.78rem;
+  color:var(--ink-3); letter-spacing:.04em; line-height:2;
+}
+.venue b{color:var(--ink-2); font-weight:500}
+
+/* ============ SECTIONS ============ */
+section{padding:clamp(3.5rem,9vh,6rem) 0; border-bottom:1px solid var(--line-soft)}
+h2{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(1.9rem,4.6vw,3.1rem); line-height:1.06; letter-spacing:-.015em;
+}
+h2 + .sub{color:var(--ink-2); margin-top:1rem; max-width:56ch}
+h3{font-size:1.08rem; font-weight:650; letter-spacing:-.01em}
+
+/* ============ A/B CHART ============ */
+.metricbar{display:flex; gap:.5rem; flex-wrap:wrap; margin:2rem 0 1.75rem}
+.mbtn{
+  font-family:var(--data); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  padding:.55rem 1rem; border-radius:99px; cursor:pointer;
+  background:transparent; color:var(--ink-3);
+  border:1px solid var(--line); transition:.25s;
+}
+.mbtn:hover{color:var(--ink); border-color:var(--blue)}
+.mbtn[aria-pressed="true"]{
+  background:var(--blue); border-color:var(--blue); color:#fff;
+  box-shadow:0 0 24px -6px var(--glow);
+}
+.rows{display:flex; flex-direction:column; gap:1.6rem}
+.row{display:grid; grid-template-columns:1fr auto; gap:.5rem 1rem; align-items:end}
+.rlabel{font-size:.95rem; line-height:1.45}
+.rlabel small{display:block; color:var(--ink-3); font-size:.78rem; font-family:var(--data); margin-top:.2rem}
+.rval{
+  font-family:var(--data); font-variant-numeric:tabular-nums;
+  font-size:1.5rem; font-weight:600; color:var(--ink); white-space:nowrap;
+}
+.track{grid-column:1/-1; height:12px; border-radius:99px; background:var(--raise); overflow:hidden; border:1px solid var(--line-soft)}
+.fill{
+  height:100%; width:0; border-radius:99px;
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue));
+  transition:width .9s cubic-bezier(.22,1,.36,1);
+}
+.row.win .fill{background:linear-gradient(90deg,var(--blue),var(--brass))}
+.row.win .rval{color:var(--brass)}
+.verdict{
+  margin-top:2rem; padding:1.15rem 1.35rem; border-radius:14px;
+  border:1px solid var(--line); background:var(--raise);
+  font-size:.98rem; color:var(--ink-2);
+}
+.verdict b{color:var(--ink)}
+
+/* ============ RULE CARDS ============ */
+.grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(248px,1fr)); margin-top:2.2rem}
+.card{
+  padding:1.4rem 1.4rem 1.5rem; border-radius:16px;
+  background:var(--ground-2); border:1px solid var(--line-soft);
+  transition:.3s; position:relative; overflow:hidden;
+}
+.card:hover{border-color:var(--blue); transform:translateY(-3px); box-shadow:var(--shadow)}
+.card .num{
+  font-family:var(--data); font-size:.68rem; letter-spacing:.2em;
+  color:var(--blue-lift); display:block; margin-bottom:.7rem;
+}
+.card p{margin:.55rem 0 0; font-size:.93rem; color:var(--ink-2); line-height:1.65}
+.card.flip{border-color:color-mix(in srgb,var(--rose) 45%,transparent)}
+.card.flip .num{color:var(--rose)}
+
+/* ============ THE MOVE ============ */
+.move{
+  border-radius:20px; padding:clamp(1.6rem,4vw,2.8rem);
+  background:
+    radial-gradient(120% 130% at 0% 0%, color-mix(in srgb,var(--blue) 22%,transparent), transparent 60%),
+    var(--ground-2);
+  border:1px solid color-mix(in srgb,var(--blue) 40%,transparent);
+  box-shadow:var(--shadow);
+}
+.quote{
+  font-family:var(--display); font-style:italic; font-weight:400;
+  font-size:clamp(1.5rem,4.4vw,2.5rem); line-height:1.2; letter-spacing:-.01em;
+  margin:1rem 0 1.6rem; color:var(--ink);
+}
+.why{display:grid; gap:.9rem; margin-top:1.6rem; padding:0; list-style:none}
+.why li{display:grid; grid-template-columns:auto 1fr; gap:.9rem; align-items:start; font-size:.95rem; color:var(--ink-2)}
+.why b{color:var(--ink); font-weight:600}
+.pip{
+  width:22px;height:22px;border-radius:50%; margin-top:.15rem;
+  display:grid;place-items:center; flex:none;
+  background:color-mix(in srgb,var(--blue) 22%,transparent);
+  border:1px solid color-mix(in srgb,var(--blue) 55%,transparent);
+  font-family:var(--data); font-size:.62rem; color:var(--blue-lift);
+}
+
+/* ============ DECK ============ */
+.deckgrid{display:grid; gap:.85rem; grid-template-columns:repeat(auto-fit,minmax(272px,1fr)); margin-top:2.4rem}
+.day{
+  background:var(--ground-2); border:1px solid var(--line-soft);
+  border-radius:16px; padding:1.25rem 1.3rem; transition:.3s; position:relative; overflow:hidden;
+}
+.day::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg,var(--blue),var(--rose)); opacity:0; transition:.3s;
+}
+.day:hover{border-color:var(--blue); transform:translateY(-2px)}
+.day[data-open="true"]{border-color:var(--blue); background:var(--ground-3)}
+.day[data-open="true"]::before{opacity:1}
+.dtoggle{
+  display:block; width:100%; text-align:left; cursor:pointer;
+  font:inherit; color:inherit; background:none; border:0; padding:0; margin:0;
+}
+.dnum{display:block; font-family:var(--data); font-size:.66rem; letter-spacing:.2em; color:var(--ink-3)}
+.dname{display:block; font-family:var(--display); font-size:1.5rem; line-height:1.15; margin-top:.4rem; letter-spacing:-.01em}
+.dcue{display:block; font-size:.86rem; color:var(--blue-lift); font-style:italic; margin-top:.5rem}
+.day[data-open="true"] .dcue{color:var(--ink-3)}
+.dbody{
+  max-height:0; opacity:0; overflow:hidden;
+  transition:max-height .45s cubic-bezier(.22,1,.36,1), opacity .3s, margin .45s;
+}
+.day[data-open="true"] .dbody{max-height:560px; opacity:1; margin-top:1.1rem}
+.dlab{
+  font-family:var(--data); font-size:.6rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.4rem;
+}
+.overlay{
+  padding:.9rem 1rem; border-radius:10px; margin-bottom:1rem;
+  background:color-mix(in srgb,var(--blue) 14%,transparent);
+  border:1px dashed color-mix(in srgb,var(--blue) 45%,transparent);
+  font-family:var(--display); font-size:1.1rem; line-height:1.35;
+}
+.ask{font-size:.94rem; color:var(--ink-2); line-height:1.6}
+.copy{
+  margin-top:1rem; font-family:var(--data); font-size:.68rem; letter-spacing:.14em;
+  text-transform:uppercase; padding:.5rem .9rem; border-radius:99px; cursor:pointer;
+  background:transparent; border:1px solid var(--line); color:var(--ink-3); transition:.25s;
+}
+.copy:hover{border-color:var(--brass); color:var(--brass)}
+.copy.done{border-color:var(--brass); color:var(--brass); background:color-mix(in srgb,var(--brass) 12%,transparent)}
+
+.deckctl{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1.6rem}
+
+/* ============ CHECK LIST ============ */
+.finals{display:grid; gap:.7rem; margin-top:2rem; padding:0; list-style:none}
+.finals li{
+  display:flex; gap:1rem; align-items:flex-start; padding:1rem 1.2rem;
+  border-radius:12px; background:var(--ground-2); border:1px solid var(--line-soft);
+}
+.finals .tag{
+  font-family:var(--data); font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--rose); flex:none; padding-top:.28rem; min-width:52px;
+}
+.finals b{display:block; margin-bottom:.2rem}
+.finals p{margin:0; font-size:.9rem; color:var(--ink-2)}
+
+/* ============ TABLE ============ */
+.scroller{overflow-x:auto; margin-top:2rem; border-radius:14px; border:1px solid var(--line-soft)}
+table{border-collapse:collapse; width:100%; min-width:520px; background:var(--ground-2)}
+th,td{padding:.95rem 1.1rem; text-align:left; border-bottom:1px solid var(--line-soft); font-size:.93rem}
+th{
+  font-family:var(--data); font-size:.63rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500;
+}
+tr:last-child td{border-bottom:none}
+td b{color:var(--ink)}
+td:first-child{color:var(--blue-lift); font-weight:600}
+
+/* ============ DETAILS ============ */
+details{
+  border:1px solid var(--line-soft); border-radius:14px; background:var(--ground-2);
+  padding:0 1.3rem; margin-top:.75rem; transition:.25s;
+}
+details[open]{border-color:var(--blue); background:var(--ground-3)}
+summary{
+  cursor:pointer; padding:1.1rem 0; list-style:none;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  font-weight:600; font-size:1rem;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"+"; font-family:var(--data); font-size:1.2rem; color:var(--blue-lift);
+  transition:transform .3s; flex:none;
+}
+details[open] summary::after{transform:rotate(45deg)}
+details .inner{padding-bottom:1.3rem; color:var(--ink-2); font-size:.94rem}
+details .inner p{margin-bottom:.7em}
+
+/* ============ FOOT ============ */
+footer{padding:clamp(3rem,7vh,4.5rem) 0 5rem; color:var(--ink-3); font-size:.86rem}
+footer .col{line-height:1.75}
+.sig{
+  font-family:var(--display); font-style:italic; font-size:1.35rem;
+  color:var(--ink-2); margin-bottom:1.2rem;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition-duration:.01ms !important}
+}
+</style>
+
+<div class="stage">
+  <div class="beams" aria-hidden="true"><i class="beam b1"></i><i class="beam b2"></i></div>
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span>For Ishmael · Aniba &amp; The Sol Starz</span>
+    <h1>Take Me<br><em>Back.</em></h1>
+    <p class="deck">Eleven days, eight artists, and one thing Aniba already did right without meaning to.</p>
+
+    <div class="clock" id="clock" role="group" aria-label="Time until showtime">
+      <div class="tick"><b id="d">—</b><span>Days</span></div>
+      <div class="tick"><b id="h">—</b><span>Hours</span></div>
+      <div class="tick"><b id="m">—</b><span>Minutes</span></div>
+      <div class="tick"><b id="s">—</b><span>Seconds</span></div>
+    </div>
+
+    <p class="venue">
+      <b>Friday, August 21, 2026</b> · Doors 7PM / Show 8PM<br>
+      <b>Haven Entertainment Center</b> · 932 E 43rd Street, Chicago
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The Evidence</p>
+    <h2>Two posts. One of them told us everything.</h2>
+    <p class="sub">Back-to-back nights, same page, nearly identical reach. Then the numbers split. Switch the metric and watch where they come apart.</p>
+
+    <div class="metricbar" role="group" aria-label="Choose metric">
+      <button class="mbtn" data-metric="views" aria-pressed="true">Views</button>
+      <button class="mbtn" data-metric="eng" aria-pressed="false">Engagement</button>
+      <button class="mbtn" data-metric="rate" aria-pressed="false">Engagement rate</button>
+    </div>
+
+    <div class="rows" id="rows">
+      <div class="row win" data-views="4164" data-eng="145" data-rate="3.48">
+        <div class="rlabel"><b>“Take Me Back!! Give me Erykah…”</b><small>AUG 1 · “BACK IN THE DAY… STILL TIMELESS”</small></div>
+        <div class="rval" data-val></div>
+        <div class="track"><div class="fill"></div></div>
+      </div>
+      <div class="row" data-views="3748" data-eng="84" data-rate="2.24">
+        <div class="rlabel"><b>“Summer is here, and we're living life…”</b><small>JUL 31 · NO TEXT OVERLAY</small></div>
+        <div class="rval" data-val></div>
+        <div class="track"><div class="fill"></div></div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      On <b>views</b> they're within 11% of each other. On <b>engagement rate</b> the first one wins by <b>56%</b>. Nothing about the production changed — one post made a claim about a shared memory and <b>named a specific artist</b>. The other described the weather.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The Grammar</p>
+    <h2>Six rules, written for Facebook.</h2>
+    <p class="sub">Facebook is where the audience is — 6,900 following Aniba Tha Messenger, against 3,141 on the band's Instagram. That changes the rules, and three of them are the opposite of what works on Reels.</p>
+
+    <div class="grid">
+      <div class="card flip">
+        <span class="num">RULE 01 · NOT REELS</span>
+        <h3>Text carries the hook, not sound</h3>
+        <p>Facebook video plays muted in the feed. The winning post won on four lines of on-screen text, not on the vocal.</p>
+      </div>
+      <div class="card">
+        <span class="num">RULE 02</span>
+        <h3>State a memory, leave a gap</h3>
+        <p>“Back in the day, when music felt like this” works because the viewer fills in the memory. “Live at Haven, Aug 21” gives them nothing to supply.</p>
+      </div>
+      <div class="card">
+        <span class="num">RULE 03</span>
+        <h3>Name one artist. Never a genre</h3>
+        <p>“Give me Erykah” beat “summer is here” by 56%. A name is a person people have a position about. A genre isn't.</p>
+      </div>
+      <div class="card flip">
+        <span class="num">RULE 04 · NOT REELS</span>
+        <h3>Long captions are fine here</h3>
+        <p>This audience reads. Facebook rewards dwell time on the caption. The opposite of Instagram, where long copy gets scrolled past.</p>
+      </div>
+      <div class="card flip">
+        <span class="num">RULE 05 · NOT REELS</span>
+        <h3>The ask is a comment, not a link</h3>
+        <p>Facebook suppresses posts that send people away and rewards ones that start conversations. Never end on “link in bio.”</p>
+      </div>
+      <div class="card">
+        <span class="num">RULE 06</span>
+        <h3>Same frame, every time</h3>
+        <p>One camera position, one look, one overlay style per series. People should recognize Aniba before they read a word.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The One Move</p>
+    <div class="move">
+      <h2>Worth more than every hook on this page.</h2>
+      <p class="quote">“Comment TAKE ME BACK and I'll send you the link.”</p>
+      <p style="color:var(--ink-2);max-width:52ch">Not a link in the post. A comment prompt, answered by DM. It costs nothing and it's the only thing here that still exists on August 22nd.</p>
+      <ul class="why">
+        <li><span class="pip">01</span><span><b>Comments are what Facebook rewards.</b> This turns the ask into the algorithm's fuel instead of fighting it.</span></li>
+        <li><span class="pip">02</span><span><b>It builds a list Aniba owns.</b> The venue has the ticket buyers. She'd have every person who raised their hand — in her own inbox, for the next show and the one after.</span></li>
+        <li><span class="pip">03</span><span><b>It's the only way to count anything.</b> When you don't own the checkout, comments and DMs sent are the number you've got. Crude beats nothing.</span></li>
+        <li><span class="pip">04</span><span><b>Every commenter is a warm invite.</b> A personal reply converts far better than a public post ever will.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Days 1–8</p>
+    <h2>The setlist is the content calendar.</h2>
+    <p class="sub">Eight artists on the bill means eight days of the format that already worked. Same frame, same overlay style, one name a day. Tap any card for the overlay line and the caption.</p>
+
+    <div class="deckctl">
+      <button class="mbtn" id="openAll" aria-pressed="false">Expand all</button>
+    </div>
+
+    <div class="deckgrid" id="deck"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Days 9–11</p>
+    <h2>Then change registers.</h2>
+    <ul class="finals">
+      <li><span class="tag">Day 09</span><div><b>The Best Dressed contest</b><p>It's on the ticket page and it isn't in the content. “Show me your neo-soul fit in the comments.” Free participation, free wardrobe photos, and it pre-sells the atmosphere of the room.</p></div></li>
+      <li><span class="tag">Day 10</span><div><b>Soundcheck. The empty room.</b><p>Anticipation outperforms invitation. Lights up, nobody in it yet, the band running one bar over and over.</p></div></li>
+      <li><span class="tag">Day 11</span><div><b>The real number</b><p>“Room holds ___.” Scarcity only works when it's true — so only post this one if it is.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Scoreboard</p>
+    <h2>Four numbers. Ignore the rest.</h2>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Track this</th><th>Because</th></tr></thead>
+        <tbody>
+          <tr><td>Engagement ÷ views</td><td>The comparison that already told us Erykah beat summer. Per post, every post.</td></tr>
+          <tr><td>Comments</td><td>What Facebook rewards, and the input to the DM list.</td></tr>
+          <tr><td>Net follows</td><td>Currently reading <b>“--”</b> on both posts. Four thousand people watched and nobody joined. That's the gap.</td></tr>
+          <tr><td>DM list size</td><td>The only asset that outlives the show and isn't the venue's.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1.5rem;color:var(--ink-3);font-size:.9rem">Ignore raw views. Ignore “approximate earnings” entirely — at this volume it's nowhere near a payout threshold, so it's noise.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">After August</p>
+    <h2>When the covers are behind you.</h2>
+    <p class="sub">This whole plan is built for a tribute night. Aniba's own music needs a different engine — six series that compound instead of counting down.</p>
+
+    <details>
+      <summary>The Session — film the room properly</summary>
+      <div class="inner"><p>The highest-leverage change available. Every independent artist who broke through in the last decade turned their rehearsal into their content, which collapses the “what do we post” problem and the “when do we rehearse” problem into one problem.</p><p>Cold open mid-take. Cut on the downbeat. The room going quiet after a take lands — that silence is the post.</p></div>
+    </details>
+    <details>
+      <summary>One Part — twenty seconds on a single detail</summary>
+      <div class="inner"><p>Solo the bass line, then the full track. Stack the harmonies one at a time. “This part was a mistake — we kept it.” Craft content travels far outside the fanbase, because other musicians share it.</p></div>
+    </details>
+    <details>
+      <summary>Aniba Says — stance content</summary>
+      <div class="inner"><p>She talks to camera, but each one earns it by having a real position. “The most overrated thing in R&amp;B right now is ___.” “Nobody tells you being a singer is mostly ___.” Her personal page is already the right surface for this.</p></div>
+    </details>
+    <details>
+      <summary>Chicago — the series that sells tickets</summary>
+      <div class="inner"><p>Geo-anchored identity recruits people who can physically show up. Play the song in the place it's about. Rank the local rooms, with opinions. “Chicago artists who should be huge” — name three, tag them, they repost.</p></div>
+    </details>
+    <details>
+      <summary>The Ask — engineered for comments</summary>
+      <div class="inner"><p>“Give me a word, I'll write a hook out of it” — then actually do it, on camera, the next day. Every answer in the comments is a future post you didn't have to think of.</p></div>
+    </details>
+    <details>
+      <summary>One structural note, worth raising before the next show</summary>
+      <div class="inner"><p>The venue owns this event's ticketing, which means it also owns the buyer list, the emails, and every piece of data about who came. The band's promo drives all of it to somebody else's records.</p><p>Nothing to fix in eleven days — the DM mechanic is the workaround. But it's worth deciding before the next booking, because it's the same question as owning your masters, just wearing different clothes.</p></div>
+    </details>
+    <details>
+      <summary>And one small thing: pick a name and hold it</summary>
+      <div class="inner"><p>Out in the world right now there's Aniba Tha Messenger, Aniba &amp; The Sol Starz, Aniba Hotep &amp; The Sol Collective, and anibahoteptsc.com. Someone who hears her once and searches a week later has to guess right. Not urgent — just costly, quietly, forever.</p></div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="col">
+    <p class="sig">One last thing, honestly.</p>
+    <p>Only two of Aniba's posts were actually measured here — the two in the screenshots. So “name an artist and they'll argue” is a strong-looking signal that happens to match the show's own premise, but it's built on two data points, not a proven pattern.</p>
+    <p>Treat the eight-day run as the test of it. If the artist-name posts hold above 3% while the vibe posts sit near 2%, it's real and it becomes the house style. If they don't, we learned it in eleven days for free.</p>
+    <p style="margin-top:2rem;font-family:var(--data);font-size:.72rem;letter-spacing:.1em;color:var(--ink-3)">FIGURES READ AUGUST 10, 2026 · POST INSIGHTS DATED JULY 31 &amp; AUGUST 1, 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- countdown ---------- */
+  var SHOW = Date.parse("2026-08-22T01:00:00Z"); /* Aug 21 2026, 8PM Chicago */
+  var el = {d:document.getElementById("d"),h:document.getElementById("h"),m:document.getElementById("m"),s:document.getElementById("s")};
+  function pad(n){return n<10?"0"+n:""+n;}
+  function tickTock(){
+    var left = SHOW - Date.now();
+    if(left < 0){ left = 0; }
+    var sec = Math.floor(left/1000);
+    el.d.textContent = pad(Math.floor(sec/86400));
+    el.h.textContent = pad(Math.floor(sec%86400/3600));
+    el.m.textContent = pad(Math.floor(sec%3600/60));
+    el.s.textContent = pad(sec%60);
+  }
+  tickTock(); setInterval(tickTock,1000);
+
+  /* ---------- metric switcher ---------- */
+  var rows = Array.prototype.slice.call(document.querySelectorAll("#rows .row"));
+  var btns = Array.prototype.slice.call(document.querySelectorAll(".mbtn[data-metric]"));
+  function render(metric){
+    var vals = rows.map(function(r){ return parseFloat(r.dataset[metric]); });
+    var max = Math.max.apply(null, vals);
+    rows.forEach(function(r,i){
+      var v = vals[i];
+      r.querySelector("[data-val]").textContent =
+        metric === "rate" ? v.toFixed(2) + "%" : v.toLocaleString("en-US");
+      r.querySelector(".fill").style.width = (v/max*100) + "%";
+    });
+  }
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){
+      btns.forEach(function(o){ o.setAttribute("aria-pressed", String(o === b)); });
+      render(b.dataset.metric);
+    });
+  });
+  render("views");
+
+  /* ---------- the eight ---------- */
+  var DAYS = [
+    {a:"Erykah Badu",   o:"If you know, you know.",            q:"Baduizm or Mama's Gun? Don't think about it — first one that came to mind."},
+    {a:"D'Angelo",      o:"This one still hurts.",             q:"Where were you the first time you heard Untitled? Be honest."},
+    {a:"Jill Scott",    o:"Nobody writes like this anymore.",  q:"Give me one Jill line you never forgot."},
+    {a:"Lauryn Hill",   o:"One album. That's all it took.",    q:"Would we have gotten a second one — and should we have?"},
+    {a:"Musiq Soulchild",o:"You had this on a burned CD.",     q:"Which song was track one? No looking it up."},
+    {a:"Maxwell",       o:"Turn the lights off for this one.", q:"Maxwell or D'Angelo. Pick one. I'll wait."},
+    {a:"India.Arie",    o:"She told the truth too early.",     q:"What did Video mean to you at the time?"},
+    {a:"Bilal",         o:"The one they slept on.",            q:"Who else got slept on? Name them."}
+  ];
+  var deck = document.getElementById("deck");
+  DAYS.forEach(function(d,i){
+    var card = document.createElement("div");
+    card.className = "day";
+    card.setAttribute("data-open","false");
+    var bodyId = "day-body-" + (i+1);
+    var caption = d.q + " 🎶 Take Me Back — Aug 21 @ The Haven. Comment TAKE ME BACK and I'll send you the link.";
+
+    card.innerHTML =
+      '<button class="dtoggle" type="button" aria-expanded="false" aria-controls="' + bodyId + '">' +
+        '<span class="dnum">DAY ' + pad(i+1) + '</span>' +
+        '<span class="dname"></span>' +
+        '<span class="dcue">tap for the overlay + caption</span>' +
+      '</button>' +
+      '<div class="dbody" id="' + bodyId + '">' +
+        '<span class="dlab">On-screen overlay</span>' +
+        '<div class="overlay"></div>' +
+        '<span class="dlab">Caption</span>' +
+        '<p class="ask"></p>' +
+        '<button class="copy" type="button">Copy caption</button>' +
+      '</div>';
+
+    card.querySelector(".dname").textContent = d.a;
+    card.querySelector(".overlay").textContent = '“' + d.o + '”';
+    card.querySelector(".ask").textContent = caption;
+
+    var tog = card.querySelector(".dtoggle");
+    tog.addEventListener("click", function(){
+      var open = card.getAttribute("data-open") !== "true";
+      card.setAttribute("data-open", String(open));
+      tog.setAttribute("aria-expanded", String(open));
+    });
+
+    var cp = card.querySelector(".copy");
+    cp.addEventListener("click", function(){
+      var done = function(){
+        cp.textContent = "Copied";
+        cp.classList.add("done");
+        setTimeout(function(){ cp.textContent = "Copy caption"; cp.classList.remove("done"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(caption).then(done, function(){ cp.textContent = "Select & copy"; });
+      } else {
+        cp.textContent = "Select & copy";
+      }
+    });
+    deck.appendChild(card);
+  });
+
+  /* ---------- expand all ---------- */
+  var all = document.getElementById("openAll");
+  all.addEventListener("click", function(){
+    var open = all.getAttribute("aria-pressed") !== "true";
+    all.setAttribute("aria-pressed", String(open));
+    all.textContent = open ? "Collapse all" : "Expand all";
+    Array.prototype.forEach.call(deck.querySelectorAll(".day"), function(d){
+      d.setAttribute("data-open", String(open));
+      d.querySelector(".dtoggle").setAttribute("aria-expanded", String(open));
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var tt = document.getElementById("themeToggle");
+  tt.addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    if(!cur){ cur = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; }
+    document.documentElement.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+  });
+})();
+</script>
+</body>
+</html>
