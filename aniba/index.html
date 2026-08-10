@@ -10,7 +10,8 @@
 <meta name="theme-color" content="#070B18">
 <title>Aniba &middot; The 11-Day Plan</title>
 <style>
-  html{-webkit-text-size-adjust:100%; background:#070B18}
+  html{-webkit-text-size-adjust:100%; background:#070B18; scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   img,svg,video{max-width:100%;height:auto}
   button{font-family:inherit}
 </style>
@@ -147,8 +148,106 @@ h1 em{font-style:italic; color:var(--blue-lift); text-shadow:0 0 40px var(--glow
 }
 .venue b{color:var(--ink-2); font-weight:500}
 
-/* ============ SECTIONS ============ */
-section{padding:clamp(3.5rem,9vh,6rem) 0; border-bottom:1px solid var(--line-soft)}
+/* ============ READING PROGRESS ============ */
+#bar{
+  position:fixed; top:0; left:0; height:2px; width:0; z-index:60;
+  background:linear-gradient(90deg,var(--blue),var(--brass)); transition:width .1s linear;
+}
+
+/* ============ STICKY NAV ============ */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:color-mix(in srgb,var(--ground) 88%,transparent);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topin{
+  width:var(--wide); margin-inline:auto; padding:.7rem var(--pad);
+  display:flex; align-items:center; gap:1rem; justify-content:space-between;
+}
+.brandmark{
+  font-family:var(--display); font-size:1.05rem; letter-spacing:-.01em;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.brandmark em{font-style:italic; color:var(--blue-lift)}
+.tools{display:flex; align-items:center; gap:.5rem; flex:none}
+.daysleft{
+  font-family:var(--data); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass); border:1px solid color-mix(in srgb,var(--brass) 40%,transparent);
+  padding:.35rem .6rem; border-radius:99px; white-space:nowrap;
+}
+.navbtn{
+  font-family:var(--data); font-size:.65rem; letter-spacing:.14em; text-transform:uppercase;
+  padding:.45rem .85rem; border-radius:99px; cursor:pointer; white-space:nowrap;
+  background:transparent; border:1px solid var(--line); color:var(--ink-2); transition:.22s;
+}
+.navbtn:hover{border-color:var(--blue); color:var(--ink)}
+.navbtn[aria-expanded="true"]{background:var(--blue); border-color:var(--blue); color:#fff}
+
+.panel{
+  display:none; border-top:1px solid var(--line-soft);
+  background:color-mix(in srgb,var(--ground-2) 96%,transparent);
+  max-height:min(70vh,560px); overflow-y:auto;
+}
+.panel.open{display:block}
+.panelin{width:var(--wide); margin-inline:auto; padding:1.1rem var(--pad) 1.5rem}
+.chips{display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.1rem}
+.chip{
+  font-family:var(--data); font-size:.62rem; letter-spacing:.13em; text-transform:uppercase;
+  padding:.45rem .8rem; border-radius:99px; cursor:pointer;
+  background:transparent; border:1px solid var(--line); color:var(--ink-3); transition:.22s;
+}
+.chip:hover{color:var(--ink); border-color:var(--blue)}
+.chip[aria-pressed="true"]{background:var(--blue); border-color:var(--blue); color:#fff}
+.toclist{list-style:none; margin:0; padding:0; display:grid; gap:.15rem}
+.toclist a{
+  display:flex; align-items:baseline; gap:.7rem; padding:.6rem .7rem; border-radius:9px;
+  text-decoration:none; color:var(--ink-2); font-size:.95rem; transition:.18s;
+}
+.toclist a:hover{background:var(--raise); color:var(--ink)}
+.toclist a.on{background:color-mix(in srgb,var(--blue) 16%,transparent); color:var(--ink)}
+.toclist a[hidden]{display:none}
+.tocat{
+  font-family:var(--data); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3); flex:none; min-width:42px;
+}
+.toclist a.on .tocat{color:var(--blue-lift)}
+
+/* ============ CHECKLIST ============ */
+.todo{list-style:none; margin:2rem 0 0; padding:0; display:grid; gap:.6rem}
+.todo li{margin:0}
+.todo label{
+  display:flex; gap:.9rem; align-items:flex-start; cursor:pointer;
+  padding:.95rem 1.15rem; border-radius:12px;
+  background:var(--ground-2); border:1px solid var(--line-soft); transition:.22s;
+}
+.todo label:hover{border-color:var(--blue)}
+.todo input{
+  appearance:none; -webkit-appearance:none; margin:.2rem 0 0; flex:none;
+  width:19px; height:19px; border-radius:6px; cursor:pointer;
+  border:1.5px solid var(--line); background:transparent; transition:.2s;
+}
+.todo input:checked{background:var(--blue); border-color:var(--blue)}
+.todo input:checked::after{content:"✓"; display:block; color:#fff; font-size:.75rem; text-align:center; line-height:17px}
+.todo .txt{font-size:.97rem; line-height:1.55}
+.todo .txt small{display:block; color:var(--ink-3); font-size:.83rem; margin-top:.2rem}
+.todo input:checked ~ .txt{opacity:.45; text-decoration:line-through; text-decoration-thickness:1px}
+
+/* ============ SECTIONS AS FEED CARDS ============ */
+main{display:flex; flex-direction:column; gap:clamp(.9rem,2vw,1.4rem); padding:clamp(.9rem,2vw,1.4rem) 0 0}
+section{
+  padding:clamp(2rem,5vw,3.2rem) 0;
+  background:var(--ground-2);
+  border:1px solid var(--line-soft);
+  border-radius:clamp(14px,2vw,20px);
+  width:var(--wide); margin-inline:auto;
+  scroll-margin-top:70px;
+}
+section[hidden]{display:none}
+section .wrap{width:100%; padding-inline:clamp(1.1rem,4vw,2.6rem)}
+/* nested surfaces lift off the card ground */
+section .card,section .day,section table,section details,section .finals li{background:var(--ground-3)}
+section .day[data-open="true"]{background:color-mix(in srgb,var(--blue) 12%,var(--ground-3))}
 h2{
   font-family:var(--display); font-weight:400;
   font-size:clamp(1.9rem,4.6vw,3.1rem); line-height:1.06; letter-spacing:-.015em;
@@ -360,6 +459,8 @@ footer .col{line-height:1.75}
 }
 </style>
 
+<div id="bar" aria-hidden="true"></div>
+
 <div class="stage">
   <div class="beams" aria-hidden="true"><i class="beam b1"></i><i class="beam b2"></i></div>
   <div class="wrap">
@@ -381,7 +482,50 @@ footer .col{line-height:1.75}
   </div>
 </div>
 
-<section>
+<nav class="topbar" aria-label="Sections">
+  <div class="topin">
+    <span class="brandmark">Take Me <em>Back</em> · the plan</span>
+    <span class="tools">
+      <span class="daysleft" id="dleft">—</span>
+      <button class="navbtn" id="tocBtn" type="button" aria-expanded="false" aria-controls="tocPanel">Contents</button>
+    </span>
+  </div>
+  <div class="panel" id="tocPanel">
+    <div class="panelin">
+      <div class="chips" role="group" aria-label="Filter sections">
+        <button class="chip" data-filter="all" aria-pressed="true">Everything</button>
+        <button class="chip" data-filter="act" aria-pressed="false">Do this week</button>
+        <button class="chip" data-filter="why" aria-pressed="false">Why</button>
+        <button class="chip" data-filter="later" aria-pressed="false">After the show</button>
+      </div>
+      <ul class="toclist" id="toc"></ul>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<section id="start" data-cat="act">
+  <div class="wrap">
+    <p class="eyebrow">Start here</p>
+    <h2>Nine things, and four of them are free and instant.</h2>
+    <p class="sub">Everything below this section is the reasoning. This is the doing. Tick them off as they're done — the rest of the page explains any line you want the argument for.</p>
+
+    <ul class="todo">
+      <li><label><input type="checkbox"><span class="txt">Switch on <b>“Guests can invite friends”</b> in the event settings<small>Ten seconds. Lets all 38 responders invite people using their own allowance, not yours.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Add <b>co-hosts</b> to the Facebook event<small>Mendel, Gerald, CJ, Aniba's own profile, Haven, IMAN. Each one adds 500 invites and can post inside the event.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Request to join <b>The South Side Of Chicago</b> and <b>Bronzeville Alliance</b><small>Today, not Thursday — both are private and admins take days to approve.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Change the <b>TikTok display name</b> to “Aniba &amp; The Sol Starz — Chicago Neo Soul”<small>Free, ten seconds, and it's the field TikTok's search actually reads.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Start the <b>eight-artist countdown</b> — one a day at 8:45PM<small>Erykah, Jill, D'Angelo, Lauryn, Musiq, Maxwell, India.Arie, Bilal. Post them as Reels, not feed posts.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Put <b>“Comment TAKE ME BACK and I'll send you the link”</b> on every post<small>The single highest-value line on this page. Builds a list she owns and sidesteps every limit Facebook imposes.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Get the <b>six band members resharing</b> daily<small>Six networks instead of one, and nobody has to shoot anything extra.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Post the <b>Jill Scott angle</b><small>She's at The Chicago Theatre two days later with 10,078 people interested. Their Friday is the warm-up for a weekend those people already booked.</small></span></label></li>
+      <li><label><input type="checkbox"><span class="txt">Email <b>Haven</b> and ask them to add Aniba's Meta pixel to the Eventbrite listing<small>Five minutes on their end. If yes, real ticket tracking becomes possible. Worth knowing either way.</small></span></label></li>
+    </ul>
+  </div>
+</section>
+
+<section id="evidence" data-cat="why">
   <div class="wrap">
     <p class="eyebrow">The Evidence</p>
     <h2>Two posts. One of them told us everything.</h2>
@@ -412,7 +556,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="rules" data-cat="why">
   <div class="wrap">
     <p class="eyebrow">The Grammar</p>
     <h2>Six rules, written for Facebook.</h2>
@@ -453,7 +597,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="move" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">The One Move</p>
     <div class="move">
@@ -470,7 +614,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="countdown" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">Days 1–8</p>
     <h2>The setlist is the content calendar.</h2>
@@ -484,7 +628,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="final3" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">Days 9–11</p>
     <h2>Then change registers.</h2>
@@ -496,7 +640,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="timing" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">Timing</p>
     <h2>9PM is working. That doesn't make it best.</h2>
@@ -558,7 +702,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="links" data-cat="why">
   <div class="wrap">
     <p class="eyebrow">Links</p>
     <h2>Keep the link out of the post.</h2>
@@ -589,7 +733,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="paid" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">Paid</p>
     <h2>Ticket ads can't work. Event ads can.</h2>
@@ -650,7 +794,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="event" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">The Event Page</p>
     <h2>The best asset here is already built, and barely being used.</h2>
@@ -696,7 +840,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="groups" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">The Groups</p>
     <h2>Seven real ones. The best isn't a music group.</h2>
@@ -779,7 +923,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="volume" data-cat="why">
   <div class="wrap">
     <p class="eyebrow">Volume</p>
     <h2>Organic already beats the ad budget. Posting more won't extend that.</h2>
@@ -821,7 +965,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="tiktok" data-cat="later">
   <div class="wrap">
     <p class="eyebrow">TikTok</p>
     <h2>103 videos. Not one has reached 2,000 views.</h2>
@@ -903,7 +1047,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="measure" data-cat="act">
   <div class="wrap">
     <p class="eyebrow">Scoreboard</p>
     <h2>Four numbers. Ignore the rest.</h2>
@@ -922,7 +1066,7 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
-<section>
+<section id="after" data-cat="later">
   <div class="wrap">
     <p class="eyebrow">After August</p>
     <h2>When the covers are behind you.</h2>
@@ -959,6 +1103,8 @@ footer .col{line-height:1.75}
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="col">
     <p class="sig">One last thing, honestly.</p>
@@ -972,18 +1118,100 @@ footer .col{line-height:1.75}
 (function(){
   "use strict";
 
+  /* ---------- table of contents ---------- */
+  var SECTIONS = [
+    ["start","Start here"],["evidence","The evidence"],["rules","Six rules"],
+    ["move","The one move"],["countdown","Eight artists, eight days"],["final3","Days 9–11"],
+    ["timing","When to post"],["links","Links"],["paid","Paid"],
+    ["event","The event page"],["groups","The groups"],["volume","How much to post"],
+    ["tiktok","TikTok"],["measure","What to measure"],["after","After August"]
+  ];
+  var CATNAME = {act:"Do", why:"Why", later:"Later"};
+  var toc = document.getElementById("toc");
+  var tocBtn = document.getElementById("tocBtn");
+  var panel = document.getElementById("tocPanel");
+
+  SECTIONS.forEach(function(pair){
+    var sec = document.getElementById(pair[0]);
+    if(!sec) return;
+    var cat = sec.getAttribute("data-cat") || "why";
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    a.href = "#" + pair[0];
+    a.dataset.cat = cat;
+    a.dataset.target = pair[0];
+    a.innerHTML = '<span class="tocat">' + (CATNAME[cat] || "") + '</span><span></span>';
+    a.lastChild.textContent = pair[1];
+    a.addEventListener("click", function(){ closePanel(); });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+
+  function openPanel(){ panel.classList.add("open"); tocBtn.setAttribute("aria-expanded","true"); }
+  function closePanel(){ panel.classList.remove("open"); tocBtn.setAttribute("aria-expanded","false"); }
+  tocBtn.addEventListener("click", function(){
+    panel.classList.contains("open") ? closePanel() : openPanel();
+  });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closePanel(); });
+
+  /* ---------- filtering ---------- */
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip[data-filter]"));
+  chips.forEach(function(c){
+    c.addEventListener("click", function(){
+      var f = c.dataset.filter;
+      chips.forEach(function(o){ o.setAttribute("aria-pressed", String(o === c)); });
+      SECTIONS.forEach(function(pair){
+        var sec = document.getElementById(pair[0]);
+        if(!sec) return;
+        var show = (f === "all") || (sec.getAttribute("data-cat") === f);
+        sec.hidden = !show;
+      });
+      Array.prototype.forEach.call(toc.querySelectorAll("a"), function(a){
+        a.hidden = !(f === "all" || a.dataset.cat === f);
+      });
+    });
+  });
+
+  /* ---------- scroll spy + progress ---------- */
+  var bar = document.getElementById("bar");
+  var links = Array.prototype.slice.call(toc.querySelectorAll("a"));
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function(){
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + "%";
+
+      var current = null;
+      SECTIONS.forEach(function(pair){
+        var sec = document.getElementById(pair[0]);
+        if(!sec || sec.hidden) return;
+        if(sec.getBoundingClientRect().top <= 120) current = pair[0];
+      });
+      links.forEach(function(a){ a.classList.toggle("on", a.dataset.target === current); });
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
   /* ---------- countdown ---------- */
   var SHOW = Date.parse("2026-08-22T01:00:00Z"); /* Aug 21 2026, 8PM Chicago */
   var el = {d:document.getElementById("d"),h:document.getElementById("h"),m:document.getElementById("m"),s:document.getElementById("s")};
   function pad(n){return n<10?"0"+n:""+n;}
+  var dleft = document.getElementById("dleft");
   function tickTock(){
     var left = SHOW - Date.now();
     if(left < 0){ left = 0; }
     var sec = Math.floor(left/1000);
-    el.d.textContent = pad(Math.floor(sec/86400));
+    var days = Math.floor(sec/86400);
+    el.d.textContent = pad(days);
     el.h.textContent = pad(Math.floor(sec%86400/3600));
     el.m.textContent = pad(Math.floor(sec%3600/60));
     el.s.textContent = pad(sec%60);
+    dleft.textContent = left === 0 ? "Show day" : (days + (days === 1 ? " day left" : " days left"));
   }
   tickTock(); setInterval(tickTock,1000);
 
