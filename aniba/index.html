@@ -447,6 +447,11 @@ footer .col{line-height:1.75}
   color:var(--ink-2); margin-bottom:1.2rem;
 }
 
+@media (max-width:560px){
+  .suffix{display:none}
+  .navbtn,.daysleft{font-size:.58rem; letter-spacing:.1em; padding:.4rem .65rem}
+}
+
 @media (max-width:430px){
   .clock{gap:.45rem}
   .tick{min-width:0; flex:1 1 0; padding:.7rem .35rem .55rem; text-align:center}
@@ -484,7 +489,7 @@ footer .col{line-height:1.75}
 
 <nav class="topbar" aria-label="Sections">
   <div class="topin">
-    <span class="brandmark">Take Me <em>Back</em> · the plan</span>
+    <span class="brandmark">Take Me <em>Back</em><span class="suffix"> · the plan</span></span>
     <span class="tools">
       <span class="daysleft" id="dleft">—</span>
       <button class="navbtn" id="tocBtn" type="button" aria-expanded="false" aria-controls="tocPanel">Contents</button>
