@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0E0A09">
+<title>RaMu &middot; The Million-Like Problem</title>
+<style>
+  html{-webkit-text-size-adjust:100%; background:#0E0A09}
+  img,svg,video{max-width:100%;height:auto}
+  button{font-family:inherit}
+</style>
+</head>
+<body>
+
+<style>
+/* ============ TOKENS ============
+   Palette is RaMu's own: the terracotta is the accent colour already
+   running on rashonmurph.com (#A74D4A), lifted for contrast on dark.
+   Amber and magenta are the stage light in his own photography.       */
+:root{
+  --ground:#0E0A09;
+  --ground-2:#181110;
+  --ground-3:#241a17;
+  --raise:rgba(235,180,160,.06);
+  --line:rgba(226,164,143,.20);
+  --line-soft:rgba(226,164,143,.11);
+  --ink:#F4EDE7;
+  --ink-2:#C4ABA0;
+  --ink-3:#8C7368;
+  --terra:#C25F52;
+  --terra-lift:#EE9082;
+  --terra-deep:#6E2E27;
+  --amber:#E3A85C;
+  --magenta:#B6558F;
+  --glow:rgba(194,95,82,.45);
+  --shadow:0 24px 60px -28px rgba(0,0,0,.9);
+  --wash1:rgba(194,95,82,.42);
+  --wash2:rgba(182,85,143,.24);
+  --wash3:rgba(227,168,92,.14);
+
+  --display:"Didot","Bodoni 72","Bodoni MT",Baskerville,"Playfair Display",Georgia,serif;
+  --body:"Avenir Next","Avenir","Segoe UI",system-ui,-apple-system,sans-serif;
+  --data:ui-monospace,"SF Mono","IBM Plex Mono","Roboto Mono",Menlo,monospace;
+
+  --col:min(68ch,100%);
+  --wide:min(1080px,100%);
+  --pad:clamp(1.1rem,4vw,2rem);
+}
+
+/* Single-theme by design: warm room, one lamp on the keys.
+   It does not follow the OS light/dark preference — it commits. */
+
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:1.0625rem; line-height:1.72;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+p{margin:0 0 1.1em}
+a{color:var(--terra-lift); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--terra-lift); outline-offset:3px; border-radius:3px}
+h1,h2,h3{text-wrap:balance; margin:0}
+strong{color:var(--ink); font-weight:650}
+
+.wrap{width:var(--wide); margin-inline:auto; padding-inline:var(--pad)}
+.col{width:var(--col); margin-inline:auto}
+
+.eyebrow{
+  font-family:var(--data); font-size:.7rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 .9rem;
+  display:flex; align-items:center; gap:.7rem;
+}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--line-soft)}
+
+/* ============ STAGE HERO ============ */
+.stage{
+  position:relative; overflow:hidden; isolation:isolate;
+  padding:clamp(3.5rem,11vh,7rem) 0 clamp(3rem,8vh,5rem);
+  border-bottom:1px solid var(--line-soft);
+}
+.stage::before{
+  content:""; position:absolute; inset:-30% -20% auto -20%; height:150%;
+  background:
+    radial-gradient(58% 46% at 20% 0%, var(--wash1), transparent 68%),
+    radial-gradient(48% 42% at 80% 8%, var(--wash2), transparent 66%),
+    radial-gradient(44% 38% at 52% 36%, var(--wash3), transparent 70%);
+  z-index:-2; animation:wash 24s ease-in-out infinite alternate;
+}
+.stage::after{
+  content:""; position:absolute; inset:0; z-index:-1; opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.35'/></svg>");
+  mix-blend-mode:overlay; pointer-events:none;
+}
+@keyframes wash{from{transform:translate3d(-2%,0,0) scale(1)}to{transform:translate3d(3%,2%,0) scale(1.08)}}
+
+.beams{position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.5}
+.beam{
+  position:absolute; top:-25%; width:34vmax; height:150%;
+  background:linear-gradient(180deg,var(--glow),transparent 62%);
+  filter:blur(40px); transform-origin:50% 0;
+}
+.beam.b1{left:-8%; transform:rotate(13deg); animation:sway 16s ease-in-out infinite alternate}
+.beam.b2{right:-6%; transform:rotate(-16deg); animation:sway 21s ease-in-out -4s infinite alternate-reverse}
+@keyframes sway{from{transform:rotate(13deg) translateX(-3vw)}to{transform:rotate(4deg) translateX(5vw)}}
+
+.badge{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:var(--data); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--amber); border:1px solid color-mix(in srgb,var(--amber) 40%,transparent);
+  background:color-mix(in srgb,var(--amber) 9%,transparent);
+  padding:.4rem .85rem; border-radius:99px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber)}
+
+h1{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(2.7rem,8vw,6rem); line-height:.96;
+  letter-spacing:-.02em; margin:1.4rem 0 0;
+}
+h1 em{font-style:italic; color:var(--terra-lift); text-shadow:0 0 44px var(--glow)}
+.deck{
+  font-size:clamp(1.05rem,2.1vw,1.3rem); color:var(--ink-2);
+  max-width:50ch; margin:1.5rem 0 0; line-height:1.6;
+}
+
+.clock{display:flex; gap:clamp(.6rem,2.4vw,1.4rem); margin-top:2.6rem; flex-wrap:wrap}
+.tick{
+  min-width:88px; padding:.75rem .9rem .6rem; border-radius:12px;
+  background:var(--raise); border:1px solid var(--line-soft); backdrop-filter:blur(6px);
+}
+.tick b{
+  display:block; font-family:var(--data); font-variant-numeric:tabular-nums;
+  font-size:clamp(1.4rem,3.6vw,2rem); font-weight:600; line-height:1; color:var(--ink);
+}
+.tick span{
+  display:block; margin-top:.45rem; font-family:var(--data);
+  font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3);
+}
+.tick.hot b{color:var(--terra-lift)}
+.venue{
+  margin-top:2rem; font-family:var(--data); font-size:.78rem;
+  color:var(--ink-3); letter-spacing:.04em; line-height:2;
+}
+.venue b{color:var(--ink-2); font-weight:500}
+
+/* ============ SECTIONS ============ */
+section{padding:clamp(3.5rem,9vh,6rem) 0; border-bottom:1px solid var(--line-soft)}
+h2{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(1.9rem,4.6vw,3.1rem); line-height:1.06; letter-spacing:-.015em;
+}
+h2 + .sub{color:var(--ink-2); margin-top:1rem; max-width:58ch}
+h3{font-size:1.08rem; font-weight:650; letter-spacing:-.01em}
+
+/* ============ CHART ============ */
+.metricbar{display:flex; gap:.5rem; flex-wrap:wrap; margin:2rem 0 1.75rem}
+.mbtn{
+  font-family:var(--data); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  padding:.55rem 1rem; border-radius:99px; cursor:pointer;
+  background:transparent; color:var(--ink-3);
+  border:1px solid var(--line); transition:.25s;
+}
+.mbtn:hover{color:var(--ink); border-color:var(--terra)}
+.mbtn[aria-pressed="true"]{
+  background:var(--terra); border-color:var(--terra); color:#fff;
+  box-shadow:0 0 24px -6px var(--glow);
+}
+.rows{display:flex; flex-direction:column; gap:1.35rem}
+.row{display:grid; grid-template-columns:1fr auto; gap:.5rem 1rem; align-items:end}
+.rlabel{font-size:.93rem; line-height:1.45}
+.rlabel small{display:block; color:var(--ink-3); font-size:.76rem; font-family:var(--data); margin-top:.2rem}
+.rval{
+  font-family:var(--data); font-variant-numeric:tabular-nums;
+  font-size:1.35rem; font-weight:600; color:var(--ink); white-space:nowrap;
+}
+.track{grid-column:1/-1; height:11px; border-radius:99px; background:var(--raise); overflow:hidden; border:1px solid var(--line-soft)}
+.fill{
+  display:block; height:100%; width:0; border-radius:99px; min-width:2px;
+  background:linear-gradient(90deg,var(--terra-deep),var(--terra));
+  transition:width .9s cubic-bezier(.22,1,.36,1);
+}
+.row.win .fill{background:linear-gradient(90deg,var(--terra),var(--amber))}
+.row.win .rval{color:var(--amber)}
+.verdict{
+  margin-top:2rem; padding:1.15rem 1.35rem; border-radius:14px;
+  border:1px solid var(--line); background:var(--raise);
+  font-size:.98rem; color:var(--ink-2);
+}
+.verdict b{color:var(--ink)}
+
+/* ============ CARDS ============ */
+.grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(248px,1fr)); margin-top:2.2rem}
+.card{
+  padding:1.4rem 1.4rem 1.5rem; border-radius:16px;
+  background:var(--ground-2); border:1px solid var(--line-soft);
+  transition:.3s; position:relative; overflow:hidden;
+}
+.card:hover{border-color:var(--terra); transform:translateY(-3px); box-shadow:var(--shadow)}
+.card .num{
+  font-family:var(--data); font-size:.68rem; letter-spacing:.2em;
+  color:var(--terra-lift); display:block; margin-bottom:.7rem;
+}
+.card p{margin:.55rem 0 0; font-size:.93rem; color:var(--ink-2); line-height:1.65}
+.card.flip{border-color:color-mix(in srgb,var(--magenta) 45%,transparent)}
+.card.flip .num{color:var(--magenta)}
+
+/* ============ THE MOVE ============ */
+.move{
+  border-radius:20px; padding:clamp(1.6rem,4vw,2.8rem);
+  background:
+    radial-gradient(120% 130% at 0% 0%, color-mix(in srgb,var(--terra) 22%,transparent), transparent 60%),
+    var(--ground-2);
+  border:1px solid color-mix(in srgb,var(--terra) 40%,transparent);
+  box-shadow:var(--shadow);
+}
+.quote{
+  font-family:var(--display); font-style:italic; font-weight:400;
+  font-size:clamp(1.45rem,4.2vw,2.4rem); line-height:1.2; letter-spacing:-.01em;
+  margin:1rem 0 1.6rem; color:var(--ink);
+}
+.why{display:grid; gap:.9rem; margin-top:1.6rem; padding:0; list-style:none}
+.why li{display:grid; grid-template-columns:auto 1fr; gap:.9rem; align-items:start; font-size:.95rem; color:var(--ink-2)}
+.why b{color:var(--ink); font-weight:600}
+.pip{
+  width:22px;height:22px;border-radius:50%; margin-top:.15rem;
+  display:grid;place-items:center; flex:none;
+  background:color-mix(in srgb,var(--terra) 22%,transparent);
+  border:1px solid color-mix(in srgb,var(--terra) 55%,transparent);
+  font-family:var(--data); font-size:.62rem; color:var(--terra-lift);
+}
+
+/* ============ HOOK DECK ============ */
+.deckgrid{display:grid; gap:.85rem; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:2.4rem}
+.day{
+  background:var(--ground-2); border:1px solid var(--line-soft);
+  border-radius:16px; padding:1.25rem 1.3rem; transition:.3s; position:relative; overflow:hidden;
+}
+.day::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg,var(--terra),var(--amber)); opacity:0; transition:.3s;
+}
+.day:hover{border-color:var(--terra); transform:translateY(-2px)}
+.day[data-open="true"]{border-color:var(--terra); background:var(--ground-3)}
+.day[data-open="true"]::before{opacity:1}
+.dtoggle{
+  display:block; width:100%; text-align:left; cursor:pointer;
+  font:inherit; color:inherit; background:none; border:0; padding:0; margin:0;
+}
+.dnum{display:block; font-family:var(--data); font-size:.66rem; letter-spacing:.2em; color:var(--ink-3)}
+.dname{display:block; font-family:var(--display); font-size:1.3rem; line-height:1.2; margin-top:.4rem; letter-spacing:-.01em}
+.dcue{display:block; font-size:.85rem; color:var(--terra-lift); font-style:italic; margin-top:.5rem}
+.day[data-open="true"] .dcue{color:var(--ink-3)}
+.dbody{
+  max-height:0; opacity:0; overflow:hidden;
+  transition:max-height .45s cubic-bezier(.22,1,.36,1), opacity .3s, margin .45s;
+}
+.day[data-open="true"] .dbody{max-height:600px; opacity:1; margin-top:1.1rem}
+.dlab{
+  font-family:var(--data); font-size:.6rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.4rem;
+}
+.overlay{
+  padding:.9rem 1rem; border-radius:10px; margin-bottom:1rem;
+  background:color-mix(in srgb,var(--terra) 14%,transparent);
+  border:1px dashed color-mix(in srgb,var(--terra) 45%,transparent);
+  font-family:var(--display); font-size:1.05rem; line-height:1.35;
+}
+.ask{font-size:.93rem; color:var(--ink-2); line-height:1.6}
+.copy{
+  margin-top:1rem; font-family:var(--data); font-size:.68rem; letter-spacing:.14em;
+  text-transform:uppercase; padding:.5rem .9rem; border-radius:99px; cursor:pointer;
+  background:transparent; border:1px solid var(--line); color:var(--ink-3); transition:.25s;
+}
+.copy:hover{border-color:var(--amber); color:var(--amber)}
+.copy.done{border-color:var(--amber); color:var(--amber); background:color-mix(in srgb,var(--amber) 12%,transparent)}
+.deckctl{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1.6rem}
+
+/* ============ ORDERED LIST ============ */
+.finals{display:grid; gap:.7rem; margin-top:2rem; padding:0; list-style:none}
+.finals li{
+  display:flex; gap:1rem; align-items:flex-start; padding:1rem 1.2rem;
+  border-radius:12px; background:var(--ground-2); border:1px solid var(--line-soft);
+}
+.finals .tag{
+  font-family:var(--data); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--amber); flex:none; padding-top:.3rem; min-width:76px;
+}
+.finals b{display:block; margin-bottom:.2rem}
+.finals p{margin:0; font-size:.9rem; color:var(--ink-2)}
+.finals li.top{border-color:color-mix(in srgb,var(--terra) 50%,transparent); background:color-mix(in srgb,var(--terra) 7%,transparent)}
+
+/* ============ TABLE ============ */
+.pill{
+  display:inline-block; font-family:var(--data); font-size:.58rem;
+  letter-spacing:.16em; text-transform:uppercase; padding:.25rem .55rem;
+  border-radius:99px; white-space:nowrap;
+}
+.pill.good{color:var(--amber); background:color-mix(in srgb,var(--amber) 14%,transparent); border:1px solid color-mix(in srgb,var(--amber) 45%,transparent)}
+.pill.bad{color:var(--terra-lift); background:color-mix(in srgb,var(--terra) 16%,transparent); border:1px solid color-mix(in srgb,var(--terra) 45%,transparent)}
+.when{font-family:var(--data); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink)}
+.note{
+  margin-top:2rem; padding:1.15rem 1.35rem; border-radius:14px;
+  border:1px solid color-mix(in srgb,var(--magenta) 40%,transparent);
+  background:color-mix(in srgb,var(--magenta) 8%,transparent);
+  font-size:.95rem; color:var(--ink-2);
+}
+.note b{color:var(--ink)}
+.scroller{overflow-x:auto; margin-top:2rem; border-radius:14px; border:1px solid var(--line-soft)}
+table{border-collapse:collapse; width:100%; min-width:520px; background:var(--ground-2)}
+th,td{padding:.9rem 1.1rem; text-align:left; border-bottom:1px solid var(--line-soft); font-size:.92rem}
+th{
+  font-family:var(--data); font-size:.63rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500;
+}
+tr:last-child td{border-bottom:none}
+td b{color:var(--ink)}
+td:first-child{color:var(--terra-lift); font-weight:600}
+code{
+  font-family:var(--data); font-size:.85em; padding:.15em .45em; border-radius:5px;
+  background:var(--raise); border:1px solid var(--line-soft); color:var(--ink-2);
+}
+
+/* ============ DETAILS ============ */
+details{
+  border:1px solid var(--line-soft); border-radius:14px; background:var(--ground-2);
+  padding:0 1.3rem; margin-top:.75rem; transition:.25s;
+}
+details[open]{border-color:var(--terra); background:var(--ground-3)}
+summary{
+  cursor:pointer; padding:1.1rem 0; list-style:none;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  font-weight:600; font-size:1rem;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"+"; font-family:var(--data); font-size:1.2rem; color:var(--terra-lift);
+  transition:transform .3s; flex:none;
+}
+details[open] summary::after{transform:rotate(45deg)}
+details .inner{padding-bottom:1.3rem; color:var(--ink-2); font-size:.94rem}
+details .inner p{margin-bottom:.7em}
+
+/* ============ FOOT ============ */
+footer{padding:clamp(3rem,7vh,4.5rem) 0 5rem; color:var(--ink-3); font-size:.86rem}
+footer .col{line-height:1.75}
+.sig{
+  font-family:var(--display); font-style:italic; font-size:1.35rem;
+  color:var(--ink-2); margin-bottom:1.2rem;
+}
+
+@media (max-width:430px){
+  .clock{gap:.45rem}
+  .tick{min-width:0; flex:1 1 0; padding:.7rem .35rem .55rem; text-align:center}
+  .tick span{font-size:.52rem; letter-spacing:.1em}
+  .badge{font-size:.62rem; letter-spacing:.14em; line-height:1.5}
+  .finals li{flex-direction:column; gap:.4rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition-duration:.01ms !important}
+}
+</style>
+
+<div class="stage">
+  <div class="beams" aria-hidden="true"><i class="beam b1"></i><i class="beam b2"></i></div>
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span>Prepared for Rashon &ldquo;RaMu&rdquo; Murph &middot; A2G Systems</span>
+    <h1>A million people<br>watched you<br><em>play the chords.</em></h1>
+    <p class="deck">Then they had nowhere to go. This is a read of what&rsquo;s actually on your pages right now &mdash; and the four things that would turn that afternoon into a business.</p>
+
+    <div class="clock" role="group" aria-label="Headline numbers">
+      <div class="tick hot"><b id="n1">&mdash;</b><span>Likes, Apr 6 reel</span></div>
+      <div class="tick"><b id="n2">&mdash;</b><span>Comments</span></div>
+      <div class="tick"><b id="n3">&mdash;</b><span>Followers today</span></div>
+      <div class="tick"><b id="n4">&mdash;</b><span>Median post</span></div>
+    </div>
+
+    <p class="venue">
+      All figures read live from your public pages on <b>10 August 2026</b><br>
+      Instagram&rsquo;s own like and comment counts &middot; nothing estimated
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The Evidence</p>
+      <h2>One post is not like the others.</h2>
+      <p class="sub">Every post visible on your grid, with Instagram&rsquo;s own counts. Start on true scale &mdash; then zoom in on the last nine, because on true scale you can&rsquo;t see them at all. That invisibility <em>is</em> the finding.</p>
+    </div>
+
+    <div class="col">
+      <div class="metricbar" role="group" aria-label="Chart scale">
+        <button class="mbtn" id="mTrue" aria-pressed="true">True scale</button>
+        <button class="mbtn" id="mZoom" aria-pressed="false">Zoom the last nine</button>
+      </div>
+      <div class="rows" id="rows"></div>
+      <div class="verdict">
+        <b>Median post: 323 likes. The pinned reel: 1,000,000.</b> A reel at a million likes has left your follower base far behind &mdash; at any normal like-rate that&rsquo;s tens of millions of views. Instagram handed you a stadium every day for a week. The question this whole page exists to answer is what came back.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">What Came Back</p>
+      <h2>Almost nothing, and it isn&rsquo;t your fault.</h2>
+      <p class="sub">This is not a content problem. You are already better at making content than most people you could hire to do it. It&rsquo;s a plumbing problem &mdash; and plumbing is fixable in an afternoon.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="num">01 &middot; FOLLOWERS</span>
+          <h3>~19K &rarr; 25.5K</h3>
+          <p>Across four months and everything you posted in them. Under 1% of the people who liked that one reel followed you.</p>
+        </div>
+        <div class="card">
+          <span class="num">02 &middot; EMAIL</span>
+          <h3>Structurally near zero</h3>
+          <p>There was nothing to join except a list promising &ldquo;updates about&rdquo; free lessons at some point. Nobody signs up for a future notification.</p>
+        </div>
+        <div class="card">
+          <span class="num">03 &middot; REVENUE</span>
+          <h3>No product existed</h3>
+          <p>None exists today either. The moment arrived before the thing it could have sold.</p>
+        </div>
+        <div class="card flip">
+          <span class="num">04 &middot; THE LEAK</span>
+          <h3>The link was broken</h3>
+          <p>Literally. See the next section &mdash; this one is worth ten minutes and it has been costing you all year.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The Leak</p>
+      <h2>Your website links to Squarespace&rsquo;s Instagram.</h2>
+      <p class="sub">Not a metaphor. The three social icons in the header and footer of <strong>every page</strong> of rashonmurph.com are still the unedited template defaults that shipped with the theme.</p>
+    </div>
+    <div class="col scroller">
+      <table>
+        <thead><tr><th>Icon</th><th>Where it actually sends people</th><th>Should be</th></tr></thead>
+        <tbody>
+          <tr><td>Instagram</td><td><code>instagram.com/squarespace</code> &mdash; <b>Squarespace&rsquo;s own account</b></td><td><span class="pill bad">@ramumusic</span></td></tr>
+          <tr><td>LinkedIn</td><td><code>linkedin.com/feed/</code> &mdash; a generic feed</td><td><span class="pill bad">your profile</span></td></tr>
+          <tr><td>TikTok</td><td><code>tiktok.com/?utm_medium=msn</code> &mdash; the homepage</td><td><span class="pill bad">your profile</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <div class="note">
+        <b>Follow the path a fan actually takes.</b> They see the reel &rarr; tap your bio &rarr; land on <code>/connect</code> &rarr; tap the Instagram icon &rarr; arrive at Squarespace. Two more in the same family: the nav item &ldquo;Connect&rdquo; points at <code>/work</code>, and the &ldquo;Let&rsquo;s Work&rdquo; button points at <code>/new-page</code>, an unnamed default slug.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The Offer</p>
+      <h2>&ldquo;Join My Piano World&rdquo; isn&rsquo;t a course yet.</h2>
+      <p class="sub">It&rsquo;s in your bio, on your site, and in every conversation about what you&rsquo;re building. Here is what someone tapping it actually gets, word for word from your own page:</p>
+      <div class="move">
+        <span class="dlab">rashonmurph.com/emaillist</span>
+        <p class="quote">&ldquo;Be added to my email list where you will get updates about my Free Piano Lessons and Community!&rdquo;</p>
+        <ul class="why">
+          <li><span class="pip">1</span><span><b>Nothing is delivered.</b> You&rsquo;re asking someone to join a list so they can be told about free lessons later. The person who just watched thirty seconds of piano wants the thing now.</span></li>
+          <li><span class="pip">2</span><span><b>Three required fields</b> &mdash; first name, last name, email &mdash; on what is a two-second impulse decision.</span></li>
+          <li><span class="pip">3</span><span><b>The lessons page has no price and no calendar.</b> You&rsquo;re already selling one-to-one instruction in three formats and there is no way for anyone to buy it.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The One Move</p>
+      <h2>The post that blew up was a teaching post wearing a flex costume.</h2>
+      <p class="sub">&ldquo;When Ye says <em>just play the chords</em>&hellip; you PLAY the chords.&rdquo; The overlay says <em>Just Play The Chords.</em> The frame is your rig. A million people watched a man play chords, and eleven thousand of them typed something.</p>
+      <div class="move">
+        <span class="dlab">The thing they typed</span>
+        <p class="quote">&ldquo;What chords?&rdquo;</p>
+        <p style="color:var(--ink-2);font-size:.98rem;margin-bottom:0">You never answered. There was nothing to answer with. <strong>Build the answer, and make it the thing they get instantly.</strong></p>
+        <ul class="why">
+          <li><span class="pip">&rarr;</span><span><b>The magnet:</b> &ldquo;The chords from <em>that</em> Ye video.&rdquo; Two-minute video or a one-page chart, delivered the second they give an email. Not a newsletter. Not &ldquo;updates about.&rdquo;</span></li>
+          <li><span class="pip">&rarr;</span><span><b>One field.</b> Email. First and last name are two extra decisions you don&rsquo;t need and can ask for later.</span></li>
+          <li><span class="pip">&rarr;</span><span><b>The distribution is already built.</b> Eleven thousand comments are a permanent, searchable, warm audience. Reply to them. Pin the link. Repost the reel with the answer as the follow-up.</span></li>
+          <li><span class="pip">&rarr;</span><span><b>It costs you an afternoon</b> &mdash; and it is the entire difference between a viral moment and a business.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The Format</p>
+      <h2>Keys POV, without needing a stadium.</h2>
+      <p class="sub">Your signature already exists &mdash; it&rsquo;s on the viral thumbnail and half your grid. What it needs is a version you can shoot in your own room. Six of your last nine posts were &ldquo;look where I am&rdquo; tour documentation, which is a format with a dependency you don&rsquo;t control: when the tour pauses, the posting stops. Your cadence went from weekly in May to one post every nine days by August for exactly that reason.</p>
+      <p class="sub"><strong>The repeatable unit:</strong> one famous song &rarr; the one chord move that makes it work &rarr; played on the Nord &rarr; thirty seconds &rarr; the hook is the question, not the credential. Twice a week, same frame.</p>
+      <div class="deckctl">
+        <button class="mbtn" id="openAll">Open all</button>
+        <button class="mbtn" id="closeAll">Close all</button>
+      </div>
+      <div class="deckgrid" id="deck"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The Order</p>
+      <h2>Seven moves, ranked by leverage per hour.</h2>
+      <p class="sub">Not by size. The first three are yours and they&rsquo;re small; the rest are the machinery that makes the first three keep paying.</p>
+      <ol class="finals">
+        <li class="top"><span class="tag">10 min</span><div><b>Fix the three links.</b><p>Nothing downstream works until traffic can actually route to you. This is the cheapest thing on the page and it has been broken through a million-like reel.</p></div></li>
+        <li class="top"><span class="tag">Afternoon</span><div><b>Ship the chords magnet.</b><p>One video, one email field, instant delivery. Converts eleven thousand warm comments into a list you own rather than rent.</p></div></li>
+        <li class="top"><span class="tag">1 hour</span><div><b>Answer the viral post in public.</b><p>Reply in the comments, pin the link, repost the reel with the answer. That audience is still there and it cost nothing to reach the first time.</p></div></li>
+        <li><span class="tag">Ongoing</span><div><b>Two Keys-POV posts a week, one format.</b><p>Breaks the tour dependency. Consistency of format is what compounds on Instagram &mdash; not volume, and not variety.</p></div></li>
+        <li><span class="tag">Weeks</span><div><b>Start YouTube.</b><p>You don&rsquo;t have a channel. For someone selling piano teaching that is the single largest structural gap here. Shorts are the cuts you&rsquo;re already making; long-form is where the course actually funnels.</p></div></li>
+        <li><span class="tag">1 hour</span><div><b>Put a price and a calendar on the lessons page.</b><p>Revenue that needs no course to exist. You&rsquo;re already selling this; you&rsquo;re just not letting anyone buy it.</p></div></li>
+        <li><span class="tag">1 hour</span><div><b>Pick one sentence. Retire the dead Facebook Page.</b><p>Your site, Instagram, LinkedIn and Jammcard each describe a different person, and there are two Facebook pages &mdash; one with 5.1K followers, one with 97 and nothing since February.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The Window</p>
+      <h2>You&rsquo;re home. That&rsquo;s the whole reason this is now.</h2>
+      <p class="sub">The Macau dates finished on 3 August. The next announced stop on the tour is Singapore on 24 October. That&rsquo;s the only stretch in your calendar long enough to build any of this &mdash; and the shortlist above fits inside it several times over.</p>
+      <div class="clock" role="group" aria-label="Time until the tour resumes">
+        <div class="tick hot"><b id="d">&mdash;</b><span>Days</span></div>
+        <div class="tick"><b id="h">&mdash;</b><span>Hours</span></div>
+        <div class="tick"><b id="m">&mdash;</b><span>Minutes</span></div>
+        <div class="tick"><b id="s">&mdash;</b><span>Seconds</span></div>
+      </div>
+      <p class="venue"><b>Until 24 October 2026</b> &middot; Singapore Indoor Stadium &middot; next announced date</p>
+
+      <div class="note">
+        <b>One more asset you&rsquo;re not counting.</b> The comments under your Macau post are almost entirely KUN&rsquo;s fandom, and Chinese pop fandoms are among the most organised audiences on the internet. Be honest about it though: they follow the artist, there&rsquo;s a language barrier, and they are unlikely buyers of an English-language piano course. Use them for reach and proof. Don&rsquo;t build the business on them.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">Scoreboard</p>
+      <h2>Four numbers. You currently have none of them.</h2>
+      <div class="grid">
+        <div class="card"><span class="num">01</span><h3>Emails captured per week</h3><p>The only asset that survives a platform change, an algorithm change, or a tour ending.</p></div>
+        <div class="card"><span class="num">02</span><h3>Follower-to-email rate</h3><p>Turns &ldquo;did it go viral&rdquo; into &ldquo;did it work.&rdquo; A million likes and no list is this whole page said as one ratio.</p></div>
+        <div class="card"><span class="num">03</span><h3>Comments per post</h3><p>What the algorithm rewards and what the magnet harvests. You get 16&ndash;42 on a normal post. You got eleven thousand once.</p></div>
+        <div class="card"><span class="num">04</span><h3>Posts per week, by format</h3><p>Whether the cadence fix held. Everything else on this page follows from it.</p></div>
+      </div>
+      <div class="verdict"><b>Ignore follower count.</b> It&rsquo;s the number that already lied &mdash; it went up six and a half thousand while the business went nowhere.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">Honesty</p>
+      <h2>What this read couldn&rsquo;t see.</h2>
+      <p class="sub">Everything above came from your public pages. That&rsquo;s a real limit and it&rsquo;s worth stating plainly, because a confident wrong number is worse than a missing one.</p>
+
+      <details>
+        <summary>Only twelve posts are visible without logging in</summary>
+        <div class="inner"><p>Your full archive isn&rsquo;t measured here. The cadence figure covers 15 May to 3 August only &mdash; nine posts, which is the complete visible run in that window but not your whole year.</p></div>
+      </details>
+      <details>
+        <summary>No views, saves, shares or reach &mdash; so no true engagement rate</summary>
+        <div class="inner"><p>Logged-out Instagram gives likes and comments and nothing else. Every ratio on this page is measured against follower count, which is a blunter instrument than the real thing. <strong>One look at your own Instagram Insights would settle several questions this page can only frame</strong> &mdash; particularly whether the cadence drop is costing you reach or whether format is the whole story.</p></div>
+      </details>
+      <details>
+        <summary>The &ldquo;~19K in April&rdquo; figure is second-hand</summary>
+        <div class="inner"><p>It comes from an April record whose own source isn&rsquo;t stated. The 25.5K is a live read today. So the growth figure is directional, not measured &mdash; treat &ldquo;under 1% converted&rdquo; as the right order of magnitude rather than a precise number.</p></div>
+      </details>
+      <details>
+        <summary>&ldquo;1M likes&rdquo; is Instagram&rsquo;s rounded display</summary>
+        <div class="inner"><p>Not an exact count. Same for the 11K comments and the 116K on the January post. They&rsquo;re Instagram&rsquo;s own figures, read from each post, but they&rsquo;re rounded at that scale.</p></div>
+      </details>
+      <details>
+        <summary>Your list size, site analytics and DMs are invisible from outside</summary>
+        <div class="inner"><p>It&rsquo;s possible you captured meaningfully more than assumed here. The structure of the signup page argues against it &mdash; but that&rsquo;s an argument, not proof, and you have the actual number.</p></div>
+      </details>
+      <details>
+        <summary>Whether you still want a course at all</summary>
+        <div class="inner"><p>This whole page assumes the goal from earlier this year is still live. Plenty has changed since &mdash; you have production credits on <em>BULLY</em> now, including the Lauryn Hill record, and you&rsquo;re touring arenas in Asia. If the answer is that the teaching business is no longer the point, most of this page is the wrong page, and that&rsquo;s worth saying before anyone acts on it.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <p class="sig">One afternoon of plumbing, and the next one counts.</p>
+      <p>Read live on 10 August 2026 from instagram.com/ramumusic, rashonmurph.com, facebook.com/ramuproductions, published credits and tour listings. Like and comment counts are Instagram&rsquo;s own, taken from each post. Hook copy is a draft, not tested. Nothing here has been published, sent, or acted on.</p>
+      <p style="margin-top:1.4rem;color:var(--ink-3)">A2G Systems &middot; private working document</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- hero counters ---------- */
+  var heroes = [
+    {id:"n1", to:1000000, fmt:function(v){ return (v/1000000).toFixed(2).replace(/\.?0+$/,"") + "M"; }},
+    {id:"n2", to:11000,   fmt:function(v){ return Math.round(v/1000) + "K"; }},
+    {id:"n3", to:25500,   fmt:function(v){ return (v/1000).toFixed(1) + "K"; }},
+    {id:"n4", to:323,     fmt:function(v){ return String(Math.round(v)); }}
+  ];
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  heroes.forEach(function(hn){
+    var el = document.getElementById(hn.id);
+    if(!el) return;
+    if(reduce){ el.textContent = hn.fmt(hn.to); return; }
+    var start = null, dur = 1600;
+    function step(ts){
+      if(start === null) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = hn.fmt(hn.to * eased);
+      if(p < 1) requestAnimationFrame(step);
+      else el.textContent = hn.fmt(hn.to);
+    }
+    requestAnimationFrame(step);
+    /* If rAF never runs (background tab, throttled renderer), land the
+       number anyway rather than leaving an em dash on screen. */
+    setTimeout(function(){ el.textContent = hn.fmt(hn.to); }, dur + 900);
+  });
+
+  /* ---------- evidence chart ---------- */
+  var POSTS = [
+    {label:"“Just Play the Chords” — Ye, SoFi", meta:"6 Apr · pinned", likes:1000000, win:true},
+    {label:"Ye × North West on stage",                 meta:"31 Jan · pinned", likes:116000},
+    {label:"Ye × Lauryn Hill placement",               meta:"20 Jun · pinned", likes:12000},
+    {label:"AsiaTop Festival, Malaysia",                    meta:"4 Jun",  likes:601},
+    {label:"Chandler Moore clinic",                         meta:"15 May", likes:522},
+    {label:"Stadium sound, Malaysia",                       meta:"28 May", likes:511},
+    {label:"China — Venetian Macau",                   meta:"3 Aug · most recent", likes:445},
+    {label:"Pickup Music session",                          meta:"21 May", likes:323},
+    {label:"Arsenio Hall at Blue Note LA",                  meta:"24 Jun", likes:183},
+    {label:"Blue Note Milan solo",                          meta:"21 Jul", likes:172},
+    {label:"Arrangement wrap",                              meta:"8 Jul",  likes:136},
+    {label:"Wife’s birthday",                          meta:"22 Jun", likes:97}
+  ];
+
+  var rowsEl = document.getElementById("rows");
+  var bTrue  = document.getElementById("mTrue");
+  var bZoom  = document.getElementById("mZoom");
+  var mode   = "true";
+
+  function nf(n){ return n.toLocaleString("en-US"); }
+
+  function render(){
+    var list = (mode === "zoom") ? POSTS.filter(function(p){ return p.likes < 5000; }) : POSTS;
+    var max  = list.reduce(function(a,p){ return Math.max(a, p.likes); }, 0);
+
+    rowsEl.innerHTML = "";
+    list.forEach(function(p){
+      var row = document.createElement("div");
+      row.className = "row" + (p.win ? " win" : "");
+      row.innerHTML =
+        '<div class="rlabel">' + p.label + '<small>' + p.meta + '</small></div>' +
+        '<div class="rval">' + nf(p.likes) + '</div>' +
+        '<div class="track"><div class="fill"></div></div>';
+      rowsEl.appendChild(row);
+      grow(row.querySelector(".fill"), ((p.likes / max) * 100).toFixed(3) + "%");
+    });
+  }
+
+  /* Fill when the bar is actually on screen. Also the safety net: if the
+     transition never gets a chance to run (background tab, throttled
+     renderer, reduced motion), the width is still set outright. */
+  function grow(fill, target){
+    var paint = function(){ fill.style.width = target; };
+    if(reduce || typeof IntersectionObserver === "undefined"){ paint(); return; }
+    var io = new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ io.disconnect(); requestAnimationFrame(paint); }
+    }, {threshold:.15});
+    io.observe(fill.parentElement);
+    setTimeout(function(){ if(!fill.style.width){ io.disconnect(); paint(); } }, 4000);
+  }
+
+  function setMode(next){
+    mode = next;
+    bTrue.setAttribute("aria-pressed", String(next === "true"));
+    bZoom.setAttribute("aria-pressed", String(next === "zoom"));
+    render();
+  }
+  bTrue.addEventListener("click", function(){ setMode("true"); });
+  bZoom.addEventListener("click", function(){ setMode("zoom"); });
+  render();
+
+  /* ---------- hook deck ---------- */
+  var HOOKS = [
+    {n:"Hook 01", name:"The direct answer", cue:"Post this one first.",
+     overlay:"“Ye said play the chords. These are the chords.”",
+     ask:"The literal reply to eleven thousand comments. It costs you nothing to make and it is the only post here whose audience is already assembled and waiting."},
+    {n:"Hook 02", name:"The credit nobody can copy", cue:"Your own production work.",
+     overlay:"“The chord that makes ‘I Can’t Wait’ hurt.”",
+     ask:"You produced it. Ye and Ms. Lauryn Hill are on it. Roughly three people on earth can make this post, and you’re one of them."},
+    {n:"Hook 03", name:"Church to arena", cue:"Your actual biography.",
+     overlay:"“Gospel taught me this. Pop pays me for it.”",
+     ask:"The path from a worship team to a stadium stage is the most credible teaching story you have, and it’s a genuine lesson rather than a flex."},
+    {n:"Hook 04", name:"Tour, but musical", cue:"Ends on an idea, not a place.",
+     overlay:"“What 14,000 people in Macau heard me play.”",
+     ask:"Same footage you’re already shooting, but the payoff is the voicing rather than the venue. Turns tour documentation into teaching without extra work."},
+    {n:"Hook 05", name:"The ladder", cue:"Shows the gap you sell.",
+     overlay:"“Three voicings. Beginner, working, session.”",
+     ask:"Same chord, three levels. The viewer places themselves on the ladder, sees the top rung, and now wants the thing that gets them there."},
+    {n:"Hook 06", name:"The frustration", cue:"Names their exact problem.",
+     overlay:"“You’re playing it right. It still sounds wrong.”",
+     ask:"Every self-taught player has felt this and almost nobody has had it named. Naming a frustration precisely is the strongest hook in teaching content."},
+    {n:"Hook 07", name:"The origin story", cue:"Technique, told as a story.",
+     overlay:"“I got this call because of one chord.”",
+     ask:"The Bootsy Collins discovery. It works because the story has a musical payoff — the chord is the point, not the anecdote."},
+    {n:"Hook 08", name:"The Sunday test", cue:"An audience you already lead.",
+     overlay:"“Play this at church Sunday and watch what happens.”",
+     ask:"You direct a worship team. Church musicians are an enormous, underserved, extremely loyal piano-learning audience and you are already credible inside it."}
+  ];
+
+  var deck = document.getElementById("deck");
+  HOOKS.forEach(function(hk, i){
+    var el = document.createElement("article");
+    el.className = "day";
+    el.setAttribute("data-open", "false");
+    el.innerHTML =
+      '<button class="dtoggle" type="button" aria-expanded="false">' +
+        '<span class="dnum">' + hk.n + '</span>' +
+        '<span class="dname">' + hk.name + '</span>' +
+        '<span class="dcue">' + hk.cue + '</span>' +
+      '</button>' +
+      '<div class="dbody">' +
+        '<span class="dlab">On-screen</span>' +
+        '<div class="overlay">' + hk.overlay + '</div>' +
+        '<span class="dlab">Why it works</span>' +
+        '<p class="ask">' + hk.ask + '</p>' +
+        '<button class="copy" type="button">Copy the line</button>' +
+      '</div>';
+    deck.appendChild(el);
+
+    var btn = el.querySelector(".dtoggle");
+    btn.addEventListener("click", function(){
+      var open = el.getAttribute("data-open") === "true";
+      el.setAttribute("data-open", String(!open));
+      btn.setAttribute("aria-expanded", String(!open));
+    });
+
+    var cp = el.querySelector(".copy");
+    cp.addEventListener("click", function(){
+      var text = hk.overlay.replace(/[“”]/g, "");
+      var done = function(){
+        cp.textContent = "Copied";
+        cp.classList.add("done");
+        setTimeout(function(){ cp.textContent = "Copy the line"; cp.classList.remove("done"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done, function(){});
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); done(); } catch(e){}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  function setAll(open){
+    Array.prototype.forEach.call(deck.querySelectorAll(".day"), function(el){
+      el.setAttribute("data-open", String(open));
+      el.querySelector(".dtoggle").setAttribute("aria-expanded", String(open));
+    });
+  }
+  document.getElementById("openAll").addEventListener("click", function(){ setAll(true); });
+  document.getElementById("closeAll").addEventListener("click", function(){ setAll(false); });
+
+  /* ---------- countdown to the next tour date ---------- */
+  var TARGET = new Date("2026-10-24T20:00:00+08:00").getTime();
+  var d = document.getElementById("d"), h = document.getElementById("h"),
+      m = document.getElementById("m"), s = document.getElementById("s");
+
+  function pad(n){ return n < 10 ? "0" + n : String(n); }
+  function tickClock(){
+    var left = TARGET - Date.now();
+    if(left < 0) left = 0;
+    var sec = Math.floor(left / 1000);
+    d.textContent = String(Math.floor(sec / 86400));
+    h.textContent = pad(Math.floor(sec / 3600) % 24);
+    m.textContent = pad(Math.floor(sec / 60) % 60);
+    s.textContent = pad(sec % 60);
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+})();
+</script>
+
+</body>
+</html>
