@@ -1147,7 +1147,13 @@ footer .col{line-height:1.75}
     toc.appendChild(li);
   });
 
-  function openPanel(){ panel.classList.add("open"); tocBtn.setAttribute("aria-expanded","true"); }
+  function openPanel(){
+    panel.classList.add("open");
+    tocBtn.setAttribute("aria-expanded","true");
+    panel.scrollTop = 0;
+    var on = toc.querySelector("a.on");
+    if(on && on.offsetTop > panel.clientHeight - 80){ panel.scrollTop = on.offsetTop - 120; }
+  }
   function closePanel(){ panel.classList.remove("open"); tocBtn.setAttribute("aria-expanded","false"); }
   tocBtn.addEventListener("click", function(){
     panel.classList.contains("open") ? closePanel() : openPanel();
