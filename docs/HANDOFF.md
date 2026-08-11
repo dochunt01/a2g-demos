@@ -35,7 +35,12 @@ to close exactly that gap.
    changed canonicality or structure rules, `content-machine.md` yields to it —
    reconcile the doc before acting on it.
 2. **Canonicality manifest** at the vault root: per domain — system of record,
-   working copy, sync direction.
+   working copy, sync direction. Confirmed fact to record while writing it
+   (Harry, Aug 11): **all three machines — MacBook Pro, Mac Studio, Mac Mini —
+   are vault-synced.** Any of them can host a vault session; role assignments
+   (Studio = render appliance, Mini = always-on deploy host) are unchanged.
+   Record this in the vault architecture doc so no future session has to
+   re-ask.
 3. **One NOW per domain** — merge or archive strays in recently-touched domains.
 4. **Notion cleanups:** duplicate "Content Pipeline" databases (created Mar 24
    and Apr 5 — pick one, archive the other); Content Console's stale "YouTube
