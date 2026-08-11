@@ -532,6 +532,7 @@ footer .col{line-height:1.75}
         <button class="chip" data-filter="act" aria-pressed="false">Do this week</button>
         <button class="chip" data-filter="why" aria-pressed="false">Why</button>
         <button class="chip" data-filter="later" aria-pressed="false">After the show</button>
+        <button class="chip" data-filter="asked" aria-pressed="false">Questions asked</button>
         <button class="chip" id="allBtn" type="button" aria-pressed="false" style="margin-left:auto">Open all</button>
       </div>
       <ul class="toclist" id="toc"></ul>
@@ -1261,6 +1262,23 @@ Comment TAKE ME BACK and I'll send you the link.</p>
 </details>
 </section>
 
+<section id="asked" data-cat="asked">
+<details class="fold">
+<summary>
+  <span class="fhead"><span class="fcat">Asked</span><span class="ftitle">Questions Ishmael sent in, and what came back.</span></span>
+  <span class="fmark" aria-hidden="true">+</span>
+</summary>
+  <div class="wrap">
+    <p class="sub">Ask the bot anything about this plan and the answer lands here, newest first. Everything above stays as it is — this section is the only part that grows.</p>
+<!-- ASKED:START -->
+    <div class="note" style="border-color:var(--line);background:var(--raise)">
+      Nothing asked yet. Send the bot a question and it'll show up here within a couple of minutes.
+    </div>
+<!-- ASKED:END -->
+  </div>
+</details>
+</section>
+
 </main>
 
 <footer>
@@ -1282,9 +1300,10 @@ Comment TAKE ME BACK and I'll send you the link.</p>
     ["move","The one move"],["countdown","Eight artists, eight days"],["final3","Days 9–11"],
     ["timing","When to post"],["links","Links"],["paid","Paid"],
     ["event","The event page"],["groups","The groups"],["volume","How much to post"],
-    ["tiktok","TikTok"],["measure","What to measure"],["after","After August"]
+    ["tiktok","TikTok"],["measure","What to measure"],["after","After August"],
+    ["asked","Questions asked"]
   ];
-  var CATNAME = {act:"Do", why:"Why", later:"Later"};
+  var CATNAME = {act:"Do", why:"Why", later:"Later", asked:"Asked"};
   var toc = document.getElementById("toc");
   var tocBtn = document.getElementById("tocBtn");
   var panel = document.getElementById("tocPanel");
