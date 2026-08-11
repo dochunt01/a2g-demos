@@ -1,3 +1,5 @@
+> **Superseded 2026-08-10:** the canonical copy of this doc now lives in the vault (`knowledge/harry-hunt-jr/hhj-series-story.md` / `knowledge/content-factory/content-machine-design.md`, with reconciliation). This repo copy is the frozen remote-session original.
+
 # The A2G Content Machine
 
 **Scope:** the full production system for story-driven and repurposed content

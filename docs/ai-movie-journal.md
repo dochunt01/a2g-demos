@@ -1,3 +1,5 @@
+> **Superseded 2026-08-10:** the canonical copy of this doc now lives in the vault (`knowledge/harry-hunt-jr/hhj-series-story.md` / `knowledge/content-factory/content-machine-design.md`, with reconciliation). This repo copy is the frozen remote-session original.
+
 # The Series — Harry Hunt Jr's transformation, with H2 in it
 
 **Concept:** You journal. While you sleep, an agent maps the day's emotional
