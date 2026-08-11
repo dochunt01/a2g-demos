@@ -1,14 +1,55 @@
-# The Night Shift — H2's Lab Notes
+# The Series — Harry Hunt Jr's transformation, with H2 in it
 
-**Concept:** You journal. While you sleep, an agent renders the day as an
-animated H2 The Scientist short. You wake up to a finished piece of content,
-plus a log of how it was made.
+**Concept:** You journal. While you sleep, an agent maps the day's emotional
+truth onto the next beat of a serialized story — comic-panel episodes, lightly
+animated, scored with H2's music. You wake up to the next episode of your own
+transformation, drawn.
 
-Revised after reading the H2 brand card, the Brand Positioning Framework, and
-the Social Media Show Formats project in Notion. The avatar direction changes
-this from "AI life journal" into something that fits an existing brand system —
-but it collides with H2's own positioning in one place that has to be handled
-deliberately.
+**What the story is (settled in the Aug 10 session):** the true, ongoing
+transformation from freelance violinist to the operator building A2G in
+Chicago — no infrastructure, no support, a storm-gutted studio, and a staff
+built out of AI systems. Harry Hunt Jr's story, with H2 The Scientist as a
+character in it. Audience: entrepreneurs who never took the leap, are tired,
+or hear about "easier ways" and don't know what to do — plus A2G's future
+clients. Not tech people first, but polished enough that tech people respect
+the systems.
+
+**Timeline the archive already wrote:** March — building begins, music still
+hedging. April 7 — the identity is named in the journal ("Confessions of a
+Recovering Musician" entry; thesis, *not* the series title — Harry's word is
+*transformational*, not recovering). June — the storm guts the studio: the
+point of no return, not the origin. Now — the gutted lab, rebuilding, drawing
+it as it happens.
+
+**Positioning context (Aug 10):** there is a gold rush of AI content and it is
+crowded with people selling prompts and productized shortcuts. The
+differentiators here are exactly the things that can't be copy-pasted: the H2
+character, uniquely crafted human-made music, a real ongoing story, and systems
+built for domains *outside* tech (marketing for musicians and creative
+businesses) — where content has to be more interesting than tech-serious.
+The conviction underneath, one enemy across all brands: shortcuts sold to
+people who deserved capability. The real value of AI is building, customizing,
+and trying things — and that's the story being dramatized, never lectured.
+
+**Open creative thread — the three-character relay** (Harry's idea, untested):
+H2 The Scientist builds in the lab and takes the risks → hands off to Harry the
+student-scientist who loves the puzzle → hands off to **Harry Hunt Jr**, the
+executive who presents the finished thing, Jobs-style. Could be the visual
+grammar for goggles-vs-face. Gets tested by storyboarding, not debate.
+
+**Interactive layer (part of what "fun" means):** audience-submitted side
+missions — what should he try to build next, challenges, competitions,
+fail-counters. Side quests with puzzle energy alongside the serious main quest.
+
+**Companion doc:** `content-machine.md` — the full production architecture
+(lanes, automation boundaries, night shift, GHL deploy, multi-brand isolation).
+This file owns the story; that file owns the machine.
+
+---
+
+Earlier concept history below — still-valid craft sections (consistency,
+adaptation, curriculum) with framing that evolved across three sessions;
+where they conflict, the summary above and `content-machine.md` win.
 
 ---
 
