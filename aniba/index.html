@@ -3,1625 +3,249 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
-<meta name="googlebot" content="noindex, nofollow">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#070B18">
-<title>Aniba &middot; The 11-Day Plan</title>
-<style>
-  html{-webkit-text-size-adjust:100%; background:#070B18; scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  img,svg,video{max-width:100%;height:auto}
-  button{font-family:inherit}
-</style>
+<meta name="theme-color" content="#0b0e17">
+<title>Aniba — Take Me Back</title>
+<link rel="stylesheet" href="aniba.css">
 </head>
 <body>
-
-<style>
-/* ============ TOKENS ============ */
-:root{
-  --ground:#070B18;
-  --ground-2:#0C1327;
-  --ground-3:#131E3C;
-  --raise:rgba(125,160,235,.07);
-  --line:rgba(140,168,232,.18);
-  --line-soft:rgba(140,168,232,.10);
-  --ink:#E9EEFC;
-  --ink-2:#94A2C6;
-  --ink-3:#63719A;
-  --blue:#3D6DFF;
-  --blue-lift:#89AEFF;
-  --blue-deep:#1B34A8;
-  --brass:#E3A85C;
-  --rose:#D4587C;
-  --glow:rgba(61,109,255,.45);
-  --shadow:0 24px 60px -28px rgba(0,0,0,.85);
-  --wash1:rgba(61,109,255,.40);
-  --wash2:rgba(120,72,220,.26);
-  --wash3:rgba(227,168,92,.10);
-
-  --display:"Didot","Bodoni 72","Bodoni MT",Baskerville,"Playfair Display",Georgia,serif;
-  --body:"Avenir Next","Avenir","Segoe UI",system-ui,-apple-system,sans-serif;
-  --data:ui-monospace,"SF Mono","IBM Plex Mono","Roboto Mono",Menlo,monospace;
-
-  --col:min(68ch,100%);
-  --wide:min(1080px,100%);
-  --pad:clamp(1.1rem,4vw,2rem);
-}
-
-/* Single-theme by design: this page is a blue stage wash at night.
-   It does not follow the OS light/dark preference — it commits. */
-
-/* ============ BASE ============ */
-*{box-sizing:border-box}
-html{color-scheme:dark}
-body{
-  margin:0; background:var(--ground); color:var(--ink);
-  font-family:var(--body); font-size:1.0625rem; line-height:1.72;
-  -webkit-font-smoothing:antialiased; overflow-x:hidden;
-}
-p{margin:0 0 1.1em}
-a{color:var(--blue-lift); text-underline-offset:3px}
-:focus-visible{outline:2px solid var(--blue-lift); outline-offset:3px; border-radius:3px}
-h1,h2,h3{text-wrap:balance; margin:0}
-strong{color:var(--ink); font-weight:650}
-
-.wrap{width:var(--wide); margin-inline:auto; padding-inline:var(--pad)}
-.col{width:var(--col); margin-inline:auto}
-
-.eyebrow{
-  font-family:var(--data); font-size:.7rem; letter-spacing:.22em;
-  text-transform:uppercase; color:var(--ink-3); margin:0 0 .9rem;
-  display:flex; align-items:center; gap:.7rem;
-}
-.eyebrow::after{content:""; flex:1; height:1px; background:var(--line-soft)}
-
-/* ============ STAGE HERO ============ */
-.stage{
-  position:relative; overflow:hidden; isolation:isolate;
-  padding:clamp(3.5rem,11vh,7rem) 0 clamp(3rem,8vh,5rem);
-  border-bottom:1px solid var(--line-soft);
-}
-.stage::before{
-  content:""; position:absolute; inset:-30% -20% auto -20%; height:150%;
-  background:
-    radial-gradient(58% 46% at 22% 0%, var(--wash1), transparent 68%),
-    radial-gradient(48% 42% at 78% 6%, var(--wash2), transparent 66%),
-    radial-gradient(40% 36% at 50% 34%, var(--wash3), transparent 70%);
-  z-index:-2; animation:wash 22s ease-in-out infinite alternate;
-}
-.stage::after{
-  content:""; position:absolute; inset:0; z-index:-1; opacity:.5;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.35'/></svg>");
-  mix-blend-mode:overlay; pointer-events:none;
-}
-@keyframes wash{from{transform:translate3d(-2%,0,0) scale(1)}to{transform:translate3d(3%,2%,0) scale(1.08)}}
-
-.beams{position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.55}
-.beam{
-  position:absolute; top:-25%; width:34vmax; height:150%;
-  background:linear-gradient(180deg,var(--glow),transparent 62%);
-  filter:blur(38px); transform-origin:50% 0;
-}
-.beam.b1{left:-8%; transform:rotate(13deg); animation:sway 15s ease-in-out infinite alternate}
-.beam.b2{right:-6%; transform:rotate(-16deg); animation:sway 19s ease-in-out -4s infinite alternate-reverse}
-@keyframes sway{from{transform:rotate(13deg) translateX(-3vw)}to{transform:rotate(4deg) translateX(5vw)}}
-
-.badge{
-  display:inline-flex; align-items:center; gap:.55rem;
-  font-family:var(--data); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--brass); border:1px solid color-mix(in srgb,var(--brass) 40%,transparent);
-  background:color-mix(in srgb,var(--brass) 9%,transparent);
-  padding:.4rem .85rem; border-radius:99px;
-}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--brass);box-shadow:0 0 10px var(--brass)}
-
-h1{
-  font-family:var(--display); font-weight:400;
-  font-size:clamp(2.9rem,8.5vw,6.4rem); line-height:.94;
-  letter-spacing:-.02em; margin:1.4rem 0 0;
-}
-h1 em{font-style:italic; color:var(--blue-lift); text-shadow:0 0 40px var(--glow)}
-.deck{
-  font-size:clamp(1.05rem,2.1vw,1.3rem); color:var(--ink-2);
-  max-width:46ch; margin:1.5rem 0 0; line-height:1.6;
-}
-
-/* countdown */
-.clock{display:flex; gap:clamp(.6rem,2.4vw,1.4rem); margin-top:2.6rem; flex-wrap:wrap}
-.tick{
-  min-width:76px; padding:.75rem .9rem .6rem; border-radius:12px;
-  background:var(--raise); border:1px solid var(--line-soft); backdrop-filter:blur(6px);
-}
-.tick b{
-  display:block; font-family:var(--data); font-variant-numeric:tabular-nums;
-  font-size:clamp(1.5rem,4vw,2.1rem); font-weight:600; line-height:1; color:var(--ink);
-}
-.tick span{
-  display:block; margin-top:.45rem; font-family:var(--data);
-  font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
-}
-.venue{
-  margin-top:2rem; font-family:var(--data); font-size:.78rem;
-  color:var(--ink-3); letter-spacing:.04em; line-height:2;
-}
-.venue b{color:var(--ink-2); font-weight:500}
-
-/* ============ READING PROGRESS ============ */
-#bar{
-  position:fixed; top:0; left:0; height:2px; width:0; z-index:60;
-  background:linear-gradient(90deg,var(--blue),var(--brass)); transition:width .1s linear;
-}
-
-/* ============ STICKY NAV ============ */
-.topbar{
-  position:sticky; top:0; z-index:50;
-  background:color-mix(in srgb,var(--ground) 88%,transparent);
-  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line-soft);
-}
-.topin{
-  width:var(--wide); margin-inline:auto; padding:.7rem var(--pad);
-  display:flex; align-items:center; gap:1rem; justify-content:space-between;
-}
-.brandmark{
-  font-family:var(--display); font-size:1.05rem; letter-spacing:-.01em;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-.brandmark em{font-style:italic; color:var(--blue-lift)}
-.tools{display:flex; align-items:center; gap:.5rem; flex:none}
-.daysleft{
-  font-family:var(--data); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--brass); border:1px solid color-mix(in srgb,var(--brass) 40%,transparent);
-  padding:.35rem .6rem; border-radius:99px; white-space:nowrap;
-}
-.navbtn{
-  font-family:var(--data); font-size:.65rem; letter-spacing:.14em; text-transform:uppercase;
-  padding:.45rem .85rem; border-radius:99px; cursor:pointer; white-space:nowrap;
-  background:transparent; border:1px solid var(--line); color:var(--ink-2); transition:.22s;
-}
-.navbtn:hover{border-color:var(--blue); color:var(--ink)}
-.navbtn[aria-expanded="true"]{background:var(--blue); border-color:var(--blue); color:#fff}
-
-.panel{
-  display:none; border-top:1px solid var(--line-soft);
-  background:color-mix(in srgb,var(--ground-2) 96%,transparent);
-  max-height:min(70vh,560px); overflow-y:auto;
-}
-.panel.open{display:block}
-.panelin{width:var(--wide); margin-inline:auto; padding:1.1rem var(--pad) 1.5rem}
-.chips{display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.1rem}
-.chip{
-  font-family:var(--data); font-size:.62rem; letter-spacing:.13em; text-transform:uppercase;
-  padding:.45rem .8rem; border-radius:99px; cursor:pointer;
-  background:transparent; border:1px solid var(--line); color:var(--ink-3); transition:.22s;
-}
-.chip:hover{color:var(--ink); border-color:var(--blue)}
-.chip[aria-pressed="true"]{background:var(--blue); border-color:var(--blue); color:#fff}
-.toclist{list-style:none; margin:0; padding:0; display:grid; gap:.15rem}
-.toclist a{
-  display:flex; align-items:baseline; gap:.7rem; padding:.6rem .7rem; border-radius:9px;
-  text-decoration:none; color:var(--ink-2); font-size:.95rem; transition:.18s;
-}
-.toclist a:hover{background:var(--raise); color:var(--ink)}
-.toclist a.on{background:color-mix(in srgb,var(--blue) 16%,transparent); color:var(--ink)}
-.toclist a[hidden]{display:none}
-.tocat{
-  font-family:var(--data); font-size:.55rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--ink-3); flex:none; min-width:42px;
-}
-.toclist a.on .tocat{color:var(--blue-lift)}
-
-/* ============ CHECKLIST ============ */
-.todo{list-style:none; margin:2rem 0 0; padding:0; display:grid; gap:.6rem}
-.todo li{margin:0}
-.todo label{
-  display:flex; gap:.9rem; align-items:flex-start; cursor:pointer;
-  padding:.95rem 1.15rem; border-radius:12px;
-  background:var(--ground-2); border:1px solid var(--line-soft); transition:.22s;
-}
-.todo label:hover{border-color:var(--blue)}
-.todo input{
-  appearance:none; -webkit-appearance:none; margin:.2rem 0 0; flex:none;
-  width:19px; height:19px; border-radius:6px; cursor:pointer;
-  border:1.5px solid var(--line); background:transparent; transition:.2s;
-}
-.todo input:checked{background:var(--blue); border-color:var(--blue)}
-.todo input:checked::after{content:"✓"; display:block; color:#fff; font-size:.75rem; text-align:center; line-height:17px}
-.todo .txt{font-size:.97rem; line-height:1.55}
-.todo .txt small{display:block; color:var(--ink-3); font-size:.83rem; margin-top:.2rem}
-.todo input:checked ~ .txt{opacity:.45; text-decoration:line-through; text-decoration-thickness:1px}
-
-/* ============ SECTIONS AS FEED CARDS ============ */
-main{display:flex; flex-direction:column; gap:clamp(.9rem,2vw,1.4rem); padding:clamp(.9rem,2vw,1.4rem) 0 0}
-section{
-  background:var(--ground-2);
-  border:1px solid var(--line-soft);
-  border-radius:clamp(14px,2vw,20px);
-  width:var(--wide); margin-inline:auto;
-  scroll-margin-top:76px;
-  overflow:hidden; transition:border-color .25s;
-}
-section[hidden]{display:none}
-section:has(.fold[open]){border-color:color-mix(in srgb,var(--blue) 45%,transparent)}
-section .wrap{width:100%; padding:clamp(1.5rem,3.4vw,2.2rem) clamp(1.1rem,4vw,2.6rem) clamp(2rem,5vw,3rem)}
-
-/* ---- the fold header: reads as a contents row when closed ---- */
-.fold > summary{
-  list-style:none; cursor:pointer; display:flex; align-items:center; gap:1.2rem;
-  padding:clamp(1.15rem,3vw,1.6rem) clamp(1.1rem,4vw,2.6rem);
-  transition:background .2s;
-}
-.fold > summary::-webkit-details-marker{display:none}
-.fold > summary::marker{content:""}
-.fold > summary:hover{background:var(--raise)}
-.fhead{display:flex; flex-direction:column; gap:.5rem; flex:1; min-width:0}
-.fcat{
-  font-family:var(--data); font-size:.62rem; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--ink-3); transition:color .25s;
-}
-.ftitle{
-  font-family:var(--display); font-weight:400; letter-spacing:-.015em;
-  font-size:clamp(1.28rem,3vw,1.95rem); line-height:1.12; text-wrap:balance;
-}
-.fmark{
-  flex:none; width:32px; height:32px; border-radius:50%;
-  display:grid; place-items:center; font-family:var(--data); font-size:1.15rem;
-  color:var(--blue-lift); border:1px solid var(--line);
-  transition:transform .3s cubic-bezier(.22,1,.36,1), background .25s, border-color .25s;
-}
-.fold > summary:hover .fmark{border-color:var(--blue); background:color-mix(in srgb,var(--blue) 16%,transparent)}
-.fold[open] > summary .fmark{transform:rotate(45deg); background:var(--blue); border-color:var(--blue); color:#fff}
-.fold[open] > summary .fcat{color:var(--blue-lift)}
-.fold[open] > summary{border-bottom:1px solid var(--line-soft)}
-/* nested surfaces lift off the card ground */
-section .card,section .day,section table,section details,section .finals li{background:var(--ground-3)}
-section .day[data-open="true"]{background:color-mix(in srgb,var(--blue) 12%,var(--ground-3))}
-h2{
-  font-family:var(--display); font-weight:400;
-  font-size:clamp(1.9rem,4.6vw,3.1rem); line-height:1.06; letter-spacing:-.015em;
-}
-.sub{color:var(--ink-2); margin-top:0; max-width:56ch}
-h3{font-size:1.08rem; font-weight:650; letter-spacing:-.01em}
-
-/* ============ A/B CHART ============ */
-.metricbar{display:flex; gap:.5rem; flex-wrap:wrap; margin:2rem 0 1.75rem}
-.mbtn{
-  font-family:var(--data); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
-  padding:.55rem 1rem; border-radius:99px; cursor:pointer;
-  background:transparent; color:var(--ink-3);
-  border:1px solid var(--line); transition:.25s;
-}
-.mbtn:hover{color:var(--ink); border-color:var(--blue)}
-.mbtn[aria-pressed="true"]{
-  background:var(--blue); border-color:var(--blue); color:#fff;
-  box-shadow:0 0 24px -6px var(--glow);
-}
-.rows{display:flex; flex-direction:column; gap:1.6rem}
-.row{display:grid; grid-template-columns:1fr auto; gap:.5rem 1rem; align-items:end}
-.rlabel{font-size:.95rem; line-height:1.45}
-.rlabel small{display:block; color:var(--ink-3); font-size:.78rem; font-family:var(--data); margin-top:.2rem}
-.rval{
-  font-family:var(--data); font-variant-numeric:tabular-nums;
-  font-size:1.5rem; font-weight:600; color:var(--ink); white-space:nowrap;
-}
-.track{grid-column:1/-1; height:12px; border-radius:99px; background:var(--raise); overflow:hidden; border:1px solid var(--line-soft)}
-.fill{
-  height:100%; width:0; border-radius:99px;
-  background:linear-gradient(90deg,var(--blue-deep),var(--blue));
-  transition:width .9s cubic-bezier(.22,1,.36,1);
-}
-.row.win .fill{background:linear-gradient(90deg,var(--blue),var(--brass))}
-.row.win .rval{color:var(--brass)}
-.verdict{
-  margin-top:2rem; padding:1.15rem 1.35rem; border-radius:14px;
-  border:1px solid var(--line); background:var(--raise);
-  font-size:.98rem; color:var(--ink-2);
-}
-.verdict b{color:var(--ink)}
-
-/* ============ RULE CARDS ============ */
-.grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(248px,1fr)); margin-top:2.2rem}
-.card{
-  padding:1.4rem 1.4rem 1.5rem; border-radius:16px;
-  background:var(--ground-2); border:1px solid var(--line-soft);
-  transition:.3s; position:relative; overflow:hidden;
-}
-.card:hover{border-color:var(--blue); transform:translateY(-3px); box-shadow:var(--shadow)}
-.card .num{
-  font-family:var(--data); font-size:.68rem; letter-spacing:.2em;
-  color:var(--blue-lift); display:block; margin-bottom:.7rem;
-}
-.card p{margin:.55rem 0 0; font-size:.93rem; color:var(--ink-2); line-height:1.65}
-.card.flip{border-color:color-mix(in srgb,var(--rose) 45%,transparent)}
-.card.flip .num{color:var(--rose)}
-
-/* ============ THE MOVE ============ */
-.move{
-  border-radius:20px; padding:clamp(1.6rem,4vw,2.8rem);
-  background:
-    radial-gradient(120% 130% at 0% 0%, color-mix(in srgb,var(--blue) 22%,transparent), transparent 60%),
-    var(--ground-2);
-  border:1px solid color-mix(in srgb,var(--blue) 40%,transparent);
-  box-shadow:var(--shadow);
-}
-.quote{
-  font-family:var(--display); font-style:italic; font-weight:400;
-  font-size:clamp(1.5rem,4.4vw,2.5rem); line-height:1.2; letter-spacing:-.01em;
-  margin:1rem 0 1.6rem; color:var(--ink);
-}
-.why{display:grid; gap:.9rem; margin-top:1.6rem; padding:0; list-style:none}
-.why li{display:grid; grid-template-columns:auto 1fr; gap:.9rem; align-items:start; font-size:.95rem; color:var(--ink-2)}
-.why b{color:var(--ink); font-weight:600}
-.pip{
-  width:22px;height:22px;border-radius:50%; margin-top:.15rem;
-  display:grid;place-items:center; flex:none;
-  background:color-mix(in srgb,var(--blue) 22%,transparent);
-  border:1px solid color-mix(in srgb,var(--blue) 55%,transparent);
-  font-family:var(--data); font-size:.62rem; color:var(--blue-lift);
-}
-
-/* ============ DECK ============ */
-.deckgrid{display:grid; gap:.85rem; grid-template-columns:repeat(auto-fit,minmax(272px,1fr)); margin-top:2.4rem}
-.day{
-  background:var(--ground-2); border:1px solid var(--line-soft);
-  border-radius:16px; padding:1.25rem 1.3rem; transition:.3s; position:relative; overflow:hidden;
-}
-.day::before{
-  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
-  background:linear-gradient(180deg,var(--blue),var(--rose)); opacity:0; transition:.3s;
-}
-.day:hover{border-color:var(--blue); transform:translateY(-2px)}
-.day[data-open="true"]{border-color:var(--blue); background:var(--ground-3)}
-.day[data-open="true"]::before{opacity:1}
-.dtoggle{
-  display:block; width:100%; text-align:left; cursor:pointer;
-  font:inherit; color:inherit; background:none; border:0; padding:0; margin:0;
-}
-.dnum{display:block; font-family:var(--data); font-size:.66rem; letter-spacing:.2em; color:var(--ink-3)}
-.dname{display:block; font-family:var(--display); font-size:1.5rem; line-height:1.15; margin-top:.4rem; letter-spacing:-.01em}
-.dcue{display:block; font-size:.86rem; color:var(--blue-lift); font-style:italic; margin-top:.5rem}
-.day[data-open="true"] .dcue{color:var(--ink-3)}
-.dbody{
-  max-height:0; opacity:0; overflow:hidden;
-  transition:max-height .45s cubic-bezier(.22,1,.36,1), opacity .3s, margin .45s;
-}
-.day[data-open="true"] .dbody{max-height:560px; opacity:1; margin-top:1.1rem}
-.dlab{
-  font-family:var(--data); font-size:.6rem; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.4rem;
-}
-.overlay{
-  padding:.9rem 1rem; border-radius:10px; margin-bottom:1rem;
-  background:color-mix(in srgb,var(--blue) 14%,transparent);
-  border:1px dashed color-mix(in srgb,var(--blue) 45%,transparent);
-  font-family:var(--display); font-size:1.1rem; line-height:1.35;
-}
-.ask{font-size:.94rem; color:var(--ink-2); line-height:1.6}
-.copy{
-  margin-top:1rem; font-family:var(--data); font-size:.68rem; letter-spacing:.14em;
-  text-transform:uppercase; padding:.5rem .9rem; border-radius:99px; cursor:pointer;
-  background:transparent; border:1px solid var(--line); color:var(--ink-3); transition:.25s;
-}
-.copy:hover{border-color:var(--brass); color:var(--brass)}
-.copy.done{border-color:var(--brass); color:var(--brass); background:color-mix(in srgb,var(--brass) 12%,transparent)}
-
-.deckctl{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1.6rem}
-
-/* ============ CHECK LIST ============ */
-.finals{display:grid; gap:.7rem; margin-top:2rem; padding:0; list-style:none}
-.finals li{
-  display:flex; gap:1rem; align-items:flex-start; padding:1rem 1.2rem;
-  border-radius:12px; background:var(--ground-2); border:1px solid var(--line-soft);
-}
-.finals .tag{
-  font-family:var(--data); font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--rose); flex:none; padding-top:.28rem; min-width:52px;
-}
-.finals b{display:block; margin-bottom:.2rem}
-.finals p{margin:0; font-size:.9rem; color:var(--ink-2)}
-
-/* ============ TABLE ============ */
-.pill{
-  display:inline-block; font-family:var(--data); font-size:.58rem;
-  letter-spacing:.16em; text-transform:uppercase; padding:.25rem .55rem;
-  border-radius:99px; white-space:nowrap;
-}
-.pill.anchor{color:var(--blue-lift); background:color-mix(in srgb,var(--blue) 18%,transparent); border:1px solid color-mix(in srgb,var(--blue) 45%,transparent)}
-.pill.probe{color:var(--brass); background:color-mix(in srgb,var(--brass) 14%,transparent); border:1px solid color-mix(in srgb,var(--brass) 45%,transparent)}
-.when{font-family:var(--data); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink)}
-.note{
-  margin-top:2rem; padding:1.15rem 1.35rem; border-radius:14px;
-  border:1px solid color-mix(in srgb,var(--rose) 40%,transparent);
-  background:color-mix(in srgb,var(--rose) 8%,transparent);
-  font-size:.95rem; color:var(--ink-2);
-}
-.note b{color:var(--ink)}
-.scroller{overflow-x:auto; margin-top:2rem; border-radius:14px; border:1px solid var(--line-soft)}
-table{border-collapse:collapse; width:100%; min-width:520px; background:var(--ground-2)}
-th,td{padding:.95rem 1.1rem; text-align:left; border-bottom:1px solid var(--line-soft); font-size:.93rem}
-th{
-  font-family:var(--data); font-size:.63rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--ink-3); font-weight:500;
-}
-tr:last-child td{border-bottom:none}
-td b{color:var(--ink)}
-td:first-child{color:var(--blue-lift); font-weight:600}
-
-/* ============ NESTED DETAILS (inside a fold body) ============ */
-.wrap details{
-  border:1px solid var(--line-soft); border-radius:14px; background:var(--ground-3);
-  padding:0 1.3rem; margin-top:.75rem; transition:.25s;
-}
-.wrap details[open]{border-color:var(--blue)}
-.wrap details > summary{
-  cursor:pointer; padding:1.1rem 0; list-style:none;
-  display:flex; align-items:center; justify-content:space-between; gap:1rem;
-  font-weight:600; font-size:1rem;
-}
-.wrap details > summary::-webkit-details-marker{display:none}
-.wrap details > summary::after{
-  content:"+"; font-family:var(--data); font-size:1.2rem; color:var(--blue-lift);
-  transition:transform .3s; flex:none;
-}
-.wrap details[open] > summary::after{transform:rotate(45deg)}
-.wrap details .inner{padding-bottom:1.3rem; color:var(--ink-2); font-size:.94rem}
-.wrap details .inner p{margin-bottom:.7em}
-
-/* ============ FOOT ============ */
-footer{padding:clamp(3rem,7vh,4.5rem) 0 5rem; color:var(--ink-3); font-size:.86rem}
-footer .col{line-height:1.75}
-.sig{
-  font-family:var(--display); font-style:italic; font-size:1.35rem;
-  color:var(--ink-2); margin-bottom:1.2rem;
-}
-
-@media (max-width:560px){
-  .suffix{display:none}
-  .navbtn,.daysleft{font-size:.58rem; letter-spacing:.1em; padding:.4rem .65rem}
-}
-
-@media (max-width:430px){
-  .clock{gap:.45rem}
-  .tick{min-width:0; flex:1 1 0; padding:.7rem .35rem .55rem; text-align:center}
-  .tick span{font-size:.54rem; letter-spacing:.12em}
-  .badge{font-size:.62rem; letter-spacing:.14em; line-height:1.5}
-}
-
-@media (prefers-reduced-motion:reduce){
-  *{animation:none !important; transition-duration:.01ms !important}
-}
-</style>
-
-<div id="bar" aria-hidden="true"></div>
-
-<div class="stage">
-  <div class="beams" aria-hidden="true"><i class="beam b1"></i><i class="beam b2"></i></div>
-  <div class="wrap">
-    <span class="badge"><span class="dot"></span>For Ishmael · Aniba &amp; The Sol Starz</span>
-    <h1>Take Me<br><em>Back.</em></h1>
-    <p class="deck">Eleven days, eight artists, and one thing Aniba already did right without meaning to.</p>
-
-    <div class="clock" id="clock" role="group" aria-label="Time until showtime">
-      <div class="tick"><b id="d">—</b><span>Days</span></div>
-      <div class="tick"><b id="h">—</b><span>Hours</span></div>
-      <div class="tick"><b id="m">—</b><span>Minutes</span></div>
-      <div class="tick"><b id="s">—</b><span>Seconds</span></div>
-    </div>
-
-    <p class="venue">
-      <b>Friday, August 21, 2026</b> · Doors 7PM / Show 8PM<br>
-      <b>Haven Entertainment Center</b> · 932 E 43rd Street, Chicago
-    </p>
-  </div>
-</div>
-
-<nav class="topbar" aria-label="Sections">
-  <div class="topin">
-    <span class="brandmark">Take Me <em>Back</em><span class="suffix"> · the plan</span></span>
-    <span class="tools">
-      <span class="daysleft" id="dleft">—</span>
-      <button class="navbtn" id="tocBtn" type="button" aria-expanded="false" aria-controls="tocPanel">Contents</button>
-    </span>
-  </div>
-  <div class="panel" id="tocPanel">
-    <div class="panelin">
-      <div class="chips" role="group" aria-label="Filter sections">
-        <button class="chip" data-filter="all" aria-pressed="true">Everything</button>
-        <button class="chip" data-filter="act" aria-pressed="false">Do this week</button>
-        <button class="chip" data-filter="why" aria-pressed="false">Why</button>
-        <button class="chip" data-filter="later" aria-pressed="false">After the show</button>
-        <button class="chip" data-filter="asked" aria-pressed="false">Questions asked</button>
-        <button class="chip" id="allBtn" type="button" aria-pressed="false" style="margin-left:auto">Open all</button>
-      </div>
-      <ul class="toclist" id="toc"></ul>
-    </div>
-  </div>
-</nav>
+<div class="grid-bg"></div><div class="aurora a1"></div><div class="aurora a2"></div>
+<div class="zap" style="left:12%;animation-duration:9s"></div>
+<div class="zap" style="left:38%;animation-duration:12s;animation-delay:2.6s"></div>
+<div class="zap" style="left:64%;animation-duration:10s;animation-delay:5.1s"></div>
+<div class="zap" style="left:88%;animation-duration:13s;animation-delay:1.3s"></div>
 
 <main>
+  <div class="eyebrow">Aniba &amp; The Sol Starz · A2G</div>
+  <h1>Take Me Back</h1>
+  <div class="sub"><span class="live"><span class="pulse"></span></span><span id="today-line">…</span> · <b id="days-left">…</b> · show is <b>Friday, August 21, 2026</b>, doors 7PM, The Haven, 932 E 43rd</div>
 
-<section id="start" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Start here</span><span class="ftitle">Nine actions: finish setting up the event page, join the groups, start the eight-day countdown, and email the venue.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Four of these take under a minute each. Everything below this section is the reasoning — this is the doing. Tick them off as they're done, and open any section further down for the argument behind a line.</p>
-
-    <ul class="todo">
-      <li><label><input type="checkbox"><span class="txt">Switch on <b>“Guests can invite friends”</b> in the event settings<small>Ten seconds. Lets all 38 responders invite people using their own allowance, not yours.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Add <b>co-hosts</b> to the Facebook event<small>Mendel, Gerald, CJ, Aniba's own profile, Haven, IMAN. Each one adds 500 invites and can post inside the event.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Request to join <b>The South Side Of Chicago</b> and <b>Bronzeville Alliance</b><small>Today, not Thursday — both are private and admins take days to approve.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Change the <b>TikTok display name</b> to “Aniba &amp; The Sol Starz — Chicago Neo Soul”<small>Free, ten seconds, and it's the field TikTok's search actually reads.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Start the <b>eight-artist countdown</b> — one a day at 8:45PM<small>Erykah, Jill, D'Angelo, Lauryn, Musiq, Maxwell, India.Arie, Bilal. Post them as Reels, not feed posts.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Put <b>“Comment TAKE ME BACK and I'll send you the link”</b> on every post<small>The single highest-value line on this page. Builds a list she owns and sidesteps every limit Facebook imposes.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Get the <b>six band members resharing</b> daily<small>Six networks instead of one, and nobody has to shoot anything extra.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Post the <b>Jill Scott angle</b><small>She's at The Chicago Theatre two days later with 10,078 people interested. Their Friday is the warm-up for a weekend those people already booked.</small></span></label></li>
-      <li><label><input type="checkbox"><span class="txt">Email <b>Haven</b> and ask them to add Aniba's Meta pixel to the Eventbrite listing<small>Five minutes on their end. If yes, real ticket tracking becomes possible. Worth knowing either way.</small></span></label></li>
-    </ul>
-  </div>
-</details>
-</section>
-
-<section id="week1" data-cat="why">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Week one</span><span class="ftitle">The countdown is landing harder per viewer — and reaching a fraction of the people.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Read live on 13 August 2026, eight days out. Two countdown posts have gone up. The result is the opposite of what a glance at the reaction counts suggests.</p>
-
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Post</th><th>Views</th><th>Reactions + comments + shares</th><th>Rate</th></tr></thead>
-        <tbody>
-          <tr><td>Erykah manifesto <span class="dnum">1 AUG</span></td><td class="when">4,400</td><td class="when">54</td><td class="when">1.23%</td></tr>
-          <tr class="win"><td>Lauryn Hill countdown <span class="dnum">12 AUG</span></td><td class="when">564</td><td class="when">20</td><td class="when">3.55%</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="verdict">
-      <b>Per person who saw it, the countdown post is doing nearly three times the work.</b> The writing and the format are landing. What collapsed is how many people got shown it at all — <b>564 against 4,400</b>. This is a distribution problem, not a content problem, and those need opposite fixes.
-    </div>
-
-    <div class="note">
-      <b>And the Erykah post was the outlier, not the baseline.</b> Her last ten Reels, newest first: <span class="when">564 · 549 · 811 · 893 · 666 · 950 · 640 · 985 · 2.5K · 4.4K</span>. Eight of the last eight sit in a tight 549–985 band. That's not a slump — it's a <b>ceiling</b>, and it's the same shape as the TikTok account, where 103 videos cluster around 291 views. Facebook shows a Reel to a small first pool and only expands it if enough people watch to the end. Her videos are reaching that pool and stopping there.
-    </div>
-
-    <div class="note" style="border-color:color-mix(in srgb,var(--brass) 45%,transparent);background:color-mix(in srgb,var(--brass) 9%,transparent)">
-      <b>What was different about the one that broke out?</b> It carried a <b>text overlay</b>, and it named <b>six artists at once</b> — “Give me Erykah. Give me Jill. Give me D'Angelo…” The countdown posts name one each, by design. A manifesto activates everyone who loves any of the six; a single name activates a slice. Worth holding as a hypothesis, not a conclusion — and worth testing with one deliberately broad post before the 21st.
-    </div>
-
-    <h3 style="margin-top:2.6rem">Length is doing something too</h3>
-    <div class="grid">
-      <div class="card">
-        <span class="num">HER PAGE · 15 SECONDS</span>
-        <h3>Lauryn Hill — 20 engagements</h3>
-        <p>Fifteen seconds, on the personal profile, using the caption question as written.</p>
+  <!-- 1 · NEXT POST -->
+  <section id="next">
+    <div class="panel hero">
+      <div class="shead">
+        <span class="biglabel">Today's post</span>
+        <span class="stamp" id="steer-stamp">…</span>
       </div>
-      <div class="card flip">
-        <span class="num">BAND PAGE · 47 SECONDS</span>
-        <h3>Jill Scott — 5 reactions</h3>
-        <p>Three times the length, on the bigger page, a quarter of the response. Both went up the same day.</p>
-      </div>
+      <h2 id="np-artist">…</h2>
+      <div id="np-lanes"></div>
+      <p class="overlay-line" id="np-overlay"></p>
+      <div class="caption-box" id="np-caption"></div>
+      <button class="copybtn" id="np-copy" type="button">Copy the caption</button>
+      <div id="np-read" class="note blue" style="display:none"></div>
+      <ul class="keep" id="np-keep"></ul>
     </div>
-    <p style="margin-top:1.2rem;color:var(--ink-2);max-width:60ch">Two variables moved at once so this isn't clean, but it points the same way as everything else: <b>shorter, on her personal profile.</b> The 7,300-follower band page keeps underperforming the 6,900-follower personal one.</p>
+  </section>
 
-    <div class="note" style="border-color:color-mix(in srgb,var(--rose) 45%,transparent);background:color-mix(in srgb,var(--rose) 8%,transparent)">
-      <b>The number that hasn't moved: event responses are still 38.</b> Same as three days ago, across two countdown posts. And the event still shows <b>three hosts</b> — the co-hosts haven't been added. The content is running; the plumbing on the checklist isn't. Of the two, the plumbing is the one with a mechanical guarantee attached.
+  <!-- 2 · LAST POST TILES -->
+  <section id="numbers">
+    <div class="label">The scoreboard</div>
+    <div class="tiles" id="tiles"></div>
+    <div class="note" id="tiles-note" style="display:none"></div>
+  </section>
+
+  <!-- 3 · WAITING ON YOU -->
+  <section id="waiting">
+    <div class="label">Waiting on you</div>
+    <ul class="todo" id="todo"></ul>
+  </section>
+
+  <!-- 4 · RECENT QUESTIONS -->
+  <section id="asked">
+    <div class="shead"><div class="label">Recent questions</div></div>
+    <div id="qa-list"><div class="note blue">Nothing asked yet. When the ask-anything line opens, answers land here.</div></div>
+  </section>
+
+  <!-- 5 · TICKETS -->
+  <section id="tickets">
+    <div class="label">Tickets</div>
+    <div class="panel" id="tickets-panel"><span class="stamp">…</span></div>
+  </section>
+
+  <!-- 6 · SUBPAGES -->
+  <section id="nav">
+    <div class="label">The rest</div>
+    <div class="cards">
+      <a class="card c-playbook" href="playbook.html">
+        <h2>Playbook</h2>
+        <p>How to make each post — the shot, the eight artists, every caption, the test we're running.</p>
+      </a>
+      <a class="card c-reference" href="reference.html">
+        <h2>Reference</h2>
+        <p>The numbers history, the groups, the event page moves, and everything behind the plan.</p>
+      </a>
     </div>
-
-    <div class="note" style="border-color:var(--line);background:var(--raise)">
-      <b>Check this yourself in ten seconds.</b> Open <b>facebook.com/aniba.hotep/reels</b> — Facebook prints the view count on every thumbnail. No dashboard, no screenshots. That's the scoreboard for everything below.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="format" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">The format question</span><span class="ftitle">Concert footage or her singing straight into the camera? Lead with the close-up, pay off with the stage.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Ishmael has been pulling live footage of Aniba performing these songs at past shows. The alternative is her singing them close, to camera, somewhere personal. The data above says which problem to solve, and it isn't the one it looks like.</p>
-
-    <div class="verdict">
-      <b>Reach on Reels is decided by how many people watch to the end of the first few seconds.</b> Engagement is already fine — 3.55% is a good number. So the format question isn't “which is more compelling,” it's narrower and more answerable: <b>which one stops a thumb in the first two seconds on a six-inch screen?</b>
-    </div>
-
-    <div class="grid">
-      <div class="card flip">
-        <span class="num">WHERE STAGE FOOTAGE LOSES</span>
-        <h3>It was shot for the room, not the phone</h3>
-        <p>Wide, dark, filmed from the audience, with the vocal buried under a PA and a crowd. Shrunk to a phone she's a small figure in low light, and the thing being demonstrated — her voice — is the thing the recording handles worst.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">AND THE FRAME</span>
-        <h3>Horizontal footage in a vertical feed</h3>
-        <p>Concert clips are usually shot wide. Cropped to 9:16 they lose the band; letterboxed they read as recycled. Either way the first frame says “archive” rather than “now.”</p>
-      </div>
-      <div class="card">
-        <span class="num">WHERE THE CLOSE-UP WINS</span>
-        <h3>Clear voice, eye contact, full frame</h3>
-        <p>A close vocal is the proof, delivered cleanly. A face looking down the lens is the single most reliable stopper on any short-video feed, and it fills a vertical frame without cropping anything.</p>
-      </div>
-      <div class="card">
-        <span class="num">WHERE STAGE FOOTAGE WINS</span>
-        <h3>It proves the thing being sold</h3>
-        <p>People are buying a ticket to a live band. A real stage, a real crowd and a real horn section say professional act. A phone in a kitchen doesn't. This is a genuine advantage and it shouldn't be thrown away.</p>
-      </div>
-    </div>
-
-    <div class="move" style="margin-top:2.2rem">
-      <span class="badge"><span class="dot"></span>The recommendation</span>
-      <p class="quote">Open on the close-up. Cut to the stage on the hook.</p>
-      <p style="color:var(--ink-2);max-width:56ch">Three to five seconds of her singing straight to camera — clear, well lit, vertical — then cut to the live footage of that same song as the payoff. The close-up wins the retention decision, which is the part that's failing. The stage footage does the credibility work, which is the part that's already good. Nothing Ishmael has already pulled goes to waste; it moves from the front of the video to the middle.</p>
-    </div>
-
-    <h3 style="margin-top:2.6rem">Don't take my word for it — there are five posts left</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">Five artists remain before the 21st, which is enough to settle this properly instead of arguing about it:</p>
-    <ul class="finals" style="margin-top:1.2rem">
-      <li><span class="tag">A</span><div><b>Two posts: stage footage only</b><p>What's been running. This is the control.</p></div></li>
-      <li><span class="tag">B</span><div><b>Two posts: close-up open, stage payoff</b><p>The hybrid above. Same songs, same captions, different first three seconds.</p></div></li>
-      <li><span class="tag">C</span><div><b>One post: the broad one</b><p>Name four or five artists at once with a text overlay, the way the 1 August post did. Tests whether breadth was what broke that one out.</p></div></li>
-    </ul>
-    <p style="margin-top:1.4rem;color:var(--ink-2);max-width:60ch">Then read the view counts off the Reels tab. If the hybrids clear a thousand while the stage-only posts sit at 550, that's the house format settled by evidence — and it's a finding that outlives this show.</p>
-
-    <div class="note">
-      <b>One thing to hold steady while testing.</b> Keep them all on her personal profile, all around 15 seconds, all with the same caption structure. Changing the shot <em>and</em> the length <em>and</em> the page at once is what made the Lauryn-versus-Jill comparison unreadable.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="evidence" data-cat="why">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">The Evidence</span><span class="ftitle">Two posts. One of them told us everything.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Back-to-back nights, same page, nearly identical reach. Then the numbers split. Switch the metric and watch where they come apart.</p>
-
-    <div class="metricbar" role="group" aria-label="Choose metric">
-      <button class="mbtn" data-metric="views" aria-pressed="true">Views</button>
-      <button class="mbtn" data-metric="eng" aria-pressed="false">Engagement</button>
-      <button class="mbtn" data-metric="rate" aria-pressed="false">Engagement rate</button>
-    </div>
-
-    <div class="rows" id="rows">
-      <div class="row win" data-views="4164" data-eng="145" data-rate="3.48">
-        <div class="rlabel"><b>“Take Me Back!! Give me Erykah…”</b><small>AUG 1 · “BACK IN THE DAY… STILL TIMELESS”</small></div>
-        <div class="rval" data-val></div>
-        <div class="track"><div class="fill"></div></div>
-      </div>
-      <div class="row" data-views="3748" data-eng="84" data-rate="2.24">
-        <div class="rlabel"><b>“Summer is here, and we're living life…”</b><small>JUL 31 · NO TEXT OVERLAY</small></div>
-        <div class="rval" data-val></div>
-        <div class="track"><div class="fill"></div></div>
-      </div>
-    </div>
-
-    <div class="verdict">
-      On <b>views</b> they're within 11% of each other. On <b>engagement rate</b> the first one wins by <b>56%</b>. Nothing about the production changed — one post made a claim about a shared memory and <b>named a specific artist</b>. The other described the weather.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="rules" data-cat="why">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">The Grammar</span><span class="ftitle">Six rules, written for Facebook.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Facebook is where the audience is — 6,900 following Aniba Tha Messenger, against 3,141 on the band's Instagram. That changes the rules, and three of them are the opposite of what works on Reels.</p>
-
-    <div class="grid">
-      <div class="card flip">
-        <span class="num">RULE 01 · NOT REELS</span>
-        <h3>Text carries the hook, not sound</h3>
-        <p>Facebook video plays muted in the feed. The winning post won on four lines of on-screen text, not on the vocal.</p>
-      </div>
-      <div class="card">
-        <span class="num">RULE 02</span>
-        <h3>State a memory, leave a gap</h3>
-        <p>“Back in the day, when music felt like this” works because the viewer fills in the memory. “Live at Haven, Aug 21” gives them nothing to supply.</p>
-      </div>
-      <div class="card">
-        <span class="num">RULE 03</span>
-        <h3>Name one artist. Never a genre</h3>
-        <p>“Give me Erykah” beat “summer is here” by 56%. A name is a person people have a position about. A genre isn't.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">RULE 04 · NOT REELS</span>
-        <h3>Long captions are fine here</h3>
-        <p>This audience reads. Facebook rewards dwell time on the caption. The opposite of Instagram, where long copy gets scrolled past.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">RULE 05 · NOT REELS</span>
-        <h3>The ask is a comment, not a link</h3>
-        <p>Meta is testing a cap of two link posts a month on pages like this one — and links in comments are exempt from it. Full detail below.</p>
-      </div>
-      <div class="card">
-        <span class="num">RULE 06</span>
-        <h3>Same frame, every time</h3>
-        <p>One camera position, one look, one overlay style per series. People should recognize Aniba before they read a word.</p>
-      </div>
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="move" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">The One Move</span><span class="ftitle">Worth more than every hook on this page.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <div class="move">
-      <p class="quote">“Comment TAKE ME BACK and I'll send you the link.”</p>
-      <p style="color:var(--ink-2);max-width:52ch">Not a link in the post. A comment prompt, answered by DM. It costs nothing and it's the only thing here that still exists on August 22nd.</p>
-      <ul class="why">
-        <li><span class="pip">01</span><span><b>Comments are what Facebook rewards.</b> This turns the ask into the algorithm's fuel instead of fighting it.</span></li>
-        <li><span class="pip">02</span><span><b>It builds a list Aniba owns.</b> The venue has the ticket buyers. She'd have every person who raised their hand — in her own inbox, for the next show and the one after.</span></li>
-        <li><span class="pip">03</span><span><b>It's the only way to count anything.</b> When you don't own the checkout, comments and DMs sent are the number you've got. Crude beats nothing.</span></li>
-        <li><span class="pip">04</span><span><b>Every commenter is a warm invite.</b> A personal reply converts far better than a public post ever will.</span></li>
-      </ul>
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="countdown" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Days 1–8</span><span class="ftitle">The setlist is the content calendar.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Eight artists on the bill means eight days of the format that already worked. Same frame, same overlay style, one name a day. Tap any card for the overlay line and the caption.</p>
-
-    <h3 style="margin-top:2.6rem">Video, not a picture. And the face is Aniba's.</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">Each of the eight is <b>a short vertical video of Aniba singing that artist's song</b> — not a graphic, not a flyer, and not a photograph of Erykah Badu.</p>
-
-    <div class="grid">
-      <div class="card">
-        <span class="num">WHY VIDEO</span>
-        <h3>A photo can't prove she can sing it</h3>
-        <p>The entire claim is that this band does D'Angelo justice. Hearing four seconds of it settles that; a picture asks people to take it on faith. Video is also the only format that reaches past her own followers.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">WHY NOT THEIR PHOTO</span>
-        <h3>It advertises the wrong artist</h3>
-        <p>A picture of Erykah Badu sells Erykah Badu. Someone scrolling sees a legend's face, feels the nostalgia, and never registers whose show it is. Her own face on her own stage is the thing being sold.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">AND THE RIGHTS</span>
-        <h3>Their images and records aren't yours</h3>
-        <p>Using another artist's photograph or their studio recording to promote a ticketed show is somebody else's property, and Facebook's rights matching will often mute or block it regardless. <b>Aniba performing the song is her own footage</b> — the safe choice and the strong one at once.</p>
-      </div>
-      <div class="card">
-        <span class="num">NAMES ARE FINE</span>
-        <h3>Say the name, in text and out loud</h3>
-        <p>Writing “D'Angelo” on screen and in the caption is just stating what's being performed — and it's the searchable keyword. What to avoid is anything implying they're appearing or endorsing.</p>
-      </div>
-    </div>
-
-    <h3 style="margin-top:2.8rem">The shot</h3>
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Element</th><th>Spec</th></tr></thead>
-        <tbody>
-          <tr><td>Format</td><td>Vertical 9:16, posted as a <b>Reel</b>. Same on TikTok.</td></tr>
-          <tr><td>Length</td><td class="when">15–25 sec</td></tr>
-          <tr><td>Content</td><td>Her singing <b>the recognisable part</b> — the hook everyone knows, never the intro. Band audible if they're there; her and a keyboard is enough.</td></tr>
-          <tr><td>First frame</td><td>Already singing. No countdown, no “hey y'all,” no title card. The voice is the hook.</td></tr>
-          <tr><td>Camera</td><td>One fixed position, same spot all eight days. That repetition is what makes people recognise her before they read anything.</td></tr>
-          <tr><td>On-screen text</td><td>One line, the memory claim from the table below. Big, top third, readable in half a second — Facebook plays muted.</td></tr>
-          <tr><td>Ending</td><td>Cut on a note rather than a fade, so it loops cleanly.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note">
-      <b>Shoot all eight in one sitting.</b> One rehearsal, eight songs, eight clips, then schedule them out across the days. Trying to film something new each evening for eight consecutive days is how this plan dies on day three. <b>And check the footage from the August 9th show first</b> — if any of these eight songs were in that set, those clips already exist and the shoot gets shorter.
-    </div>
-
-    <h3 style="margin-top:2.8rem">The caption, in four lines</h3>
-    <div class="move" style="margin-top:1.2rem">
-      <span class="dlab">Worked example — Day 1</span>
-      <div class="overlay" style="margin-top:.7rem">On screen: “If you know, you know.”</div>
-      <p class="ask" style="margin-top:1.2rem;white-space:pre-line;font-size:1rem">Baduizm or Mama's Gun? Don't think about it — first one that came to mind.
-
-We're doing Erykah on the 21st, and we're not skipping the deep cuts.
-
-🎟️ Take Me Back: A Neo Soul Experience — Fri Aug 21, doors 7, The Haven, 932 E 43rd.
-
-Comment TAKE ME BACK and I'll send you the link.</p>
-    </div>
-    <p style="margin-top:1.2rem;color:var(--ink-2);max-width:60ch">Line one is the argument starter and does the work. Line two connects it to the show. Line three is the detail people need. Line four is the ask. <b>No link in the post</b> — it goes in the reply, for the reasons in the Links section.</p>
-    <p style="margin-top:1rem;color:var(--ink-3);font-size:.9rem;max-width:60ch">On Facebook, skip hashtags — they do nothing there. On TikTok add three to five: <span class="when">#neosoul</span> <span class="when">#erykahbadu</span> <span class="when">#chicagomusic</span>, rotating the artist tag each day.</p>
-
-    <h3 style="margin-top:2.8rem">The eight</h3>
-    <div class="deckctl">
-      <button class="mbtn" id="openAll" aria-pressed="false">Expand all</button>
-    </div>
-
-    <div class="deckgrid" id="deck"></div>
-  </div>
-</details>
-</section>
-
-<section id="final3" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Days 9–11</span><span class="ftitle">Then change registers.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <ul class="finals">
-      <li><span class="tag">Day 09</span><div><b>The Best Dressed contest</b><p>It's on the ticket page and it isn't in the content. “Show me your neo-soul fit in the comments.” Free participation, free wardrobe photos, and it pre-sells the atmosphere of the room.</p></div></li>
-      <li><span class="tag">Day 10</span><div><b>Soundcheck. The empty room.</b><p>Anticipation outperforms invitation. Lights up, nobody in it yet, the band running one bar over and over.</p></div></li>
-      <li><span class="tag">Day 11</span><div><b>The real number</b><p>“Room holds ___.” Scarcity only works when it's true — so only post this one if it is.</p></div></li>
-    </ul>
-  </div>
-</details>
-</section>
-
-<section id="timing" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Timing</span><span class="ftitle">9PM is working. That doesn't make it best.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Both measured posts went up around 9PM — one at 8:58, one at 9:31. Same hour, no second time slot to compare against. So the honest read is that 9PM <em>works</em>, not that it wins. Nothing in the data has been tested against it yet.</p>
-
-    <div class="verdict">
-      What 9PM did earn is real, though. Those posts pulled <b>4,164</b> and <b>3,748</b> views against roughly <b>6,900</b> followers — on a <b>Friday night and a Saturday night</b>, the two slots almost every published “best time to post” chart calls the worst of the week. Those charts are built mostly on business pages selling business things. A Chicago neo-soul audience deciding what to do this weekend is not that audience, and it doesn't behave like it.
-    </div>
-
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Day</th><th>Artist</th><th>Post at</th><th>Slot</th></tr></thead>
-        <tbody>
-          <tr><td>Tue Aug 11</td><td>Erykah Badu</td><td class="when">8:45 PM</td><td><span class="pill anchor">Anchor</span></td></tr>
-          <tr><td>Wed Aug 12</td><td>Jill Scott</td><td class="when">8:45 PM</td><td><span class="pill anchor">Anchor</span></td></tr>
-          <tr><td>Thu Aug 13</td><td>D'Angelo</td><td class="when">12:30 PM</td><td><span class="pill probe">Probe</span></td></tr>
-          <tr><td>Fri Aug 14</td><td>Lauryn Hill</td><td class="when">8:45 PM</td><td><span class="pill anchor">Anchor</span></td></tr>
-          <tr><td>Sat Aug 15</td><td>Musiq Soulchild</td><td class="when">9:15 PM</td><td><span class="pill anchor">Anchor</span></td></tr>
-          <tr><td>Sun Aug 16</td><td>Maxwell</td><td class="when">7:30 PM</td><td><span class="pill probe">Probe</span></td></tr>
-          <tr><td>Mon Aug 17</td><td>India.Arie</td><td class="when">8:45 PM</td><td><span class="pill anchor">Anchor</span></td></tr>
-          <tr><td>Tue Aug 18</td><td>Bilal</td><td class="when">12:30 PM</td><td><span class="pill probe">Probe</span></td></tr>
-          <tr><td>Wed Aug 19</td><td>Best Dressed contest</td><td class="when">12:30 PM</td><td><span class="pill probe">Probe</span></td></tr>
-          <tr><td>Thu Aug 20</td><td>Soundcheck / empty room</td><td class="when">8:45 PM</td><td><span class="pill anchor">Anchor</span></td></tr>
-          <tr><td>Fri Aug 21</td><td>Day of — last call</td><td class="when">11 AM &amp; 5 PM</td><td><span class="pill anchor">Show day</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <span class="num">WHY 8:45, NOT 9:00</span>
-        <h3>Land before the scroll, not during it</h3>
-        <p>Facebook needs a few minutes to push a new post out. Going up slightly early puts it in front of people as the 9PM wind-down starts instead of halfway through it.</p>
-      </div>
-      <div class="card">
-        <span class="num">WHY THE SAME SLOT</span>
-        <h3>A time is part of the ritual</h3>
-        <p>Same hour every night is the scheduling version of “same frame every time.” People start expecting it, and Facebook learns who to show it to.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">WHY THREE PROBES</span>
-        <h3>Otherwise we learn nothing</h3>
-        <p>If all eight go up at 9PM we end these eleven days knowing exactly what we know now. Three posts at genuinely different hours is what turns the run into an answer.</p>
-      </div>
-      <div class="card">
-        <span class="num">WHY FRIDAY &amp; SATURDAY NIGHT</span>
-        <h3>The mindset matches the ask</h3>
-        <p>Someone scrolling at 9PM on a weekend is already thinking about going out. That's the frame of mind that buys a ticket to a Friday night show — which is the one benchmark charts can't see.</p>
-      </div>
-    </div>
-
-    <div class="note">
-      <b>Before any of this — check her own numbers.</b> Meta Business Suite → Insights → Audience → the activity chart. It shows the hours <b>her</b> followers were actually online over the last 28 days, broken out by day. That's her real audience, not an average of 300,000 other pages. If that chart disagrees with anything in the table above, <b>the chart wins</b> and we rebuild the schedule around it. It takes about a minute to pull.
-    </div>
-
-    <div class="note" style="border-color:var(--line);background:var(--raise)">
-      <b>One caveat on reading the result.</b> The probes carry different artists than the anchors, so if midday underperforms we won't know for certain whether it was the hour or the name. With eleven posts there's no way around that. What comes out is a direction worth acting on, not proof — and it's still eleven days and zero dollars to get it.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="links" data-cat="why">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Links</span><span class="ftitle">Keep the link out of the post.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Not for the reason everyone repeats. The “link posts get 80% less reach” figure floating around traces back to marketing blogs, not to data, and it's shakier than it sounds — Facebook referral traffic to news sites actually <em>rose</em> sharply through 2026. The real reason is narrower and much more concrete.</p>
-
-    <div class="grid">
-      <div class="card flip">
-        <span class="num">THE ACTUAL RULE</span>
-        <h3>Two links a month, or pay</h3>
-        <p>Meta is testing a hard cap of two link posts per month on professional accounts and Pages, lifted only by a Meta Verified subscription starting at $14.99/month. Confirmed by Meta in December 2025 as “a limited test.” News publishers are excluded. Creator pages are exactly who it targets.</p>
-      </div>
-      <div class="card">
-        <span class="num">THE EXEMPTION</span>
-        <h3>Comments don't count</h3>
-        <p>Links posted in the comments are unlimited and unaffected. So is anything pointing at Instagram, WhatsApp, or another Facebook post.</p>
-      </div>
-      <div class="card">
-        <span class="num">THE SCALE OF IT</span>
-        <h3>Links barely appear in feeds anyway</h3>
-        <p>By Meta's own reporting, 97.9% of what Americans actually saw on Facebook contained no outbound link at all — up from 86.5% three years earlier. Whatever the mechanism, the outcome is settled.</p>
-      </div>
-      <div class="card">
-        <span class="num">SO</span>
-        <h3>Comment, then DM</h3>
-        <p>Which is what the plan already said. It now has a documented reason behind it instead of folklore — and it's the one route Meta is actively pushing people toward.</p>
-      </div>
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="paid" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Paid</span><span class="ftitle">Ticket ads can't work. Event ads can.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">There's a specific reason paid traffic can't be optimized <em>toward a ticket sale</em> for August 21 — and one clean way around it that costs nothing to set up. Both come down to where the conversion happens.</p>
-
-    <div class="note">
-      <b>You can't put a pixel on this checkout.</b> Eventbrite does support Meta pixels — the organizer pastes a pixel ID under Marketing → Tracking pixels, and it takes about a minute. But only the <b>organizer</b> can do it, and the organizer is Haven Entertainment Center. Without that pixel there's no way to tell Facebook what a sale looks like, no way to optimize toward one, and no way to retarget anyone who visited the ticket page and didn't buy.
-    </div>
-
-    <div class="verdict">
-      <b>And the math doesn't clear either.</b> A Meta ad set needs roughly <b>50 conversion events a week</b> to stop guessing and start optimizing. The minimum daily budget to get there is target-cost-per-ticket × 50 ÷ 7 — so even at a generous $10 a ticket, that's about <b>$71 a day</b>, and not one of those sales could be counted without the pixel. A smaller budget doesn't run slower, it runs permanently unstable. Eleven days isn't two full learning cycles regardless.
-    </div>
-
-    <div class="move" style="margin-top:2.4rem">
-      <span class="badge"><span class="dot"></span>The way around it</span>
-      <h3 style="font-size:1.4rem;margin-top:1.1rem">Event Response ads need no pixel at all</h3>
-      <p style="color:var(--ink-2);margin-top:.9rem;max-width:58ch">Meta's Engagement objective has an Event Response setting that optimizes for people tapping <b>Interested</b> or <b>Going</b> on a Facebook event. That tap happens <b>inside Facebook</b> — so there's nothing to install, nothing on Eventbrite to touch, and no permission to ask anyone for. Meta's own documentation says it plainly: it works for an event with or without tickets and doesn't need the conversion tracking that Sales campaigns require.</p>
-      <p style="color:var(--ink-2);margin-top:1rem;max-width:58ch">And an Interested tap isn't a vanity metric here — it triggers the reminder machinery described in the next section. <b>This is the paid motion to run this week</b>, if any budget runs at all. Measure the actual cost per response rather than trusting anyone's estimate; at this scale it's the only number worth knowing.</p>
-    </div>
-
-    <h3 style="margin-top:2.6rem">What else money could do this week</h3>
-    <ul class="finals" style="margin-top:1.2rem">
-      <li><span class="tag">Free</span><div><b>Ask Haven for the pixel anyway</b><p>One email. If they'll drop Aniba's pixel ID into the Eventbrite listing, real purchase tracking becomes possible — and it costs them five minutes. Worth knowing the answer before the next booking either way.</p></div></li>
-      <li><span class="tag">Best</span><div><b>Put money behind the post that already won</b><p>Don't build new ad creative. Boost the piece already earning 3.48% organically, tight radius around Chicago, optimized for engagement or video views — not purchases, which can't be tracked anyway.</p></div></li>
-      <li><span class="tag">Free</span><div><b>Warm audiences need no pixel</b><p>Page engagers, video viewers, and follower lookalikes all live inside Facebook. None of them require anything installed on Eventbrite.</p></div></li>
-      <li><span class="tag">Read</span><div><b>Judge it on comments and DMs</b><p>Not on tickets. Tickets aren't measurable here, and pretending otherwise just produces a confident number that means nothing.</p></div></li>
-    </ul>
-
-    <h3 style="margin-top:2.8rem">“Should I boost the posts that already hit 4,000?”</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">Right instinct. Two adjustments to how it gets spent.</p>
-
-    <div class="grid">
-      <div class="card">
-        <span class="num">THE INSTINCT — KEEP IT</span>
-        <h3>Let organic pick the winner first</h3>
-        <p>Posting free is a test nobody charges for. Most people spend before they know what works; running eleven posts and funding only the ones that already earned attention is the correct order. That not every post hits 4,000 isn't a problem — it's the test doing its job.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">ADJUSTMENT 1</span>
-        <h3>Not to the same people</h3>
-        <p>A post that already reached 4,000 has mostly finished with the warm audience — whoever was going to see it, saw it. Spending to show it to followers again buys repetition, not reach. Point it at people who haven't seen it: a tight Chicago radius, neo-soul interests, and the Jill Scott audience below.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">ADJUSTMENT 2</span>
-        <h3>Not the Boost button</h3>
-        <p>Boost defaults to optimizing for likes and comments — the wrong currency here. Run the same winning video through Ads Manager as an <b>Event Response</b> campaign instead. Same money, and each response it buys picks up Facebook's free reminders for August 20th and show day.</p>
-      </div>
-      <div class="card">
-        <span class="num">IF ONLY ONE THING GETS FUNDED</span>
-        <h3>Fund the event, not the post</h3>
-        <p>A boosted post stops working the minute the budget stops. An event response keeps working until August 21, because Facebook keeps reminding that person for free. The spend compounds instead of evaporating.</p>
-      </div>
-    </div>
-
-    <div class="note" style="border-color:var(--line);background:var(--raise);margin-top:2rem">
-      <b>The real lesson is the same one as the ticketing.</b> Spending to fill a room you don't own, through a checkout you can't see, is how you spend money and learn nothing. The version of this worth doing properly is a show where the band holds the ticket link — then the pixel, the retargeting, and the numbers all become available at once.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="event" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">The Event Page</span><span class="ftitle">The best asset here is already built, and barely being used.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">The Facebook event for August 21 exists, and the band hosts it — not the venue. Aniba &amp; The Sol Starz, Neri Honey and Ishmael are all listed as hosts. As of today it shows <b>38 people responded</b>, with tickets running $25.61–$43.30.</p>
-
-    <div class="move">
-      <span class="badge"><span class="dot"></span>Why this matters more than any post</span>
-      <p class="quote">An “Interested” tap today becomes a reminder on August 20th and again on show day — sent by Facebook, automatically, for free.</p>
-      <p style="color:var(--ink-2);max-width:56ch">That solves the actual failure mode for a local show. Almost nobody decides not to come. They mean to come, and then Friday arrives and they've forgotten. Every other thing on this page is fighting for attention <em>now</em>; the event page is the only one that puts a message in front of someone at the exact hour it matters.</p>
-      <ul class="why">
-        <li><span class="pip">01</span><span><b>Responses spread on their own.</b> When someone marks Interested or Going, that shows up in their friends' feeds — which for a Chicago show is precisely the right social graph to be spreading through.</span></li>
-        <li><span class="pip">02</span><span><b>There are roughly 1,500 unused invites sitting there.</b> Each host can personally invite up to 500 people. Three hosts, none of them near the cap. Add four band members as co-hosts and it's closer to 3,500.</span></li>
-        <li><span class="pip">03</span><span><b>Every co-host gets their own 500.</b> Adding co-hosts isn't a courtesy — it's the only way to raise the invite ceiling, and each one can post into the event too.</span></li>
-        <li><span class="pip">04</span><span><b>The event link is a Facebook link.</b> Which means it sits outside the two-links-a-month cap entirely. Post the event, let the event carry the Eventbrite link.</span></li>
-      </ul>
-    </div>
-
-    <h3 style="margin-top:2.8rem">The 500 cap only applies to one thing</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">Five hundred is the limit on <em>personally inviting individuals</em>. It is not a limit on how many people can find the event. Everything below is uncapped, and most of it is free.</p>
-
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Route</th><th>Ceiling</th><th>What to do</th></tr></thead>
-        <tbody>
-          <tr><td>Add co-hosts</td><td class="when">+500 each</td><td>Three hosts today. Add Aniba's personal profile, Mendel, Gerald, CJ, plus Haven and IMAN Entertainment — that's six more, taking capacity past 4,000. Each co-host can post inside the event too.</td></tr>
-          <tr><td>Sharing</td><td class="when">Unlimited</td><td>Share the event to both Facebook pages, her profile, Stories, Messenger threads, WhatsApp, and text. Sharing has never counted against the invite cap.</td></tr>
-          <tr><td>Facebook Groups</td><td class="when">Unlimited</td><td>The biggest untapped channel, and Facebook has a built-in “invite group members to an event” option. Seven real ones are named and sized in the next section.</td></tr>
-          <tr><td>“Guests can invite friends”</td><td class="when">Their quota</td><td>A toggle on the event settings. Switch it on and all 38 responders can invite their own friends — spending their allowance, not hers. Check it's already on.</td></tr>
-          <tr><td>Comment → DM</td><td class="when">Unlimited</td><td>A comment opens a 24-hour window in which a Page may send that person a promotional message. So “comment TAKE ME BACK and I'll send you the link” is both within Meta's rules and completely outside the invite cap.</td></tr>
-          <tr><td>Event Response ads</td><td class="when">Budget only</td><td>The uncapped, paid version of an invite — and the only route that reaches people connected to nobody in the band.</td></tr>
-          <tr><td>Ask responders to share</td><td class="when">Unlimited</td><td>Say it outright in the event and in posts. Every share reaches a network at zero cost to the quota.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note">
-      <b>Two cautions.</b> Facebook tightens the cap on accounts whose invitations go unanswered — so invite people who'd plausibly come, in batches over several days, not one blast. And <b>don't create duplicate events</b> to multiply the quota. It's a well-known trick and a bad one: it splits the social proof (38 responses on one event reads far better than 19 and 19), nobody knows which one is real, and it's exactly the behaviour that gets an account throttled in the week it matters most.
-    </div>
-
-    <div class="note" style="border-color:color-mix(in srgb,var(--brass) 45%,transparent);background:color-mix(in srgb,var(--brass) 9%,transparent)">
-      <b>And the thing sitting right there on the event page.</b> Facebook's own suggested-events panel shows <b>Jill Scott at The Chicago Theatre on Sunday, August 23 — with 10,078 people interested.</b> That's two days after this show, in the same city, and Jill Scott is on the tribute setlist. Ten thousand Chicagoans have just publicly raised their hand for exactly this music, on exactly this weekend. The Friday show is the warm-up for the weekend they're already planning — and that's a post, an ad audience, and an argument, all free.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="groups" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">The Groups</span><span class="ftitle">Seven real ones. The best isn't a music group.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Every group below was opened and checked on August 10, 2026 — names, sizes and privacy settings are what Facebook showed on the day. Ranked by how well the room matches the room at The Haven, not by size.</p>
-
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Group</th><th>Size</th><th>Access</th><th>Read</th></tr></thead>
-        <tbody>
-          <tr><td><a href="https://www.facebook.com/groups/thesouthsideofchicago/">The South Side Of Chicago</a></td><td class="when">66.8K</td><td><span class="pill probe">Private</span></td><td><b>The best match on this page.</b> Its own description: for people who “grew up on Chicago's South Side” and “remember Chicago past.” A nostalgia group, for the neighbourhood the venue sits in, for a nostalgia show. Request to join today — approval takes time you don't have much of.</td></tr>
-          <tr><td><a href="https://www.facebook.com/groups/chicagostepper/">Chicago Stepper</a></td><td class="when">20.6K</td><td><span class="pill anchor">Public</span></td><td>Steppers are the audience. Grown Black Chicago, dressed up, out to hear live soul on a Friday. Has an Events tab.</td></tr>
-          <tr><td><a href="https://www.facebook.com/groups/BronzevilleAlliance/">Bronzeville Alliance</a></td><td class="when">11.4K</td><td><span class="pill probe">Private</span></td><td>932 E 43rd is Bronzeville. These are the neighbours — the people with the shortest trip to the door.</td></tr>
-          <tr><td><a href="https://www.facebook.com/groups/40855413209/">Chicago Steppers United</a></td><td class="when">5.8K</td><td><span class="pill anchor">Public</span></td><td>Same community, second room. Events tab.</td></tr>
-          <tr><td><a href="https://www.facebook.com/groups/356280918157157/">Chicago Steppin Events</a></td><td class="when">4.7K</td><td><span class="pill anchor">Public</span></td><td>Smaller, but it exists <em>for</em> posting events — the least friction of any group here.</td></tr>
-          <tr><td><a href="https://www.facebook.com/groups/ChiMusicians/">Chicago Musicians</a></td><td class="when">27.8K</td><td><span class="pill anchor">Public</span></td><td>Big, but these are players, not ticket buyers. Worth it for reshares and for the band's own network — don't expect sales.</td></tr>
-          <tr><td><a href="https://www.facebook.com/groups/livechicagomusic/">Live Chicago Music</a></td><td class="when">17.1K</td><td><span class="pill anchor">Public</span></td><td>Has an Events tab, but what's on the wall right now is a RUSH tribute and acoustic rock. Wrong crowd. Post it, expect little.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note" style="border-color:color-mix(in srgb,var(--brass) 45%,transparent);background:color-mix(in srgb,var(--brass) 9%,transparent)">
-      <b>The stepping groups are the find here.</b> Chicago stepping is a partner dance with a devoted local following, and that following is almost exactly the person who buys a ticket to a neo-soul tribute night — Black Chicago, thirty-five to sixty-five, dresses for it, goes out for live music rather than a DJ. Three public groups, three Events tabs, roughly 31,000 people between them, and nobody in the band has posted to any of them.
-    </div>
-
-    <div class="note">
-      <b>A trap worth knowing about.</b> Chicago stepping has chapters all over the country, so most groups with “Chicago Steppers” in the name are <em>not in Chicago</em> — the search turned up Atlanta, Huntsville and a DMV group before it turned up local ones. Check the location before posting, or you'll be advertising a Bronzeville show to people in Georgia. The three listed above are the Chicago ones.
-    </div>
-
-    <h3 style="margin-top:2.8rem">How to post without getting thrown out</h3>
-    <div class="grid">
-      <div class="card">
-        <span class="num">TODAY</span>
-        <h3>Request the private two first</h3>
-        <p>South Side Of Chicago and Bronzeville Alliance both need approval, and admins don't rush. Requesting on day one and getting in on day four still leaves a week. Requesting on day seven leaves nothing.</p>
-      </div>
-      <div class="card">
-        <span class="num">WHO POSTS</span>
-        <h3>A person, not the Page</h3>
-        <p>Pages can only post in a group if that group's admin switched it on, and most community admins haven't. Profiles never need permission. Full breakdown below.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">HOW IT READS</span>
-        <h3>Share a memory, not a flyer</h3>
-        <p>“Anybody else remember when the Regal was still standing?” with the event attached will outrun “TICKETS ON SALE NOW” in every one of these rooms. Same rule as the feed posts — lead with the memory, let the show follow.</p>
-      </div>
-      <div class="card">
-        <span class="num">PACING</span>
-        <h3>Not all seven in one day</h3>
-        <p>One or two a day from one account, spread across the week. Blanket-posting the same link everywhere in an afternoon is the fastest way to get flagged in the week it matters most.</p>
-      </div>
-    </div>
-
-    <h3 style="margin-top:2.8rem">Which account should join</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">There's a detail in how Aniba's accounts are set up that settles this, and it's easy to miss. <b>“Aniba Tha Messenger” is not a Page — it's her personal profile in professional mode.</b> Facebook labels it Profile · Digital creator. “Aniba &amp; The Sol Starz” is the actual Page.</p>
-    <p style="margin-top:1rem;color:var(--ink-2);max-width:60ch">That matters, because it means her creator account joins and posts in groups with the full freedom of a person while still carrying 6,900 public followers and her artist identity. It's the best of both, and it's already built.</p>
-
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Account</th><th>In groups</th><th>Use it for</th></tr></thead>
-        <tbody>
-          <tr><td>Aniba's profile<br><span class="dnum">ANIBA THA MESSENGER</span></td><td><span class="pill anchor">Best</span></td><td><b>The two community groups — South Side and Bronzeville.</b> A South Sider posting a memory is welcome there. A promoter posting a flyer is not. Anyone who clicks her name lands on her artist presence anyway.</td></tr>
-          <tr><td>Ishmael's profile</td><td><span class="pill anchor">Best</span></td><td><b>Chicago Musicians</b> — manager talking to players, peer to peer. Plus one steppers group, to spread the posting across two accounts instead of one.</td></tr>
-          <tr><td>A band member who steps</td><td><span class="pill anchor">Best</span></td><td>If any of them actually step, that person should carry the steppers groups. Being a real member of that room beats every follower count on this page.</td></tr>
-          <tr><td>The band Page<br><span class="dnum">ANIBA &amp; THE SOL STARZ</span></td><td><span class="pill probe">Last resort</span></td><td>A Page can only post where the admin has enabled it, and in community groups a Page post reads as an advert. Save it for the two groups that exist for promotion — Live Chicago Music and Chicago Steppin Events.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note" style="border-color:color-mix(in srgb,var(--rose) 45%,transparent);background:color-mix(in srgb,var(--rose) 8%,transparent)">
-      <b>The catch, and it changes who does the work.</b> A professional-mode profile can't be handed to anyone else — unlike a Page, there's no way to add an admin. So Ishmael cannot post as Aniba. The two highest-value groups on this page are the ones where <b>her</b> voice is the whole advantage, which means those posts need her hands, not his. Worth agreeing before the week starts rather than discovering it on Thursday.
-    </div>
-
-    <div class="note">
-      <b>And don't make a new account for this.</b> Admins of private groups look at who's asking — a profile with history, friends and photos gets waved through; a profile created last Tuesday gets ignored or denied, and it looks like exactly what it is. Both existing profiles are established. Use them.
-    </div>
-
-    <div class="note" style="border-color:var(--line);background:var(--raise)">
-      <b>What I couldn't check.</b> Group rules aren't visible from outside, so somebody has to read each one before posting — several of these will ban promotion outright, and that's the admin's call, not a negotiation. Two others surfaced that couldn't be verified: <b>Old School Soul RnB Lovers</b>, which appears to be national rather than Chicago, and <b>Eventos En Chicago</b>, which is Spanish-language. Neither looks worth the effort for a local show.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="volume" data-cat="why">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Volume</span><span class="ftitle">Organic already beats the ad budget. Posting more won't extend that.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Two separate questions live in “should we post more” — is free traffic actually competitive with paid, and does doubling the posts double the reach. The first answer is yes. The second is no, and pushing it backfires.</p>
-
-    <div class="verdict">
-      <b>What the free posts are already worth.</b> A post pulling ~4,000 views is delivering what would cost roughly <b>$30</b> to buy — brand-awareness CPMs on Facebook average about <b>$7.50</b> per thousand impressions in 2026. Across eleven days of daily posting that's around <b>44,000 impressions, or roughly $330 of media, for nothing.</b> And it's landing on people who already follow her, which for a local show eleven days out is a warmer, likelier-to-buy audience than any budget could assemble from cold in the same window.
-    </div>
-
-    <div class="note">
-      <b>But the ceiling is real, and it bites early.</b> The measured sweet spot for a Facebook Page is <b>5–7 posts a week</b>. Returns flatten above 10 a week and engagement falls off below 3. The mechanism is the part that matters: Facebook caps how much of any one Page it shows a given person, so <b>a second post in a day mostly steals impressions from the first</b> — same audience, split attention. Worse, more posts at a lower engagement rate teaches the algorithm the Page is less interesting, which pulls down the reach of everything that follows.
-    </div>
-
-    <p style="margin-top:1.8rem">Eleven posts across eleven days is exactly 7 a week. <b>The plan is already at the top of the useful range.</b> Adding a second daily post moves it into the zone where the data says it starts costing reach rather than buying it.</p>
-
-    <h3 style="margin-top:2.8rem">The actual lever: post the same things as Reels</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">Her posts are landing at roughly half to two-thirds of her follower count, which is the shape of feed distribution — it's capped by how many people follow her. Reels aren't. They're the one Facebook format that reaches non-followers at scale, they average <b>67% more reach</b> than standard posts, and up to half of what people see in Feed now comes from accounts they don't follow. Same footage, same caption, same 8:45 slot — published as a Reel instead. That raises the ceiling without adding a single post.</p>
-
-    <h3 style="margin-top:2.8rem">And the surfaces that don't compete with each other</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">This is the honest version of “post more.” Don't add posts to the Page — add channels. None of these steal from the daily post, because none of them live in the same slot.</p>
-
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Surface</th><th>How much</th><th>Why it doesn't cannibalize</th></tr></thead>
-        <tbody>
-          <tr><td>Feed / Reel</td><td class="when">1 per day</td><td>The one that's capped. Keep it at one and make it a Reel.</td></tr>
-          <tr><td>Stories</td><td class="when">3–5 per day</td><td>Separate surface entirely. Never competes with the feed post — and they're where the link belongs.</td></tr>
-          <tr><td>Comment replies</td><td class="when">Every one</td><td>Replies push the post back up and read as engagement. Free, and unlimited.</td></tr>
-          <tr><td>Band member reshares</td><td class="when">6 people, daily</td><td>Six separate networks, six separate feeds. The cheapest reach multiplier on this list.</td></tr>
-          <tr><td>Chicago / neo-soul Groups</td><td class="when">2–3 groups</td><td>A distribution channel of its own, and a warm local one. Post as a person, follow each group's rules, don't blanket them.</td></tr>
-          <tr><td>Instagram cross-post</td><td class="when">Same daily piece</td><td>Different platform, zero extra shooting. Low priority — it's the smaller audience.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note" style="border-color:var(--line);background:var(--raise);margin-top:2rem">
-      <b>One number worth pulling.</b> Both screenshots read “#1 out of 10” and “#2 out of 10,” which means the dashboard was ranking against ten recent posts — so there's already a posting history to compare against, and I don't know what window it covers. If that's ten posts in two weeks, the cadence is roughly right already and this is about format, not frequency. Worth a glance before changing anything.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="tiktok" data-cat="later">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">TikTok</span><span class="ftitle">103 videos. Not one has reached 2,000 views.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">The account is <b>@anibathesolstarz</b> — 385 followers, 102 following, 103 posts. Here's what the whole catalogue actually looks like, counted one by one on August 10, 2026.</p>
-
-    <div class="clock" style="margin-top:2rem">
-      <div class="tick"><b>103</b><span>Videos</span></div>
-      <div class="tick"><b>43,257</b><span>Total views</span></div>
-      <div class="tick"><b>291</b><span>Median</span></div>
-      <div class="tick"><b>1,963</b><span>Best ever</span></div>
-    </div>
-
-    <div class="verdict" style="margin-top:2rem">
-      For scale: <b>one Facebook post did 4,164 views.</b> That single post beat the best TikTok video by more than double, and roughly ten Facebook posts would out-reach the entire TikTok catalogue. This isn't a small account that needs time — it's 103 attempts with a consistent result.
-    </div>
-
-    <div class="note">
-      <b>And that consistent result names the problem exactly.</b> TikTok shows every new video to a test pool of roughly <b>200–500 people</b> first, then expands only if enough of them watch it through — the rough bar is 35% completion before it graduates to a 5,000–10,000 pool. Their median video does <b>291 views</b>, and half the catalogue sits under 300. <b>These videos are dying inside the first test pool, almost every time.</b> The algorithm is looking at them and declining to expand — 103 times.
-    </div>
-
-    <h3 style="margin-top:2.8rem">So hashtags aren't the problem</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">They do still matter — hashtag-driven discovery is up sharply year over year, and adding one lifts views around 5%. But 5% of 291 views is fifteen views. <b>No hashtag rescues a video the test pool didn't finish.</b> Completion has to be fixed first; hashtags then multiply something that's working instead of decorating something that isn't.</p>
-
-    <h3 style="margin-top:2.6rem">What the captions give away</h3>
-    <p style="margin-top:.8rem;color:var(--ink-2);max-width:60ch">Reading through them, nearly every post is one of two things — a show recap or an inspirational thought:</p>
-    <ul class="finals" style="margin-top:1.2rem">
-      <li><span class="tag">Recap</span><div><p>“Last night's show was OH-MAZING!! With the help of Neri, Mendel, Gerald &amp; CJ, we cruised through that show so effortlessly!”</p></div></li>
-      <li><span class="tag">Promo</span><div><p>“🚨 WE'RE TRYING TO FILL THE VACANCY! COME THROUGH!!🚨”</p></div></li>
-      <li><span class="tag">Quote</span><div><p>“Being an artist isn't something you do because it's easy. You do it because you can't imagine not doing it…”</p></div></li>
-    </ul>
-    <p style="margin-top:1.4rem;color:var(--ink-2);max-width:60ch"><b>These are Facebook captions.</b> On Facebook the audience is people who already know her, and a recap lands because they care how the night went. On TikTok the audience is strangers who owe her nothing — and a recap of a show they weren't at, or a thought about the artist's life, gives them no reason to still be there at second three. Same footage, wrong room.</p>
-
-    <h3 style="margin-top:2.8rem">The fixes, in order of what they're worth</h3>
-    <div class="grid">
-      <div class="card">
-        <span class="num">FIX 01 · THE WHOLE GAME</span>
-        <h3>Open on the singing</h3>
-        <p>No talking intro, no title card, no “hey y'all.” Her voice in the first frame. Completion is the heaviest ranking signal there is, and everything before the vocal is a reason to swipe.</p>
-      </div>
-      <div class="card">
-        <span class="num">FIX 02</span>
-        <h3>Much shorter than feels right</h3>
-        <p>A 20-second clip watched to 80% beats a 60-second clip watched to 40% — TikTok scores the percentage, not the seconds. Post the one bar people would rewind, not the song.</p>
-      </div>
-      <div class="card">
-        <span class="num">FIX 03</span>
-        <h3>Make it loop</h3>
-        <p>End on the note it started on so the replay is seamless. A loop that catches someone twice counts as completion twice, and it's the cheapest trick on the platform.</p>
-      </div>
-      <div class="card flip">
-        <span class="num">FIX 04 · FREE, 10 SECONDS</span>
-        <h3>Fix the name field</h3>
-        <p>The display name is currently the raw handle, “anibathesolstarz.” TikTok's search indexes that field. Change it to <b>Aniba &amp; The Sol Starz — Chicago Neo Soul</b> and the account becomes findable by people searching those words.</p>
-      </div>
-    </div>
-
-    <h3 style="margin-top:2.8rem">Hashtags, done properly</h3>
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Rule</th><th>What it means here</th></tr></thead>
-        <tbody>
-          <tr><td>Three to five, not twenty</td><td>Specificity beats volume. A wall of tags reads as spam and dilutes what TikTok thinks the video is about.</td></tr>
-          <tr><td>Never #fyp, #viral, #foryou</td><td>These are the old growth-hack tags. They tell the algorithm nothing and are actively worth skipping.</td></tr>
-          <tr><td>Treat them as search terms</td><td>Not labels — <em>queries</em>. Ask what someone would type to find this video, and use that.</td></tr>
-          <tr><td>Mix broad + niche + specific</td><td>Broad: <span class="when">#neosoul</span> <span class="when">#livemusic</span> · Niche: <span class="when">#chicagomusic</span> <span class="when">#rnbband</span> · Specific: <span class="when">#erykahbadu</span> <span class="when">#dangelo</span> <span class="when">#jillscott</span></td></tr>
-          <tr><td>Artist names carry real intent</td><td>Someone searching #erykahbadu wants exactly this. That's the highest-intent tag available and it changes per video, matching the eight-day countdown.</td></tr>
-          <tr><td>Fix the typo</td><td>The brand tag in use is <b>#Anibaandthesolsrarz</b> — misspelled. It's also not the handle, which is <b>@anibathesolstarz</b> without the “and.” Pick one spelling and use it everywhere.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note" style="margin-top:2rem">
-      <b>Bigger than hashtags now: say the words out loud.</b> TikTok transcribes audio and reads on-screen text, and both feed search. So the keyword should appear in three places — <b>spoken in the video, written on screen, and typed in the caption</b>. “This is a D'Angelo song” said aloud does more for discovery than the hashtag does.
-    </div>
-
-    <div class="note" style="border-color:color-mix(in srgb,var(--rose) 45%,transparent);background:color-mix(in srgb,var(--rose) 8%,transparent)">
-      <b>One strategic thing, plainly: TikTok will not sell tickets to August 21st.</b> It distributes by interest, not by neighbourhood — there's no way to aim it at people who could drive to 43rd Street on Friday. With 385 followers and eleven days, it isn't the instrument. Facebook and the event page are. <b>TikTok is the long game</b> — where an audience for Aniba's own music gets built once the covers show is behind them. Fix the format now, but don't spend the eleven days there.
-    </div>
-  </div>
-</details>
-</section>
-
-<section id="measure" data-cat="act">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Scoreboard</span><span class="ftitle">Four numbers. Ignore the rest.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <div class="scroller">
-      <table>
-        <thead><tr><th>Track this</th><th>Because</th></tr></thead>
-        <tbody>
-          <tr><td>Engagement ÷ views</td><td>The comparison that already told us Erykah beat summer. Per post, every post.</td></tr>
-          <tr><td>Comments</td><td>What Facebook rewards, and the input to the DM list.</td></tr>
-          <tr><td>Net follows</td><td>Currently reading <b>“--”</b> on both posts. Four thousand people watched and nobody joined. That's the gap.</td></tr>
-          <tr><td>DM list size</td><td>The only asset that outlives the show and isn't the venue's.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="margin-top:1.5rem;color:var(--ink-3);font-size:.9rem">Ignore raw views. Ignore “approximate earnings” entirely — at this volume it's nowhere near a payout threshold, so it's noise.</p>
-  </div>
-</details>
-</section>
-
-<section id="after" data-cat="later">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">After August</span><span class="ftitle">When the covers are behind you.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">This whole plan is built for a tribute night. Aniba's own music needs a different engine — six series that compound instead of counting down.</p>
-
-    <details>
-      <summary>The Session — film the room properly</summary>
-      <div class="inner"><p>The highest-leverage change available. Every independent artist who broke through in the last decade turned their rehearsal into their content, which collapses the “what do we post” problem and the “when do we rehearse” problem into one problem.</p><p>Cold open mid-take. Cut on the downbeat. The room going quiet after a take lands — that silence is the post.</p></div>
-    </details>
-    <details>
-      <summary>One Part — twenty seconds on a single detail</summary>
-      <div class="inner"><p>Solo the bass line, then the full track. Stack the harmonies one at a time. “This part was a mistake — we kept it.” Craft content travels far outside the fanbase, because other musicians share it.</p></div>
-    </details>
-    <details>
-      <summary>Aniba Says — stance content</summary>
-      <div class="inner"><p>She talks to camera, but each one earns it by having a real position. “The most overrated thing in R&amp;B right now is ___.” “Nobody tells you being a singer is mostly ___.” Her personal page is already the right surface for this.</p></div>
-    </details>
-    <details>
-      <summary>Chicago — the series that sells tickets</summary>
-      <div class="inner"><p>Geo-anchored identity recruits people who can physically show up. Play the song in the place it's about. Rank the local rooms, with opinions. “Chicago artists who should be huge” — name three, tag them, they repost.</p></div>
-    </details>
-    <details>
-      <summary>The Ask — engineered for comments</summary>
-      <div class="inner"><p>“Give me a word, I'll write a hook out of it” — then actually do it, on camera, the next day. Every answer in the comments is a future post you didn't have to think of.</p></div>
-    </details>
-    <details>
-      <summary>One structural note, worth raising before the next show</summary>
-      <div class="inner"><p>The venue owns this event's ticketing, which means it also owns the buyer list, the emails, and every piece of data about who came. The band's promo drives all of it to somebody else's records.</p><p>Nothing to fix in eleven days — the DM mechanic is the workaround. But it's worth deciding before the next booking, because it's the same question as owning your masters, just wearing different clothes.</p></div>
-    </details>
-    <details>
-      <summary>And one small thing: pick a name and hold it</summary>
-      <div class="inner"><p>Out in the world right now there's Aniba Tha Messenger, Aniba &amp; The Sol Starz, Aniba Hotep &amp; The Sol Collective, and anibahoteptsc.com. Someone who hears her once and searches a week later has to guess right. Not urgent — just costly, quietly, forever.</p></div>
-    </details>
-  </div>
-</details>
-</section>
-
-<section id="asked" data-cat="asked">
-<details class="fold">
-<summary>
-  <span class="fhead"><span class="fcat">Asked</span><span class="ftitle">Questions Ishmael sent in, and what came back.</span></span>
-  <span class="fmark" aria-hidden="true">+</span>
-</summary>
-  <div class="wrap">
-    <p class="sub">Ask the bot anything about this plan and the answer lands here, newest first. Everything above stays as it is — this section is the only part that grows.</p>
-<!-- ASKED:START -->
-    <div class="note" style="border-color:var(--line);background:var(--raise)">
-      Nothing asked yet. Send the bot a question and it'll show up here within a couple of minutes.
-    </div>
-<!-- ASKED:END -->
-  </div>
-</details>
-</section>
-
+  </section>
+
+  <footer>
+    <span id="foot-updated">…</span><br>
+    Built by A2G. Numbers come from the public Reels grid — check them yourself anytime at facebook.com/aniba.hotep/reels.
+  </footer>
 </main>
-
-<footer>
-  <div class="col">
-    <p class="sig">One last thing, honestly.</p>
-    <p>Only two of Aniba's posts were actually measured here — the two in the screenshots. So “name an artist and they'll argue” is a strong-looking signal that happens to match the show's own premise, but it's built on two data points, not a proven pattern.</p>
-    <p>Treat the eight-day run as the test of it. If the artist-name posts hold above 3% while the vibe posts sit near 2%, it's real and it becomes the house style. If they don't, we learned it in eleven days for free.</p>
-    <p style="margin-top:2rem;font-family:var(--data);font-size:.72rem;letter-spacing:.1em;color:var(--ink-3)">FIGURES READ AUGUST 10, 2026 · POST INSIGHTS DATED JULY 31 &amp; AUGUST 1, 2026</p>
-  </div>
-</footer>
 
 <script>
 (function(){
-  "use strict";
+"use strict";
+var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+function parseISO(d){var p=d.split("-");return new Date(+p[0],+p[1]-1,+p[2]);}
+function longDate(iso,withWeekday){var d=parseISO(iso);
+  var s=MONTHS[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear();
+  return withWeekday?DAYS[d.getDay()]+", "+s:s;}
+function localISO(d){d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function daysBetween(aIso,bIso){return Math.round((parseISO(bIso)-parseISO(aIso))/86400000);}
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML;}
+function ageStamp(el,iso,freshDays){ // freshness per section, staleness loud
+  var age=daysBetween(iso,localISO());
+  var txt="as of "+longDate(iso, age<8);
+  el.textContent=txt;
+  el.className="stamp "+(age<=freshDays?"fresh":(age<=freshDays+2?"warn":"stale"));
+  if(age>freshDays) el.textContent=txt+" — stale";
+}
 
-  /* ---------- table of contents ---------- */
-  var SECTIONS = [
-    ["start","Start here"],
-    ["week1","Week one results"],["format","The format question"],
-    ["evidence","The evidence"],["rules","Six rules"],
-    ["move","The one move"],["countdown","Eight artists, eight days"],["final3","Days 9–11"],
-    ["timing","When to post"],["links","Links"],["paid","Paid"],
-    ["event","The event page"],["groups","The groups"],["volume","How much to post"],
-    ["tiktok","TikTok"],["measure","What to measure"],["after","After August"],
-    ["asked","Questions asked"]
-  ];
-  var CATNAME = {act:"Do", why:"Why", later:"Later", asked:"Asked"};
-  var toc = document.getElementById("toc");
-  var tocBtn = document.getElementById("tocBtn");
-  var panel = document.getElementById("tocPanel");
+var TODAY=localISO();
+var SHOW="2026-08-21";
 
-  SECTIONS.forEach(function(pair){
-    var sec = document.getElementById(pair[0]);
-    if(!sec) return;
-    var cat = sec.getAttribute("data-cat") || "why";
-    var li = document.createElement("li");
-    var a = document.createElement("a");
-    a.href = "#" + pair[0];
-    a.dataset.cat = cat;
-    a.dataset.target = pair[0];
-    a.innerHTML = '<span class="tocat">' + (CATNAME[cat] || "") + '</span><span></span>';
-    a.lastChild.textContent = pair[1];
-    a.addEventListener("click", function(){
-      var f = sec.querySelector(".fold");
-      if(f) f.open = true;
-      closePanel();
-    });
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
+document.getElementById("today-line").textContent=longDate(TODAY,true);
+var left=daysBetween(TODAY,SHOW);
+document.getElementById("days-left").textContent=left>1?left+" days to go":(left===1?"tomorrow night":(left===0?"SHOW DAY":"show has happened"));
 
-  function openPanel(){
-    panel.classList.add("open");
-    tocBtn.setAttribute("aria-expanded","true");
-    panel.scrollTop = 0;
-    var on = toc.querySelector("a.on");
-    if(on && on.offsetTop > panel.clientHeight - 80){ panel.scrollTop = on.offsetTop - 120; }
+/* ---------- steer: today's post ---------- */
+fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
+  var entry=null;
+  (s.schedule||[]).forEach(function(e){ if(e.date===TODAY) entry=e; });
+  if(!entry){ // next upcoming, or last if past
+    var up=(s.schedule||[]).filter(function(e){return e.date>=TODAY;});
+    entry=up.length?up[0]:(s.schedule||[])[s.schedule.length-1];
   }
-  function closePanel(){ panel.classList.remove("open"); tocBtn.setAttribute("aria-expanded","false"); }
-  tocBtn.addEventListener("click", function(){
-    panel.classList.contains("open") ? closePanel() : openPanel();
-  });
-  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closePanel(); });
-
-  /* ---------- filtering ---------- */
-  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip[data-filter]"));
-  chips.forEach(function(c){
-    c.addEventListener("click", function(){
-      var f = c.dataset.filter;
-      chips.forEach(function(o){ o.setAttribute("aria-pressed", String(o === c)); });
-      SECTIONS.forEach(function(pair){
-        var sec = document.getElementById(pair[0]);
-        if(!sec) return;
-        var show = (f === "all") || (sec.getAttribute("data-cat") === f);
-        sec.hidden = !show;
-      });
-      Array.prototype.forEach.call(toc.querySelectorAll("a"), function(a){
-        a.hidden = !(f === "all" || a.dataset.cat === f);
-      });
-    });
-  });
-
-  /* ---------- open / close all ---------- */
-  var allBtn = document.getElementById("allBtn");
-  allBtn.addEventListener("click", function(){
-    var opening = allBtn.getAttribute("aria-pressed") !== "true";
-    allBtn.setAttribute("aria-pressed", String(opening));
-    allBtn.textContent = opening ? "Close all" : "Open all";
-    Array.prototype.forEach.call(document.querySelectorAll("main .fold"), function(f){
-      f.open = opening;
-    });
-  });
-
-  /* ---------- scroll spy + progress ---------- */
-  var bar = document.getElementById("bar");
-  var links = Array.prototype.slice.call(toc.querySelectorAll("a"));
-  var ticking = false;
-  function onScroll(){
-    if(ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(function(){
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - window.innerHeight;
-      bar.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + "%";
-
-      var current = null;
-      SECTIONS.forEach(function(pair){
-        var sec = document.getElementById(pair[0]);
-        if(!sec || sec.hidden) return;
-        if(sec.getBoundingClientRect().top <= 120) current = pair[0];
-      });
-      links.forEach(function(a){ a.classList.toggle("on", a.dataset.target === current); });
-      ticking = false;
-    });
+  if(!entry) return;
+  var pre=entry.date===TODAY?"":(entry.date>TODAY?"Next post — "+longDate(entry.date,true)+": ":"Last scheduled: ");
+  document.getElementById("np-artist").textContent=pre+entry.artist;
+  var lanes=document.getElementById("np-lanes");
+  if(entry.lane && entry.lane!=="—"){
+    lanes.innerHTML='<span class="lanechip">Lane '+esc(entry.lane)+'</span><span class="lanechip alt">'+esc(entry.lane_name)+'</span>';
+  } else {
+    lanes.innerHTML='<span class="lanechip alt">'+esc(entry.lane_name||"")+'</span>';
   }
-  window.addEventListener("scroll", onScroll, {passive:true});
-  onScroll();
+  document.getElementById("np-overlay").textContent='On-screen text: “'+entry.overlay+'”';
+  document.getElementById("np-caption").textContent=entry.caption;
+  var st=document.getElementById("steer-stamp");
+  if(s.stale){ st.textContent="no fresh numbers today — schedule unchanged"; st.className="stamp warn"; }
+  else ageStamp(st,(s.generated_at||"").slice(0,10),1);
+  if(s.read){ var r=document.getElementById("np-read"); r.style.display="block"; r.innerHTML="<b>Yesterday's read:</b> "+esc(s.read); }
+  var keep=document.getElementById("np-keep");
+  (s.keep||[]).forEach(function(k){ var li=document.createElement("li"); li.textContent=k; keep.appendChild(li); });
+  var btn=document.getElementById("np-copy");
+  btn.addEventListener("click",function(){
+    (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(entry.caption):Promise.reject()).then(function(){
+      btn.textContent="Copied"; btn.classList.add("done");
+      setTimeout(function(){btn.textContent="Copy the caption";btn.classList.remove("done");},1800);
+    },function(){ btn.textContent="Select the box and copy"; });
+  });
+}).catch(function(){ document.getElementById("np-artist").textContent="Couldn't load the schedule — tell Harry."; });
 
-  /* ---------- countdown ---------- */
-  var SHOW = Date.parse("2026-08-22T01:00:00Z"); /* Aug 21 2026, 8PM Chicago */
-  var el = {d:document.getElementById("d"),h:document.getElementById("h"),m:document.getElementById("m"),s:document.getElementById("s")};
-  function pad(n){return n<10?"0"+n:""+n;}
-  var dleft = document.getElementById("dleft");
-  function tickTock(){
-    var left = SHOW - Date.now();
-    if(left < 0){ left = 0; }
-    var sec = Math.floor(left/1000);
-    var days = Math.floor(sec/86400);
-    el.d.textContent = pad(days);
-    el.h.textContent = pad(Math.floor(sec%86400/3600));
-    el.m.textContent = pad(Math.floor(sec%3600/60));
-    el.s.textContent = pad(sec%60);
-    dleft.textContent = left === 0 ? "Show day" : (days + (days === 1 ? " day left" : " days left"));
+/* ---------- stats: tiles + tickets ---------- */
+fetch("stats.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
+  var pr=(s.sources&&s.sources.personal_reels)||{items:[],as_of:TODAY};
+  var items=pr.items||[];
+  var dated=items.filter(function(i){return i.date_posted;});
+  dated.sort(function(a,b){return a.date_posted<b.date_posted?1:-1;});
+  var last=dated[0];
+  var tiles=document.getElementById("tiles");
+  function tile(n,cls,label,stampIso,freshDays){
+    var d=document.createElement("div"); d.className="tile";
+    d.innerHTML='<div class="n '+cls+'">'+esc(n)+'</div><small>'+esc(label)+'</small><span class="stamp"></span>';
+    if(stampIso) ageStamp(d.querySelector(".stamp"),stampIso,freshDays||1);
+    tiles.appendChild(d); return d;
   }
-  tickTock(); setInterval(tickTock,1000);
-
-  /* ---------- metric switcher ---------- */
-  var rows = Array.prototype.slice.call(document.querySelectorAll("#rows .row"));
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".mbtn[data-metric]"));
-  function render(metric){
-    var vals = rows.map(function(r){ return parseFloat(r.dataset[metric]); });
-    var max = Math.max.apply(null, vals);
-    rows.forEach(function(r,i){
-      var v = vals[i];
-      r.querySelector("[data-val]").textContent =
-        metric === "rate" ? v.toFixed(2) + "%" : v.toLocaleString("en-US");
-      r.querySelector(".fill").style.width = (v/max*100) + "%";
-    });
+  if(last){
+    tile(last.views.toLocaleString("en-US"),"blue","views — "+last.title,pr.as_of,1);
+    var h=last.history||[]; var gained="—";
+    if(h.length>=2) gained="+"+(h[h.length-1].views-h[h.length-2].views).toLocaleString("en-US");
+    tile(gained,"green","views gained since the last check"+(h.length<2?" (needs two days of data)":""),pr.as_of,1);
+    var er=(last.reactions!=null&&last.views)?(((last.reactions+(last.comments||0)+(last.shares||0))/last.views*100).toFixed(2)+"%"):"—";
+    var withViews=items.filter(function(i){return i.views;}).map(function(i){return i.views;}).sort(function(a,b){return a-b;});
+    var med=withViews.length?withViews[Math.floor(withViews.length/2)]:0;
+    tile(er,"brass","engagement on that post · account median "+med.toLocaleString("en-US")+" views",pr.as_of,1);
   }
-  btns.forEach(function(b){
-    b.addEventListener("click", function(){
-      btns.forEach(function(o){ o.setAttribute("aria-pressed", String(o === b)); });
-      render(b.dataset.metric);
-    });
+  tile(left>=0?String(left):"0","amber",left===1?"day until the show":"days until the show",TODAY,0);
+
+  var ev=s.sources&&s.sources.event;
+  if(ev&&ev.responded!=null){
+    tile(String(ev.responded),"blue","people responded on the Facebook event",ev.as_of,2);
+  }
+
+  var tk=(s.manual&&s.manual.tickets)||null;
+  var tp=document.getElementById("tickets-panel");
+  if(tk){
+    var pct=Math.min(100,Math.round(tk.sold/tk.goal_low*100));
+    tp.innerHTML='<b>'+tk.sold+' sold</b> — '+pct+'% of the way to '+tk.goal_low+
+      ' (stretch '+tk.goal_high+')<div style="height:8px;border-radius:99px;background:rgba(140,160,220,.15);margin-top:10px;overflow:hidden">'+
+      '<div style="height:100%;width:'+pct+'%;border-radius:99px;background:linear-gradient(90deg,var(--brass),var(--amber))"></div></div>'+
+      '<span class="stamp" style="display:block;margin-top:8px"></span>';
+    var stamp=tp.querySelector(".stamp");
+    stamp.textContent="as of "+longDate(tk.as_of,true)+" — this number arrives by phone, so it lags. That's expected.";
+    stamp.className="stamp";
+  } else { tp.innerHTML='<span class="stamp">No ticket count fed yet.</span>'; }
+
+  document.getElementById("foot-updated").textContent="Numbers last updated "+longDate((s.generated_at||"").slice(0,10),true)+".";
+}).catch(function(){
+  var n=document.getElementById("tiles-note"); n.style.display="block";
+  n.textContent="Couldn't load the numbers file — the page still works, the tiles don't. Tell Harry.";
+});
+
+/* ---------- qa ---------- */
+fetch("qa.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(q){
+  var list=(q.entries||[]).slice(0,3);
+  if(!list.length) return;
+  var box=document.getElementById("qa-list"); box.innerHTML="";
+  list.forEach(function(e){
+    var d=document.createElement("div"); d.className="qa";
+    d.innerHTML='<div class="q"></div><div class="a"></div><time></time>';
+    d.querySelector(".q").textContent="Q. "+e.question;
+    d.querySelector(".a").textContent=e.answer;
+    d.querySelector("time").textContent="asked "+longDate(e.date,daysBetween(e.date,TODAY)<8);
+    box.appendChild(d);
   });
-  render("views");
+  var more=document.createElement("p"); more.style.marginTop="10px"; more.style.fontSize="13px";
+  more.innerHTML='<a href="reference.html#qa-archive">All questions →</a>';
+  box.appendChild(more);
+}).catch(function(){});
 
-  /* ---------- the eight ---------- */
-  var DAYS = [
-    {a:"Erykah Badu",   o:"If you know, you know.",            q:"Baduizm or Mama's Gun? Don't think about it — first one that came to mind."},
-    {a:"D'Angelo",      o:"This one still hurts.",             q:"Where were you the first time you heard Untitled? Be honest."},
-    {a:"Jill Scott",    o:"Nobody writes like this anymore.",  q:"Give me one Jill line you never forgot."},
-    {a:"Lauryn Hill",   o:"One album. That's all it took.",    q:"Would we have gotten a second one — and should we have?"},
-    {a:"Musiq Soulchild",o:"You had this on a burned CD.",     q:"Which song was track one? No looking it up."},
-    {a:"Maxwell",       o:"Turn the lights off for this one.", q:"Maxwell or D'Angelo. Pick one. I'll wait."},
-    {a:"India.Arie",    o:"She told the truth too early.",     q:"What did Video mean to you at the time?"},
-    {a:"Bilal",         o:"The one they slept on.",            q:"Who else got slept on? Name them."}
-  ];
-  var deck = document.getElementById("deck");
-  DAYS.forEach(function(d,i){
-    var card = document.createElement("div");
-    card.className = "day";
-    card.setAttribute("data-open","false");
-    var bodyId = "day-body-" + (i+1);
-    var caption = d.q + " 🎶 Take Me Back — Aug 21 @ The Haven. Comment TAKE ME BACK and I'll send you the link.";
+/* ---------- waiting on you ---------- */
+var TODOS=[
+  {k:"invite-toggle", t:"Turn on “Guests can invite friends” on the event", s:"Event settings, ten seconds. Lets all 38 responders invite their own people."},
+  {k:"groups-join", t:"Request to join The South Side Of Chicago and Bronzeville Alliance", s:"From Aniba's personal profile. Private groups — admins take days, so today."},
+  {k:"band-reshare", t:"Every band member reshares today's post", s:"Six networks instead of one. Costs nothing."},
+  {k:"dm-replies", t:"Reply to every TAKE ME BACK comment with the link, by DM", s:"The comment opens a 24-hour window where the DM is allowed. This builds the list you own."}
+];
+var todo=document.getElementById("todo");
+TODOS.forEach(function(x){
+  var li=document.createElement("li");
+  li.innerHTML='<label><input type="checkbox"><span class="t"></span></label>';
+  var t=li.querySelector(".t"); t.innerHTML=esc(x.t)+"<small>"+esc(x.s)+"</small>";
+  var cb=li.querySelector("input");
+  var key="aniba-todo-"+x.k;
+  cb.checked=localStorage.getItem(key)==="1";
+  cb.addEventListener("change",function(){localStorage.setItem(key,cb.checked?"1":"0");});
+  todo.appendChild(li);
+});
 
-    card.innerHTML =
-      '<button class="dtoggle" type="button" aria-expanded="false" aria-controls="' + bodyId + '">' +
-        '<span class="dnum">DAY ' + pad(i+1) + '</span>' +
-        '<span class="dname"></span>' +
-        '<span class="dcue">tap for the overlay + caption</span>' +
-      '</button>' +
-      '<div class="dbody" id="' + bodyId + '">' +
-        '<span class="dlab">On-screen overlay</span>' +
-        '<div class="overlay"></div>' +
-        '<span class="dlab">Caption</span>' +
-        '<p class="ask"></p>' +
-        '<button class="copy" type="button">Copy caption</button>' +
-      '</div>';
-
-    card.querySelector(".dname").textContent = d.a;
-    card.querySelector(".overlay").textContent = '“' + d.o + '”';
-    card.querySelector(".ask").textContent = caption;
-
-    var tog = card.querySelector(".dtoggle");
-    tog.addEventListener("click", function(){
-      var open = card.getAttribute("data-open") !== "true";
-      card.setAttribute("data-open", String(open));
-      tog.setAttribute("aria-expanded", String(open));
-    });
-
-    var cp = card.querySelector(".copy");
-    cp.addEventListener("click", function(){
-      var done = function(){
-        cp.textContent = "Copied";
-        cp.classList.add("done");
-        setTimeout(function(){ cp.textContent = "Copy caption"; cp.classList.remove("done"); }, 1800);
-      };
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(caption).then(done, function(){ cp.textContent = "Select & copy"; });
-      } else {
-        cp.textContent = "Select & copy";
-      }
-    });
-    deck.appendChild(card);
-  });
-
-  /* ---------- expand all ---------- */
-  var all = document.getElementById("openAll");
-  all.addEventListener("click", function(){
-    var open = all.getAttribute("aria-pressed") !== "true";
-    all.setAttribute("aria-pressed", String(open));
-    all.textContent = open ? "Collapse all" : "Expand all";
-    Array.prototype.forEach.call(deck.querySelectorAll(".day"), function(d){
-      d.setAttribute("data-open", String(open));
-      d.querySelector(".dtoggle").setAttribute("aria-expanded", String(open));
-    });
-  });
+/* ---------- old anchors keep meaning ---------- */
+var MOVED={
+  "#countdown":"playbook.html#artists","#timing":"playbook.html#timing","#format":"playbook.html#format",
+  "#rules":"reference.html#rules","#evidence":"reference.html#evidence","#week1":"reference.html#week1",
+  "#links":"reference.html#links","#paid":"reference.html#paid","#event":"reference.html#event",
+  "#groups":"reference.html#groups","#volume":"reference.html#volume","#tiktok":"reference.html#tiktok",
+  "#measure":"reference.html#measure","#after":"reference.html#after","#final3":"playbook.html#final3",
+  "#move":"reference.html#move","#start":"#waiting"
+};
+if(location.hash && MOVED[location.hash]){
+  if(MOVED[location.hash].charAt(0)==="#") location.hash=MOVED[location.hash];
+  else location.replace(MOVED[location.hash]);
+}
 })();
 </script>
 </body>

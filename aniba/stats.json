@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-08-14T11:00:00-05:00",
+  "generator": "manual-seed",
+  "sources": {
+    "personal_reels": {
+      "as_of": "2026-08-13",
+      "status": "manual",
+      "note": "Read from the public Reels grid at facebook.com/aniba.hotep/reels, logged out, on August 13, 2026.",
+      "items": [
+        {"slug": "lauryn-countdown", "title": "Lauryn Hill countdown", "date_posted": "2026-08-12", "views": 564, "reactions": 14, "comments": 4, "shares": 2,
+         "history": [{"date": "2026-08-13", "views": 564}]},
+        {"slug": "erykah-manifesto", "title": "Take Me Back manifesto (six artists)", "date_posted": "2026-08-01", "views": 4400, "reactions": 46, "comments": 5, "shares": 3,
+         "history": [{"date": "2026-08-13", "views": 4400}]},
+        {"slug": "grid-3", "title": "(untitled grid reel)", "views": 549, "history": [{"date": "2026-08-13", "views": 549}]},
+        {"slug": "grid-4", "title": "(untitled grid reel)", "views": 811, "history": [{"date": "2026-08-13", "views": 811}]},
+        {"slug": "grid-5", "title": "(untitled grid reel)", "views": 893, "history": [{"date": "2026-08-13", "views": 893}]},
+        {"slug": "grid-6", "title": "(untitled grid reel)", "views": 666, "history": [{"date": "2026-08-13", "views": 666}]},
+        {"slug": "grid-7", "title": "(untitled grid reel)", "views": 950, "history": [{"date": "2026-08-13", "views": 950}]},
+        {"slug": "grid-8", "title": "(untitled grid reel)", "views": 640, "history": [{"date": "2026-08-13", "views": 640}]},
+        {"slug": "grid-9", "title": "(untitled grid reel)", "views": 985, "history": [{"date": "2026-08-13", "views": 985}]},
+        {"slug": "grid-10", "title": "(untitled grid reel)", "views": 2500, "history": [{"date": "2026-08-13", "views": 2500}]}
+      ]
+    },
+    "band_page": {
+      "as_of": "2026-08-13",
+      "status": "manual",
+      "note": "Band Page reel views are not exposed logged-out; reactions read from the post.",
+      "items": [
+        {"slug": "jill-countdown-band", "title": "Jill Scott countdown (band page, 47s)", "date_posted": "2026-08-12", "views": null, "reactions": 5, "comments": 0, "shares": 0}
+      ]
+    },
+    "event": {
+      "as_of": "2026-08-13",
+      "status": "manual",
+      "responded": 38,
+      "history": [{"date": "2026-08-10", "responded": 38}, {"date": "2026-08-13", "responded": 38}]
+    }
+  },
+  "manual": {
+    "tickets": {"sold": 22, "goal_low": 50, "goal_high": 100, "as_of": "2026-08-13", "source": "Harry, by phone from the organizer"},
+    "notes": []
+  },
+  "bot": {"questions_asked": 0}
+}
