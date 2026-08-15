@@ -149,4 +149,33 @@ td{color:var(--dim)} td b, td .ink{color:var(--ink)}
 .note b{color:var(--ink)}
 .note.green{border-left-color:var(--green)} .note.red{border-left-color:var(--red)} .note.blue{border-left-color:var(--blue)}
 
+/* phase band — what this stretch of days is for. Organic and money, one thing. */
+.phaseband{margin-top:22px; border:1px solid rgba(63,214,143,.35); border-left:4px solid var(--green);
+  background:linear-gradient(100deg, rgba(63,214,143,.10), rgba(16,21,36,.85) 55%);
+  border-radius:14px; padding:16px 18px; backdrop-filter:blur(6px); position:relative; z-index:1}
+.phaseband.ask{border-color:rgba(255,184,77,.4); border-left-color:var(--amber);
+  background:linear-gradient(100deg, rgba(255,184,77,.14), rgba(16,21,36,.85) 55%)}
+.pb-tag{display:inline-block; font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700;
+  padding:4px 11px; border-radius:99px; color:var(--bg); background:var(--green)}
+.phaseband.ask .pb-tag{background:var(--amber)}
+.pb-title{font-size:clamp(19px,4vw,25px); font-weight:650; letter-spacing:-.01em; margin-top:10px; color:var(--ink)}
+.pb-why{color:var(--dim); font-size:14px; margin-top:6px}
+.pb-rows{margin-top:14px; display:grid; gap:8px}
+.pb-row{display:flex; gap:10px; align-items:flex-start; font-size:14.5px; color:var(--ink)}
+.pb-k{flex:none; width:66px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; font-weight:700;
+  color:var(--faint); padding-top:4px}
+
+/* the money, as live state — never a budget table on the hub */
+.paidcard{border:1px solid rgba(255,184,77,.38); border-top:3px solid var(--amber); background:var(--card);
+  border-radius:14px; padding:16px 18px; backdrop-filter:blur(6px)}
+.paidcard .money{font-size:clamp(22px,4.5vw,30px); font-weight:700; color:var(--amber);
+  font-variant-numeric:tabular-nums; line-height:1.15; margin-top:6px}
+.paidcard .money small{display:block; font-size:13px; font-weight:400; color:var(--dim); margin-top:5px; line-height:1.5}
+.paidcard .bar{height:8px; border-radius:99px; background:rgba(140,160,220,.15); margin-top:12px; overflow:hidden}
+.paidcard .bar>i{display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--brass),var(--amber))}
+.paidgo{display:inline-block; margin-top:14px; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:700; text-decoration:none; color:var(--bg); background:var(--amber); border-radius:99px;
+  padding:9px 17px; box-shadow:0 2px 14px rgba(255,184,77,.35)}
+.c-ads{border-top-color:var(--amber)} .c-ads h2{color:var(--amber)}
+
 footer{margin-top:52px; color:var(--faint); font-size:12.5px; position:relative; z-index:1; line-height:1.7}

@@ -22,6 +22,20 @@
   <h1>Take Me Back</h1>
   <div class="sub"><span class="live"><span class="pulse"></span></span><span id="today-line">…</span> · <b id="days-left">…</b> · show is <b>Friday, August 21, 2026</b>, doors 7PM, The Haven, 932 E 43rd</div>
 
+  <!-- 0 · WHAT THIS STRETCH OF DAYS IS FOR -->
+  <div class="phaseband" id="phaseband" style="display:none">
+    <div class="shead">
+      <span class="pb-tag" id="pb-tag">…</span>
+      <span class="stamp" id="pb-dates">…</span>
+    </div>
+    <h2 class="pb-title" id="pb-title">…</h2>
+    <p class="pb-why" id="pb-why"></p>
+    <div class="pb-rows">
+      <div class="pb-row"><span class="pb-k">Posts</span><span id="pb-organic"></span></div>
+      <div class="pb-row"><span class="pb-k">Money</span><span id="pb-paid"></span></div>
+    </div>
+  </div>
+
   <!-- 1 · POSTING OPTIONS -->
   <section id="start">
     <div class="shead">
@@ -35,12 +49,30 @@
     <ul class="keep" id="np-keep"></ul>
   </section>
 
-  <!-- 2 · PRIMARY NAVIGATION -->
+  <!-- 2 · THE MONEY, TODAY ONLY -->
+  <section id="money">
+    <div class="paidcard" id="paidcard" style="display:none">
+      <div class="shead">
+        <div class="label" style="color:var(--amber);margin-bottom:0">The boost</div>
+        <span class="stamp" id="paid-status">…</span>
+      </div>
+      <div class="money" id="paid-money">…<small id="paid-sub"></small></div>
+      <div class="bar"><i id="paid-bar" style="width:0%"></i></div>
+      <p class="stamp" id="paid-do" style="margin-top:12px"></p>
+      <a class="paidgo" href="ads.html">The $300 plan →</a>
+    </div>
+  </section>
+
+  <!-- 3 · PRIMARY NAVIGATION -->
   <section id="nav">
     <div class="cards">
       <a class="card c-playbook" href="playbook.html">
         <h2>How to Make Each Post</h2>
         <p>See how to shoot, edit, time, and publish whichever posting option you choose.</p>
+      </a>
+      <a class="card c-ads" href="ads.html">
+        <h2>The $300 Plan</h2>
+        <p>See where the money goes, how to set up the boost, and what to watch while it runs.</p>
       </a>
       <a class="card c-reference" href="reference.html">
         <h2>Plan & Results</h2>
@@ -49,7 +81,7 @@
     </div>
   </section>
 
-  <!-- 3 · SECONDARY DETAILS -->
+  <!-- 4 · SECONDARY DETAILS -->
   <section id="additional">
     <details class="fold" data-k="hub-additional">
       <summary><div class="label">Additional details</div></summary>
@@ -111,8 +143,32 @@ document.getElementById("today-line").textContent=longDate(TODAY,true);
 var left=daysBetween(TODAY,SHOW);
 document.getElementById("days-left").textContent=left>1?left+" days to go":(left===1?"tomorrow night":(left===0?"SHOW DAY":"show has happened"));
 
+/* ---------- phase: what this stretch of days is for ---------- */
+function currentPhase(s){
+  var ph=s.phases||[];
+  for(var i=0;i<ph.length;i++){ if(TODAY>=ph[i].starts&&TODAY<=ph[i].ends) return ph[i]; }
+  for(var j=0;j<ph.length;j++){ if(TODAY<ph[j].starts) return ph[j]; } // before the window: show what's coming
+  return null; // after the show
+}
+window.ANIBA_PHASE=null;
+
 /* ---------- steer: posting options ---------- */
 fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
+  var phase=currentPhase(s);
+  window.ANIBA_PHASE=phase;
+  if(phase){
+    var band=document.getElementById("phaseband");
+    band.style.display="block";
+    if(phase.key==="ask") band.classList.add("ask");
+    document.getElementById("pb-tag").textContent=phase.key==="ask"?"Phase 2 of 2":"Phase 1 of 2";
+    document.getElementById("pb-dates").textContent=longDate(phase.starts,false).replace(", 2026","")+" – "+longDate(phase.ends,true);
+    document.getElementById("pb-title").textContent=phase.label;
+    document.getElementById("pb-why").textContent=phase.why||"";
+    document.getElementById("pb-organic").textContent=phase.organic||"";
+    document.getElementById("pb-paid").textContent=phase.paid||"";
+  }
+  renderPaid(phase,s.budget_total);
+
   var schedule=s.schedule||[], suggested=null;
   schedule.forEach(function(e){ if(e.date===TODAY) suggested=e; });
   if(!suggested){
@@ -172,8 +228,39 @@ fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(
   n.textContent="Couldn't load the schedule — tell Harry.";
 });
 
+/* ---------- the money, today only ----------
+   Plan (steer.json) and observation (stats.json) arrive separately;
+   whichever lands second completes the card. */
+var paidState={phase:undefined,budget:undefined,obs:undefined};
+function renderPaid(phase,budget){ paidState.phase=phase; paidState.budget=budget; paintPaid(); }
+function renderPaidObs(obs){ paidState.obs=obs||null; paintPaid(); }
+function paintPaid(){
+  if(paidState.phase===undefined||paidState.obs===undefined) return; // wait for both files
+  var phase=paidState.phase;
+  if(!phase) return; // show has happened — card stays hidden
+  var card=document.getElementById("paidcard");
+  card.style.display="block";
+  var rec=(paidState.obs&&paidState.obs.phases&&paidState.obs.phases[phase.key])||null;
+  var status=rec&&rec.status?rec.status:"not started";
+  var spent=rec&&rec.spent!=null?rec.spent:null;
+  var notStarted=status==="not started";
+  var stampEl=document.getElementById("paid-status");
+  stampEl.textContent=notStarted?"not started yet":status;
+  stampEl.className="stamp "+(notStarted?"warn":(status==="running"?"fresh":""));
+  document.getElementById("paid-money").firstChild.textContent="$"+phase.planned+" · "+phase.label.toLowerCase();
+  var sub=document.getElementById("paid-sub");
+  sub.textContent=(spent!=null?("$"+spent.toFixed(2)+" spent so far — "):"")
+    +"this phase runs "+longDate(phase.starts,false).replace(", 2026","")+" to "+longDate(phase.ends,true)
+    +(paidState.budget?(", part of $"+paidState.budget+" total"):"");
+  document.getElementById("paid-bar").style.width=(spent!=null&&phase.planned?Math.min(100,Math.round(spent/phase.planned*100)):0)+"%";
+  var doLine=notStarted?phase.action_start:(status==="running"?phase.action_running:"");
+  var doEl=document.getElementById("paid-do");
+  doEl.textContent=doLine||""; doEl.style.display=doLine?"block":"none";
+}
+
 /* ---------- stats: tiles + tickets ---------- */
 fetch("stats.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
+  renderPaidObs(s.paid);
   var pr=(s.sources&&s.sources.personal_reels)||{items:[],as_of:TODAY};
   var items=pr.items||[];
   var dated=items.filter(function(i){return i.date_posted;});
@@ -218,6 +305,7 @@ fetch("stats.json",{cache:"no-store"}).then(function(r){return r.json();}).then(
 
   document.getElementById("foot-updated").textContent="Numbers last updated "+longDate((s.generated_at||"").slice(0,10),true)+".";
 }).catch(function(){
+  renderPaidObs(null); // plan can still paint without observed spend
   var n=document.getElementById("tiles-note"); n.style.display="block";
   n.textContent="Couldn't load the numbers file — the page still works, the tiles don't. Tell Harry.";
 });
@@ -240,15 +328,20 @@ fetch("qa.json",{cache:"no-store"}).then(function(r){return r.json();}).then(fun
   box.appendChild(more);
 }).catch(function(){});
 
-/* ---------- waiting on you ---------- */
+/* ---------- waiting on you ----------
+   `from` gates an item until the day it matters — the list stays short. */
 var TODOS=[
+  {k:"boost-start", t:"Start the Phase 1 boost — the manifesto reel, $20 a day", s:"From the reel: Boost. Set the daily cap inside the boost sheet, end date Tuesday, August 18. Details in The $300 Plan."},
+  {k:"boost-card", t:"Confirm which card the boost bills", s:"Boost sheet shows the payment method before it runs. This is band money — check it's not someone's personal card by surprise."},
   {k:"invite-toggle", t:"Turn on “Guests can invite friends” on the event", s:"Event settings, ten seconds. Lets all 38 responders invite their own people."},
   {k:"groups-join", t:"Request to join The South Side Of Chicago and Bronzeville Alliance", s:"From Aniba's personal profile. Private groups — admins take days, so today."},
   {k:"band-reshare", t:"Every band member reshares today's post", s:"Six networks instead of one. Costs nothing."},
-  {k:"dm-replies", t:"Reply to every TAKE ME BACK comment with the link, by DM", s:"The comment opens a 24-hour window where the DM is allowed. This builds the list you own."}
+  {k:"dm-replies", t:"Reply to every TAKE ME BACK comment with the link, by DM", s:"The comment opens a 24-hour window where the DM is allowed. This builds the list you own."},
+  {k:"boost-event-check", from:"2026-08-17", t:"Check whether the band Page can boost the event itself", s:"Open the event from the band Page and look for a Boost button. If it's there, part of Phase 2 runs as event ads — every response buys Facebook's free show-day reminders."},
+  {k:"crosspost-proof", from:"2026-08-18", t:"Cross-post the live-show clip to whichever surface runs Phase 2", s:"You can only boost a post that exists on that surface. Doing this Tuesday keeps Wednesday's money from waiting on an upload."}
 ];
 var todo=document.getElementById("todo");
-TODOS.forEach(function(x){
+TODOS.filter(function(x){return !x.from||TODAY>=x.from;}).forEach(function(x){
   var li=document.createElement("li");
   li.innerHTML='<label><input type="checkbox"><span class="t"></span></label>';
   var t=li.querySelector(".t"); t.innerHTML=esc(x.t)+"<small>"+esc(x.s)+"</small>";
@@ -263,7 +356,7 @@ TODOS.forEach(function(x){
 var MOVED={
   "#countdown":"playbook.html#artists","#timing":"playbook.html#timing","#format":"playbook.html#format",
   "#rules":"reference.html#rules","#evidence":"reference.html#week1","#week1":"reference.html#week1",
-  "#links":"reference.html#links","#paid":"reference.html#paid","#event":"reference.html#event",
+  "#links":"reference.html#links","#paid":"ads.html","#event":"reference.html#event",
   "#groups":"reference.html#groups","#volume":"reference.html#volume","#tiktok":"reference.html#tiktok",
   "#measure":"reference.html#numbers-history","#after":"reference.html#after","#final3":"playbook.html#final3",
   "#move":"reference.html#move","#next":"#start"
