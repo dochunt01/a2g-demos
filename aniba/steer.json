@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T07:00:15-05:00",
+  "generated_at": "2026-08-15T09:44:24-05:00",
   "generator": "steer_gen v1 (deterministic)",
   "stale": false,
   "read": "Lauryn Hill countdown: +68 views since yesterday. As of Saturday, August 15, 2026. Event responses: +1, now 39.",
@@ -74,5 +74,32 @@
       "caption": "Tonight. Doors at 7. Show at 8.\n\nErykah. Jill. D'Angelo. Maxwell. Lauryn. Musiq. India. Bilal. All of it, live, one room.\n\n🎟️ The Haven, 932 E 43rd. Comment TAKE ME BACK for the link — or just come.\n\nBest Dressed Neo Soul contest is real. Come correct."
     }
   ],
-  "abstention": "No reliable pattern yet — keep the next test controlled: change the shot, keep the length, page, and caption structure the same."
+  "abstention": "No reliable pattern yet — keep the next test controlled: change the shot, keep the length, page, and caption structure the same.",
+  "phases": [
+    {
+      "key": "widen",
+      "label": "Fill the room's attention",
+      "starts": "2026-08-15",
+      "ends": "2026-08-18",
+      "planned": 80,
+      "organic": "Post what travels — one a day, the nostalgia formula. Reply to comments for the first half hour.",
+      "paid": "Boost the manifesto reel, $20 a day, Chicago 20 miles.",
+      "why": "Every person reached now is a person who can be reminded on Wednesday.",
+      "action_start": "Start it today — boost the manifesto reel, $20 a day, and set the cap inside the boost sheet.",
+      "action_running": "Check the cost per result once today. Nothing else to do."
+    },
+    {
+      "key": "ask",
+      "label": "The ask",
+      "starts": "2026-08-19",
+      "ends": "2026-08-21",
+      "planned": 220,
+      "organic": "Name the date in every post. Two a day Thursday and Friday.",
+      "paid": "Switch the boost goal to messages, about $73 a day.",
+      "why": "A local show gets decided in the last seventy-two hours.",
+      "action_start": "Start the closing boost — goal set to messages, about $73 a day, same Chicago radius.",
+      "action_running": "Watch the cost per message once a day. If it climbs, tighten the radius before adding money."
+    }
+  ],
+  "budget_total": 300
 }
