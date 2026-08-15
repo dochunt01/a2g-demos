@@ -22,61 +22,60 @@
   <h1>Take Me Back</h1>
   <div class="sub"><span class="live"><span class="pulse"></span></span><span id="today-line">…</span> · <b id="days-left">…</b> · show is <b>Friday, August 21, 2026</b>, doors 7PM, The Haven, 932 E 43rd</div>
 
-  <!-- 1 · NEXT POST -->
-  <section id="next">
-    <div class="panel hero">
-      <div class="shead">
-        <span class="biglabel">Today's post</span>
-        <span class="stamp" id="steer-stamp">…</span>
-      </div>
-      <h2 id="np-artist">…</h2>
-      <div id="np-lanes"></div>
-      <p class="overlay-line" id="np-overlay"></p>
-      <div class="caption-box" id="np-caption"></div>
-      <button class="copybtn" id="np-copy" type="button">Copy the caption</button>
-      <div id="np-read" class="note blue" style="display:none"></div>
-      <ul class="keep" id="np-keep"></ul>
+  <!-- 1 · POSTING OPTIONS -->
+  <section id="start">
+    <div class="shead">
+      <h2>Posting options</h2>
+      <span class="stamp" id="steer-stamp">…</span>
     </div>
+    <p class="sub">The first option is the current suggestion, not a command. Choose whichever option matches footage that is ready.</p>
+    <div id="posting-options"></div>
+    <div id="posting-error" class="note red" style="display:none"></div>
+    <div id="np-read" class="note blue" style="display:none"></div>
+    <ul class="keep" id="np-keep"></ul>
   </section>
 
-  <!-- 2 · LAST POST TILES -->
-  <section id="numbers">
-    <div class="label">The scoreboard</div>
-    <div class="tiles" id="tiles"></div>
-    <div class="note" id="tiles-note" style="display:none"></div>
-  </section>
-
-  <!-- 3 · WAITING ON YOU -->
-  <section id="waiting">
-    <div class="label">Waiting on you</div>
-    <ul class="todo" id="todo"></ul>
-  </section>
-
-  <!-- 4 · RECENT QUESTIONS -->
-  <section id="asked">
-    <div class="shead"><div class="label">Recent questions</div></div>
-    <div id="qa-list"><div class="note blue">Nothing asked yet. When the ask-anything line opens, answers land here.</div></div>
-  </section>
-
-  <!-- 5 · TICKETS -->
-  <section id="tickets">
-    <div class="label">Tickets</div>
-    <div class="panel" id="tickets-panel"><span class="stamp">…</span></div>
-  </section>
-
-  <!-- 6 · SUBPAGES -->
+  <!-- 2 · PRIMARY NAVIGATION -->
   <section id="nav">
-    <div class="label">The rest</div>
     <div class="cards">
       <a class="card c-playbook" href="playbook.html">
-        <h2>Playbook</h2>
-        <p>How to make each post — the shot, the eight artists, every caption, the test we're running.</p>
+        <h2>How to Make Each Post</h2>
+        <p>See how to shoot, edit, time, and publish whichever posting option you choose.</p>
       </a>
       <a class="card c-reference" href="reference.html">
-        <h2>Reference</h2>
-        <p>The numbers history, the groups, the event page moves, and everything behind the plan.</p>
+        <h2>Plan & Results</h2>
+        <p>See the results so far, why each choice is in the plan, and the supporting event and audience details.</p>
       </a>
     </div>
+  </section>
+
+  <!-- 3 · SECONDARY DETAILS -->
+  <section id="additional">
+    <details class="fold" data-k="hub-additional">
+      <summary><div class="label">Additional details</div></summary>
+      <div class="inner">
+        <div id="numbers">
+          <div class="label">The scoreboard</div>
+          <div class="tiles" id="tiles"></div>
+          <div class="note" id="tiles-note" style="display:none"></div>
+        </div>
+
+        <div id="waiting" style="margin-top:28px">
+          <div class="label">Waiting on you</div>
+          <ul class="todo" id="todo"></ul>
+        </div>
+
+        <div id="asked" style="margin-top:28px">
+          <div class="shead"><div class="label">Recent questions</div></div>
+          <div id="qa-list"><div class="note blue">Nothing asked yet. When the ask-anything line opens, answers land here.</div></div>
+        </div>
+
+        <div id="tickets" style="margin-top:28px">
+          <div class="label">Tickets</div>
+          <div class="panel" id="tickets-panel"><span class="stamp">…</span></div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <footer>
@@ -112,39 +111,66 @@ document.getElementById("today-line").textContent=longDate(TODAY,true);
 var left=daysBetween(TODAY,SHOW);
 document.getElementById("days-left").textContent=left>1?left+" days to go":(left===1?"tomorrow night":(left===0?"SHOW DAY":"show has happened"));
 
-/* ---------- steer: today's post ---------- */
+/* ---------- steer: posting options ---------- */
 fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
-  var entry=null;
-  (s.schedule||[]).forEach(function(e){ if(e.date===TODAY) entry=e; });
-  if(!entry){ // next upcoming, or last if past
-    var up=(s.schedule||[]).filter(function(e){return e.date>=TODAY;});
-    entry=up.length?up[0]:(s.schedule||[])[s.schedule.length-1];
+  var schedule=s.schedule||[], suggested=null;
+  schedule.forEach(function(e){ if(e.date===TODAY) suggested=e; });
+  if(!suggested){
+    var upcoming=schedule.filter(function(e){return e.date>=TODAY;});
+    suggested=upcoming.length?upcoming[0]:schedule[schedule.length-1];
   }
-  if(!entry) return;
-  var pre=entry.date===TODAY?"":(entry.date>TODAY?"Next post — "+longDate(entry.date,true)+": ":"Last scheduled: ");
-  document.getElementById("np-artist").textContent=pre+entry.artist;
-  var lanes=document.getElementById("np-lanes");
-  if(entry.lane && entry.lane!=="—"){
-    lanes.innerHTML='<span class="lanechip">Lane '+esc(entry.lane)+'</span><span class="lanechip alt">'+esc(entry.lane_name)+'</span>';
-  } else {
-    lanes.innerHTML='<span class="lanechip alt">'+esc(entry.lane_name||"")+'</span>';
-  }
-  document.getElementById("np-overlay").textContent='On-screen text: “'+entry.overlay+'”';
-  document.getElementById("np-caption").textContent=entry.caption;
   var st=document.getElementById("steer-stamp");
   if(s.stale){ st.textContent="no fresh numbers today — schedule unchanged"; st.className="stamp warn"; }
   else ageStamp(st,(s.generated_at||"").slice(0,10),1);
+  if(!suggested){
+    var empty=document.getElementById("posting-error");
+    empty.style.display="block"; empty.textContent="No posting options are in the schedule — tell Harry.";
+    return;
+  }
+
+  var ordered=[suggested].concat(schedule.filter(function(e){return e!==suggested;}));
+  var host=document.getElementById("posting-options");
+  ordered.forEach(function(entry,index){
+    var current=index===0;
+    var d=document.createElement("details");
+    d.className="fold"+(current?" hero":"");
+    d.dataset.k="hub-option-"+entry.date;
+    if(current) d.open=true;
+    var summary=document.createElement("summary");
+    summary.innerHTML='<div class="shead"><div><div class="label" style="color:'+(current?'var(--brass)':'var(--ink)')+'">'
+      +(current?'Current suggestion':'Posting option')+'</div><h3 style="font-size:18px;margin-top:4px">'+esc(entry.artist)+'</h3>'
+      +'<p class="stamp" style="margin-top:3px">Idea: “'+esc(entry.overlay)+'”</p></div>'
+      +'<span class="stamp">Originally planned for '+esc(longDate(entry.date,true))+'</span></div>';
+    d.appendChild(summary);
+    var inner=document.createElement("div"); inner.className="inner";
+    var lane=(entry.lane&&entry.lane!=="—")?("Lane "+entry.lane+" · "+entry.lane_name):entry.lane_name;
+    inner.innerHTML='<p><b>Lane / format:</b> '+esc(lane||"")+'</p>'
+      +'<p class="overlay-line">On-screen text: “'+esc(entry.overlay)+'”</p>'
+      +'<div class="caption-box"></div><button class="copybtn" type="button">Copy caption</button>';
+    inner.querySelector(".caption-box").textContent=entry.caption;
+    var btn=inner.querySelector(".copybtn");
+    btn.addEventListener("click",function(ev){
+      ev.preventDefault();
+      (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(entry.caption):Promise.reject()).then(function(){
+        btn.textContent="Copied"; btn.classList.add("done");
+        setTimeout(function(){btn.textContent="Copy caption";btn.classList.remove("done");},1800);
+      },function(){ btn.textContent="Select the box and copy"; });
+    });
+    d.appendChild(inner); host.appendChild(d);
+
+    var key="aniba-fold-"+d.dataset.k;
+    var saved=localStorage.getItem(key);
+    if(saved==="1") d.open=true; else if(saved==="0") d.open=false;
+    d.addEventListener("toggle",function(){localStorage.setItem(key,d.open?"1":"0");});
+  });
+
   if(s.read){ var r=document.getElementById("np-read"); r.style.display="block"; r.innerHTML="<b>Yesterday's read:</b> "+esc(s.read); }
   var keep=document.getElementById("np-keep");
   (s.keep||[]).forEach(function(k){ var li=document.createElement("li"); li.textContent=k; keep.appendChild(li); });
-  var btn=document.getElementById("np-copy");
-  btn.addEventListener("click",function(){
-    (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(entry.caption):Promise.reject()).then(function(){
-      btn.textContent="Copied"; btn.classList.add("done");
-      setTimeout(function(){btn.textContent="Copy the caption";btn.classList.remove("done");},1800);
-    },function(){ btn.textContent="Select the box and copy"; });
-  });
-}).catch(function(){ document.getElementById("np-artist").textContent="Couldn't load the schedule — tell Harry."; });
+}).catch(function(){
+  var n=document.getElementById("posting-error"); n.style.display="block";
+  n.textContent="Couldn't load the schedule — tell Harry.";
+});
 
 /* ---------- stats: tiles + tickets ---------- */
 fetch("stats.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
@@ -210,7 +236,7 @@ fetch("qa.json",{cache:"no-store"}).then(function(r){return r.json();}).then(fun
     box.appendChild(d);
   });
   var more=document.createElement("p"); more.style.marginTop="10px"; more.style.fontSize="13px";
-  more.innerHTML='<a href="reference.html#qa-archive">All questions →</a>';
+  more.innerHTML='<a href="reference.html#qa-archive">All questions in Plan & Results →</a>';
   box.appendChild(more);
 }).catch(function(){});
 
@@ -236,15 +262,29 @@ TODOS.forEach(function(x){
 /* ---------- old anchors keep meaning ---------- */
 var MOVED={
   "#countdown":"playbook.html#artists","#timing":"playbook.html#timing","#format":"playbook.html#format",
-  "#rules":"reference.html#rules","#evidence":"reference.html#evidence","#week1":"reference.html#week1",
+  "#rules":"reference.html#rules","#evidence":"reference.html#week1","#week1":"reference.html#week1",
   "#links":"reference.html#links","#paid":"reference.html#paid","#event":"reference.html#event",
   "#groups":"reference.html#groups","#volume":"reference.html#volume","#tiktok":"reference.html#tiktok",
-  "#measure":"reference.html#measure","#after":"reference.html#after","#final3":"playbook.html#final3",
-  "#move":"reference.html#move","#start":"#waiting"
+  "#measure":"reference.html#numbers-history","#after":"reference.html#after","#final3":"playbook.html#final3",
+  "#move":"reference.html#move","#next":"#start"
 };
 if(location.hash && MOVED[location.hash]){
   if(MOVED[location.hash].charAt(0)==="#") location.hash=MOVED[location.hash];
   else location.replace(MOVED[location.hash]);
+}
+
+/* ---------- fold persistence + meaningful hub deep links ---------- */
+Array.prototype.forEach.call(document.querySelectorAll("details.fold[data-k]"),function(f){
+  if(f.dataset.k.indexOf("hub-option-")===0) return;
+  var key="aniba-fold-"+f.dataset.k;
+  var saved=localStorage.getItem(key);
+  if(saved==="1") f.open=true; else if(saved==="0") f.open=false;
+  f.addEventListener("toggle",function(){localStorage.setItem(key,f.open?"1":"0");});
+});
+if(location.hash){
+  var target=document.querySelector(location.hash);
+  var fold=target&&target.closest("details.fold");
+  if(fold){ fold.open=true; target.scrollIntoView(); }
 }
 })();
 </script>
