@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-15T11:32:05-05:00",
-  "generator": "feed.py (manual)",
+  "generated_at": "2026-08-16T07:00:10-05:00",
+  "generator": "scrape.py",
   "sources": {
     "personal_reels": {
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "status": "scraped",
       "note": "Read from the public Reels grid at facebook.com/aniba.hotep/reels, logged out, on August 13, 2026.",
       "items": [
@@ -23,9 +23,13 @@
             {
               "date": "2026-08-15",
               "views": 863
+            },
+            {
+              "date": "2026-08-16",
+              "views": 898
             }
           ],
-          "views": 863,
+          "views": 898,
           "date_posted": "2026-08-12",
           "reactions": 14,
           "comments": 4,
@@ -63,6 +67,10 @@
             {
               "date": "2026-08-15",
               "views": 2500
+            },
+            {
+              "date": "2026-08-16",
+              "views": 2500
             }
           ],
           "views": 2500
@@ -78,6 +86,10 @@
             },
             {
               "date": "2026-08-15",
+              "views": 1000
+            },
+            {
+              "date": "2026-08-16",
               "views": 1000
             }
           ],
@@ -95,9 +107,13 @@
             {
               "date": "2026-08-15",
               "views": 973
+            },
+            {
+              "date": "2026-08-16",
+              "views": 978
             }
           ],
-          "views": 973
+          "views": 978
         },
         {
           "slug": "reel-1058845113183319",
@@ -111,9 +127,13 @@
             {
               "date": "2026-08-15",
               "views": 924
+            },
+            {
+              "date": "2026-08-16",
+              "views": 936
             }
           ],
-          "views": 924
+          "views": 936
         },
         {
           "slug": "reel-1372224450994099",
@@ -127,9 +147,13 @@
             {
               "date": "2026-08-15",
               "views": 841
+            },
+            {
+              "date": "2026-08-16",
+              "views": 855
             }
           ],
-          "views": 841
+          "views": 855
         },
         {
           "slug": "reel-2209470789613185",
@@ -143,9 +167,13 @@
             {
               "date": "2026-08-15",
               "views": 694
+            },
+            {
+              "date": "2026-08-16",
+              "views": 705
             }
           ],
-          "views": 694
+          "views": 705
         },
         {
           "slug": "reel-1063526709369213",
@@ -159,9 +187,13 @@
             {
               "date": "2026-08-15",
               "views": 655
+            },
+            {
+              "date": "2026-08-16",
+              "views": 659
             }
           ],
-          "views": 655
+          "views": 659
         },
         {
           "slug": "reel-2198665947660869",
@@ -175,9 +207,13 @@
             {
               "date": "2026-08-15",
               "views": 582
+            },
+            {
+              "date": "2026-08-16",
+              "views": 592
             }
           ],
-          "views": 582
+          "views": 592
         },
         {
           "slug": "reel-4511679479062104",
@@ -187,9 +223,13 @@
             {
               "date": "2026-08-15",
               "views": 347
+            },
+            {
+              "date": "2026-08-16",
+              "views": 479
             }
           ],
-          "views": 347
+          "views": 479
         }
       ]
     },
@@ -210,7 +250,7 @@
       ]
     },
     "event": {
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "status": "scraped",
       "responded": 39,
       "history": [
@@ -228,6 +268,10 @@
         },
         {
           "date": "2026-08-15",
+          "responded": 39
+        },
+        {
+          "date": "2026-08-16",
           "responded": 39
         }
       ]
