@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-16T07:00:10-05:00",
-  "generator": "scrape.py",
+  "generated_at": "2026-08-16T17:21:07-05:00",
+  "generator": "feed.py (manual)",
   "sources": {
     "personal_reels": {
       "as_of": "2026-08-16",
@@ -290,5 +290,21 @@
   "bot": {
     "questions_asked": 0
   },
-  "last_scrape_errors": {}
+  "last_scrape_errors": {},
+  "paid": {
+    "as_of": "2026-08-16",
+    "source": "manual",
+    "phases": {
+      "widen": {
+        "spent": 34.11,
+        "status": "running",
+        "history": [
+          {
+            "date": "2026-08-16",
+            "spent": 34.11
+          }
+        ]
+      }
+    }
+  }
 }
