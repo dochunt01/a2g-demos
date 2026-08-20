@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T07:00:11-05:00",
+  "generated_at": "2026-08-20T12:39:33-05:00",
   "sources": {
     "personal_reels": {
       "as_of": "2026-08-20",
@@ -492,16 +492,20 @@
     }
   },
   "paid": {
-    "as_of": "2026-08-16",
+    "as_of": "2026-08-20",
     "source": "manual",
     "phases": {
       "widen": {
-        "spent": 34.11,
-        "status": "running",
+        "spent": 59.68,
+        "status": "done",
         "history": [
           {
             "date": "2026-08-16",
             "spent": 34.11
+          },
+          {
+            "date": "2026-08-20",
+            "spent": 59.68
           }
         ]
       }
