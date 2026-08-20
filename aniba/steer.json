@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T07:00:11-05:00",
+  "generated_at": "2026-08-20T12:39:59-05:00",
   "generator": "steer_gen v1 (deterministic)",
   "stale": false,
   "read": "Lauryn Hill countdown: +14 views since yesterday. As of Thursday, August 20, 2026.",
@@ -82,24 +82,28 @@
       "starts": "2026-08-15",
       "ends": "2026-08-18",
       "planned": 80,
+      "actual": 59.68,
+      "status": "done",
       "organic": "Post what travels — one a day, the nostalgia formula. Reply to comments for the first half hour.",
-      "paid": "Boost the manifesto reel, $20 a day, Chicago 20 miles.",
+      "paid": "Ran and finished. $59.68 over three days: 7,443 people reached, 1,593 taps through to the page at 4 cents each.",
       "why": "Every person reached now is a person who can be reminded on Wednesday.",
-      "action_start": "Start it today — boost the manifesto reel, $20 a day, and set the cap inside the boost sheet.",
-      "action_running": "Check the cost per result once today. Nothing else to do."
+      "action_start": "Done — nothing to start.",
+      "action_running": "Finished. The numbers are on the boost report."
     },
     {
       "key": "ask",
       "label": "The ask",
       "starts": "2026-08-19",
       "ends": "2026-08-21",
-      "planned": 220,
-      "organic": "Name the date in every post. Two a day Thursday and Friday.",
-      "paid": "Switch the boost goal to messages, about $73 a day.",
-      "why": "A local show gets decided in the last seventy-two hours.",
-      "action_start": "Start the closing boost — goal set to messages, about $73 a day, same Chicago radius.",
-      "action_running": "Watch the cost per message once a day. If it climbs, tighten the radius before adding money."
+      "planned": 0,
+      "planned_original": 220,
+      "status": "cancelled",
+      "organic": "Name the date in every post. Two a day Thursday and Friday — this is what carries the last stretch.",
+      "paid": "Not running. The closing boost was cancelled on Wednesday, August 20. No money goes out in these three days.",
+      "why": "A local show gets decided in the last seventy-two hours — so with no paid behind them, the posts matter more, not less.",
+      "action_start": "Nothing to start. Post twice a day, name the date, and skip the boost sheet entirely.",
+      "action_running": "No boost to watch. Keep replying to every TAKE ME BACK comment by DM — that is the whole funnel now."
     }
   ],
-  "budget_total": 300
+  "budget_total": 59.68
 }
