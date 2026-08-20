@@ -336,9 +336,8 @@ var TODOS=[
   {k:"invite-toggle", t:"Turn on “Guests can invite friends” on the event", s:"Event settings, ten seconds. Lets all 38 responders invite their own people."},
   {k:"groups-join", t:"Request to join The South Side Of Chicago and Bronzeville Alliance", s:"From Aniba's personal profile. Private groups — admins take days, so today."},
   {k:"band-reshare", t:"Every band member reshares today's post", s:"Six networks instead of one. Costs nothing."},
-  {k:"dm-replies", t:"Reply to every TAKE ME BACK comment with the link, by DM", s:"The comment opens a 24-hour window where the DM is allowed. This builds the list you own."},
+  {k:"dm-replies", t:"Reply to every TAKE ME BACK comment with the link, by DM", s:"With no boost running, this is the whole funnel — the most valuable thing on this list. The comment opens a 24-hour window where the DM is allowed, so use it the same day. This builds the list you own."}
   /* boost-event-check: moot — Phase 2 cancelled 2026-08-20, no event ads. */
-  {k:"dm-window", t:"Keep replying to every TAKE ME BACK comment by DM", s:"With no boost running, this is the whole funnel. The comment opens a 24-hour window where the DM is allowed — use it the same day."}
 ];
 var todo=document.getElementById("todo");
 TODOS.filter(function(x){return !x.from||TODAY>=x.from;}).forEach(function(x){
