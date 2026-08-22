@@ -1,12 +1,11 @@
 {
-  "generated_at": "2026-08-22T07:00:15-05:00",
+  "generated_at": "2026-08-22T16:29:55-05:00",
   "generator": "steer_gen v1 (deterministic)",
   "stale": false,
   "read": "Lauryn Hill countdown: +0 views since yesterday. As of Saturday, August 22, 2026.",
   "keep": [
     "Fifteen seconds — the 15-second post out-engaged the 47-second one 4-to-1 (worth testing again, not yet proven)",
-    "Post on the personal profile, not the band page",
-    "Comment TAKE ME BACK line on every post — reply to every comment with the link by DM"
+    "Post on the personal profile, not the band page"
   ],
   "schedule": [
     {
@@ -15,7 +14,8 @@
       "lane": "B",
       "lane_name": "Hybrid — 3 to 5 seconds close-up to camera, then cut to the stage footage",
       "overlay": "This one still hurts.",
-      "caption": "Where were you the first time you heard Untitled? Be honest.\n\nWe're doing D'Angelo on the 21st, and we're not skipping the deep cuts.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link."
+      "caption": "Where were you the first time you heard Untitled? Be honest.\n\nWe're doing D'Angelo on the 21st, and we're not skipping the deep cuts.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link.",
+      "status": "closed"
     },
     {
       "date": "2026-08-15",
@@ -23,7 +23,8 @@
       "lane": "B",
       "lane_name": "Hybrid — close-up open, stage payoff",
       "overlay": "Turn the lights off for this one.",
-      "caption": "Maxwell or D'Angelo. Pick one. I'll wait.\n\nBoth are on the setlist Friday night.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link."
+      "caption": "Maxwell or D'Angelo. Pick one. I'll wait.\n\nBoth are on the setlist Friday night.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link.",
+      "status": "closed"
     },
     {
       "date": "2026-08-16",
@@ -31,7 +32,8 @@
       "lane": "A",
       "lane_name": "Stage footage only — the control",
       "overlay": "You had this on a burned CD.",
-      "caption": "Which song was track one? No looking it up.\n\nMusiq gets his flowers Friday night.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link."
+      "caption": "Which song was track one? No looking it up.\n\nMusiq gets his flowers Friday night.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link.",
+      "status": "closed"
     },
     {
       "date": "2026-08-17",
@@ -39,7 +41,8 @@
       "lane": "C",
       "lane_name": "The manifesto format that did 4,400 — big text overlay, name them all",
       "overlay": "BACK IN THE DAY… WHEN MUSIC FELT LIKE THIS.",
-      "caption": "Give me Erykah. Give me Jill. Give me D'Angelo. Give me Maxwell. Give me Lauryn. Give me Musiq.\n\nIf you miss the days when music had soul and lyrics had meaning — this night is for you. One room, one band, all of it live.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link."
+      "caption": "Give me Erykah. Give me Jill. Give me D'Angelo. Give me Maxwell. Give me Lauryn. Give me Musiq.\n\nIf you miss the days when music had soul and lyrics had meaning — this night is for you. One room, one band, all of it live.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link.",
+      "status": "closed"
     },
     {
       "date": "2026-08-18",
@@ -47,7 +50,8 @@
       "lane": "B",
       "lane_name": "Hybrid — close-up open, stage payoff",
       "overlay": "She told the truth too early.",
-      "caption": "What did Video mean to you at the time?\n\nIndia's on the setlist Friday. Bring somebody who needs to hear it.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link."
+      "caption": "What did Video mean to you at the time?\n\nIndia's on the setlist Friday. Bring somebody who needs to hear it.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link.",
+      "status": "closed"
     },
     {
       "date": "2026-08-19",
@@ -55,7 +59,8 @@
       "lane": "B",
       "lane_name": "Hybrid — close-up open, stage payoff",
       "overlay": "The one they slept on.",
-      "caption": "Who else got slept on? Name them.\n\nBilal gets his Friday night. Two days out.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link."
+      "caption": "Who else got slept on? Name them.\n\nBilal gets his Friday night. Two days out.\n\n🎟️ Take Me Back: A Neo Soul Experience — Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link.",
+      "status": "closed"
     },
     {
       "date": "2026-08-20",
@@ -63,7 +68,8 @@
       "lane": "—",
       "lane_name": "Anticipation beats invitation",
       "overlay": "Tomorrow night.",
-      "caption": "Lights up. Room's empty. Band's running it one more time.\n\nTomorrow this room is full — and if the real number is known, say it: \"The Haven holds ___.\" Only if it's true.\n\n🎟️ Take Me Back: A Neo Soul Experience — tomorrow, Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link."
+      "caption": "Lights up. Room's empty. Band's running it one more time.\n\nTomorrow this room is full — and if the real number is known, say it: \"The Haven holds ___.\" Only if it's true.\n\n🎟️ Take Me Back: A Neo Soul Experience — tomorrow, Friday, August 21, doors 7PM, The Haven, 932 E 43rd.\n\nComment TAKE ME BACK and I'll send you the link.",
+      "status": "closed"
     },
     {
       "date": "2026-08-21",
@@ -71,7 +77,8 @@
       "lane": "—",
       "lane_name": "Doors tonight",
       "overlay": "TONIGHT.",
-      "caption": "Tonight. Doors at 7. Show at 8.\n\nErykah. Jill. D'Angelo. Maxwell. Lauryn. Musiq. India. Bilal. All of it, live, one room.\n\n🎟️ The Haven, 932 E 43rd. Comment TAKE ME BACK for the link — or just come.\n\nBest Dressed Neo Soul contest is real. Come correct."
+      "caption": "Tonight. Doors at 7. Show at 8.\n\nErykah. Jill. D'Angelo. Maxwell. Lauryn. Musiq. India. Bilal. All of it, live, one room.\n\n🎟️ The Haven, 932 E 43rd. Comment TAKE ME BACK for the link — or just come.\n\nBest Dressed Neo Soul contest is real. Come correct.",
+      "status": "closed"
     }
   ],
   "abstention": "No reliable pattern yet — keep the next test controlled: change the shot, keep the length, page, and caption structure the same.",
@@ -105,5 +112,17 @@
       "action_running": "No boost to watch. Keep replying to every TAKE ME BACK comment by DM — that is the whole funnel now."
     }
   ],
-  "budget_total": 59.68
+  "budget_total": 59.68,
+  "campaign": {
+    "label": "Take Me Back: A Neo Soul Experience",
+    "ends": "2026-08-21",
+    "closed": true,
+    "note": "The August 21 show has played, so this campaign is closed — nothing on this page is asking you to sell tickets any more. It finished at $59.68 of paid spend, roughly 115-120 tickets, and about 80% of the room new to the band. The daily numbers keep running, so use this page for what to post next.",
+    "schedule_counts": {
+      "closed": 8,
+      "today": 0,
+      "upcoming": 0,
+      "undated": 0
+    }
+  }
 }
