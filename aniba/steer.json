@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T16:52:32-05:00",
+  "generated_at": "2026-08-22T17:19:08-05:00",
   "generator": "steer_gen v1 (deterministic)",
   "stale": false,
   "read": "Lauryn Hill countdown: +0 views since yesterday. As of Saturday, August 22, 2026.",
@@ -98,8 +98,7 @@
       "action_running": "Finished. The numbers are on the boost report.",
       "days_past_end": 4,
       "lifecycle": "ended",
-      "closed": true,
-      "needs_stop_check": false
+      "closed": true
     },
     {
       "key": "ask",
@@ -116,8 +115,7 @@
       "action_running": "No boost to watch. Keep replying to every TAKE ME BACK comment by DM — that is the whole funnel now.",
       "days_past_end": 1,
       "lifecycle": "ended",
-      "closed": true,
-      "needs_stop_check": false
+      "closed": true
     }
   ],
   "budget_total": 59.68,
@@ -131,7 +129,6 @@
       "today": 0,
       "upcoming": 0,
       "undated": 0
-    },
-    "phases_needing_stop_check": []
+    }
   }
 }
