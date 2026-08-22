@@ -25,6 +25,7 @@
   <!-- 0a · CAMPAIGN CLOSED — driven by steer.json `campaign.closed`, so the
        closeout happens on its own the day after the end date. -->
   <div class="note green" id="campaign-closed" style="display:none"></div>
+  <div class="note red" id="stop-check" style="display:none"></div>
 
   <!-- 0 · WHAT THIS STRETCH OF DAYS IS FOR -->
   <div class="phaseband" id="phaseband" style="display:none">
@@ -159,6 +160,18 @@ window.ANIBA_PHASE=null;
 /* ---------- steer: posting options ---------- */
 fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
   var camp=s.campaign||{}, CLOSED=!!camp.closed;
+  var needStop=camp.phases_needing_stop_check||[];
+  if(needStop.length){
+    var byKey={}; (s.phases||[]).forEach(function(p){byKey[p.key]=p;});
+    var names=needStop.map(function(k){
+      var p=byKey[k]||{}; return (p.label||k)+" (ended "+longDate(p.ends,true)+")";
+    }).join(", ");
+    var sc=document.getElementById("stop-check");
+    sc.style.display="block";
+    sc.innerHTML="<b>Check the ads manager.</b> "+esc(names)
+      +" — the end date has passed and nothing here confirms the boost actually stopped. "
+      +"If it is still running it is still spending. Once it is stopped, tell Harry so the number gets recorded.";
+  }
   if(CLOSED){
     var cc=document.getElementById("campaign-closed");
     cc.style.display="block";
@@ -267,16 +280,26 @@ function paintPaid(){
   var status=rec&&rec.status?rec.status:"not started";
   var spent=rec&&rec.spent!=null?rec.spent:null;
   var notStarted=status==="not started";
+  var closed=!!phase.closed;
+  var declared=String(phase.status||"").toLowerCase();
   var stampEl=document.getElementById("paid-status");
-  stampEl.textContent=notStarted?"not started yet":status;
-  stampEl.className="stamp "+(notStarted?"warn":(status==="running"?"fresh":""));
+  stampEl.textContent=closed?(declared==="cancelled"?"cancelled":"closed — end date passed")
+                            :(notStarted?"not started yet":status);
+  stampEl.className="stamp "+(closed?"":(notStarted?"warn":(status==="running"?"fresh":"")));
   document.getElementById("paid-money").firstChild.textContent="$"+phase.planned+" · "+phase.label.toLowerCase();
   var sub=document.getElementById("paid-sub");
   sub.textContent=(spent!=null?("$"+spent.toFixed(2)+" spent so far — "):"")
     +"this phase runs "+longDate(phase.starts,false).replace(", 2026","")+" to "+longDate(phase.ends,true)
     +(paidState.budget?(", part of $"+paidState.budget+" total"):"");
   document.getElementById("paid-bar").style.width=(spent!=null&&phase.planned?Math.min(100,Math.round(spent/phase.planned*100)):0)+"%";
-  var doLine=notStarted?phase.action_start:(status==="running"?phase.action_running:"");
+  // A phase past its end date, or one that was cancelled, never renders a
+  // "go start the boost" line again — that instruction expires with the date.
+  var doLine=closed
+    ? (phase.needs_stop_check
+        ? "The end date has passed — confirm in the ads manager that this actually stopped."
+        : (declared==="cancelled" ? "Cancelled — nothing to start and nothing to watch."
+                                  : "Closed. Its end date has passed, so there is nothing to do here."))
+    : (notStarted?phase.action_start:(status==="running"?phase.action_running:""));
   var doEl=document.getElementById("paid-do");
   doEl.textContent=doLine||""; doEl.style.display=doLine?"block":"none";
 }
