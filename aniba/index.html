@@ -22,6 +22,10 @@
   <h1>Take Me Back</h1>
   <div class="sub"><span class="live"><span class="pulse"></span></span><span id="today-line">…</span> · <b id="days-left">…</b> · show is <b>Friday, August 21, 2026</b>, doors 7PM, The Haven, 932 E 43rd</div>
 
+  <!-- 0a · CAMPAIGN CLOSED — driven by steer.json `campaign.closed`, so the
+       closeout happens on its own the day after the end date. -->
+  <div class="note green" id="campaign-closed" style="display:none"></div>
+
   <!-- 0 · WHAT THIS STRETCH OF DAYS IS FOR -->
   <div class="phaseband" id="phaseband" style="display:none">
     <div class="shead">
@@ -42,7 +46,7 @@
       <h2>Posting options</h2>
       <span class="stamp" id="steer-stamp">…</span>
     </div>
-    <p class="sub">The first option is the current suggestion, not a command. Choose whichever option matches footage that is ready.</p>
+    <p class="sub" id="start-sub">The first option is the current suggestion, not a command. Choose whichever option matches footage that is ready.</p>
     <div id="posting-options"></div>
     <div id="posting-error" class="note red" style="display:none"></div>
     <div id="np-read" class="note blue" style="display:none"></div>
@@ -154,6 +158,15 @@ window.ANIBA_PHASE=null;
 
 /* ---------- steer: posting options ---------- */
 fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
+  var camp=s.campaign||{}, CLOSED=!!camp.closed;
+  if(CLOSED){
+    var cc=document.getElementById("campaign-closed");
+    cc.style.display="block";
+    cc.innerHTML="<b>Campaign closed.</b> "+esc(camp.note||"");
+    document.getElementById("start-sub").textContent=
+      "Every date below has passed — this is the record of what was planned, not a suggestion for today. "
+      +"The daily numbers underneath are still live.";
+  }
   var phase=currentPhase(s);
   window.ANIBA_PHASE=phase;
   if(phase){
@@ -170,31 +183,41 @@ fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(
   renderPaid(phase,s.budget_total);
 
   var schedule=s.schedule||[], suggested=null;
-  schedule.forEach(function(e){ if(e.date===TODAY) suggested=e; });
-  if(!suggested){
-    var upcoming=schedule.filter(function(e){return e.date>=TODAY;});
-    suggested=upcoming.length?upcoming[0]:schedule[schedule.length-1];
+  if(!CLOSED){
+    schedule.forEach(function(e){ if(e.date===TODAY) suggested=e; });
+    if(!suggested){
+      // Only ever suggest forward. This used to fall back to the LAST entry,
+      // which is how a played show kept rendering as "Current suggestion".
+      var upcoming=schedule.filter(function(e){return e.date>=TODAY;});
+      suggested=upcoming.length?upcoming[0]:null;
+    }
   }
   var st=document.getElementById("steer-stamp");
   if(s.stale){ st.textContent="no fresh numbers today — schedule unchanged"; st.className="stamp warn"; }
   else ageStamp(st,(s.generated_at||"").slice(0,10),1);
-  if(!suggested){
+  if(!schedule.length){
     var empty=document.getElementById("posting-error");
     empty.style.display="block"; empty.textContent="No posting options are in the schedule — tell Harry.";
     return;
   }
 
-  var ordered=[suggested].concat(schedule.filter(function(e){return e!==suggested;}));
+  // With a live suggestion it leads; otherwise the list reads as an archive,
+  // newest first, and nothing claims to be today's move.
+  var ordered=suggested
+    ? [suggested].concat(schedule.filter(function(e){return e!==suggested;}))
+    : schedule.slice().sort(function(a,b){return String(b.date||"").localeCompare(String(a.date||""));});
   var host=document.getElementById("posting-options");
   ordered.forEach(function(entry,index){
-    var current=index===0;
+    var current=(index===0&&!!suggested);
+    var label=current?"Current suggestion"
+      :(entry.status==="closed"?"Closed — date passed":"Posting option");
     var d=document.createElement("details");
     d.className="fold"+(current?" hero":"");
     d.dataset.k="hub-option-"+entry.date;
     if(current) d.open=true;
     var summary=document.createElement("summary");
     summary.innerHTML='<div class="shead"><div><div class="label" style="color:'+(current?'var(--brass)':'var(--ink)')+'">'
-      +(current?'Current suggestion':'Posting option')+'</div><h3 style="font-size:18px;margin-top:4px">'+esc(entry.artist)+'</h3>'
+      +label+'</div><h3 style="font-size:18px;margin-top:4px">'+esc(entry.artist)+'</h3>'
       +'<p class="stamp" style="margin-top:3px">Idea: “'+esc(entry.overlay)+'”</p></div>'
       +'<span class="stamp">Originally planned for '+esc(longDate(entry.date,true))+'</span></div>';
     d.appendChild(summary);
@@ -333,14 +356,19 @@ fetch("qa.json",{cache:"no-store"}).then(function(r){return r.json();}).then(fun
 var TODOS=[
   /* boost-start: done — Phase 1 ran and closed at $59.68 (2026-08-20). */
   /* boost-card: moot — no further boost is running. */
-  {k:"invite-toggle", t:"Turn on “Guests can invite friends” on the event", s:"Event settings, ten seconds. Lets all 38 responders invite their own people."},
-  {k:"groups-join", t:"Request to join The South Side Of Chicago and Bronzeville Alliance", s:"From Aniba's personal profile. Private groups — admins take days, so today."},
-  {k:"band-reshare", t:"Every band member reshares today's post", s:"Six networks instead of one. Costs nothing."},
-  {k:"dm-replies", t:"Reply to every TAKE ME BACK comment with the link, by DM", s:"With no boost running, this is the whole funnel — the most valuable thing on this list. The comment opens a 24-hour window where the DM is allowed, so use it the same day. This builds the list you own."}
+  /* `until` added 2026-08-22: every item below was written for the Aug 21
+     countdown, so each one closes itself out the day after the show rather
+     than sitting here asking for work on a played date. */
+  {k:"invite-toggle", t:"Turn on “Guests can invite friends” on the event", s:"Event settings, ten seconds. Lets all 38 responders invite their own people.", until:"2026-08-21"},
+  {k:"groups-join", t:"Request to join The South Side Of Chicago and Bronzeville Alliance", s:"From Aniba's personal profile. Private groups — admins take days, so today.", until:"2026-08-21"},
+  {k:"band-reshare", t:"Every band member reshares today's post", s:"Six networks instead of one. Costs nothing.", until:"2026-08-21"},
+  {k:"dm-replies", t:"Reply to every TAKE ME BACK comment with the link, by DM", s:"With no boost running, this is the whole funnel — the most valuable thing on this list. The comment opens a 24-hour window where the DM is allowed, so use it the same day. This builds the list you own.", until:"2026-08-21"}
   /* boost-event-check: moot — Phase 2 cancelled 2026-08-20, no event ads. */
 ];
 var todo=document.getElementById("todo");
-TODOS.filter(function(x){return !x.from||TODAY>=x.from;}).forEach(function(x){
+TODOS.filter(function(x){
+  return (!x.from||TODAY>=x.from) && (!x.until||TODAY<=x.until);
+}).forEach(function(x){
   var li=document.createElement("li");
   li.innerHTML='<label><input type="checkbox"><span class="t"></span></label>';
   var t=li.querySelector(".t"); t.innerHTML=esc(x.t)+"<small>"+esc(x.s)+"</small>";
@@ -350,6 +378,12 @@ TODOS.filter(function(x){return !x.from||TODAY>=x.from;}).forEach(function(x){
   cb.addEventListener("change",function(){localStorage.setItem(key,cb.checked?"1":"0");});
   todo.appendChild(li);
 });
+if(!todo.children.length){
+  var none=document.createElement("li");
+  none.className="none";
+  none.textContent="Nothing waiting on you — every dated item from the campaign has closed out.";
+  todo.appendChild(none);
+}
 
 /* ---------- old anchors keep meaning ---------- */
 var MOVED={

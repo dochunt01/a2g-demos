@@ -92,6 +92,8 @@ button.copybtn.done{background:var(--green); border-color:var(--green); box-shad
 /* checklist */
 .todo{list-style:none; padding:0; margin-top:4px}
 .todo li{margin-top:8px}
+/* empty state — every dated item closed out (2026-08-22) */
+.todo li.none{color:var(--dim); font-size:14px; font-style:italic; margin-top:6px}
 .todo label{display:flex; gap:12px; align-items:flex-start; cursor:pointer;
   padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:rgba(16,21,36,.5); transition:border-color .18s}
 .todo label:hover{border-color:var(--blue)}
