@@ -25,7 +25,6 @@
   <!-- 0a · CAMPAIGN CLOSED — driven by steer.json `campaign.closed`, so the
        closeout happens on its own the day after the end date. -->
   <div class="note green" id="campaign-closed" style="display:none"></div>
-  <div class="note red" id="stop-check" style="display:none"></div>
 
   <!-- 0 · WHAT THIS STRETCH OF DAYS IS FOR -->
   <div class="phaseband" id="phaseband" style="display:none">
@@ -160,18 +159,6 @@ window.ANIBA_PHASE=null;
 /* ---------- steer: posting options ---------- */
 fetch("steer.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(s){
   var camp=s.campaign||{}, CLOSED=!!camp.closed;
-  var needStop=camp.phases_needing_stop_check||[];
-  if(needStop.length){
-    var byKey={}; (s.phases||[]).forEach(function(p){byKey[p.key]=p;});
-    var names=needStop.map(function(k){
-      var p=byKey[k]||{}; return (p.label||k)+" (ended "+longDate(p.ends,true)+")";
-    }).join(", ");
-    var sc=document.getElementById("stop-check");
-    sc.style.display="block";
-    sc.innerHTML="<b>Check the ads manager.</b> "+esc(names)
-      +" — the end date has passed and nothing here confirms the boost actually stopped. "
-      +"If it is still running it is still spending. Once it is stopped, tell Harry so the number gets recorded.";
-  }
   if(CLOSED){
     var cc=document.getElementById("campaign-closed");
     cc.style.display="block";
@@ -295,10 +282,8 @@ function paintPaid(){
   // A phase past its end date, or one that was cancelled, never renders a
   // "go start the boost" line again — that instruction expires with the date.
   var doLine=closed
-    ? (phase.needs_stop_check
-        ? "The end date has passed — confirm in the ads manager that this actually stopped."
-        : (declared==="cancelled" ? "Cancelled — nothing to start and nothing to watch."
-                                  : "Closed. Its end date has passed, so there is nothing to do here."))
+    ? (declared==="cancelled" ? "Cancelled — nothing to start and nothing to watch."
+                              : "Closed. Its end date has passed, so there is nothing to do here.")
     : (notStarted?phase.action_start:(status==="running"?phase.action_running:""));
   var doEl=document.getElementById("paid-do");
   doEl.textContent=doLine||""; doEl.style.display=doLine?"block":"none";
