@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-24T07:00:25-05:00",
+  "generated_at": "2026-08-25T07:00:14-05:00",
   "generator": "steer_gen v1 (deterministic)",
   "stale": false,
-  "read": "Lauryn Hill countdown: +0 views since yesterday. As of Monday, August 24, 2026.",
+  "read": "Lauryn Hill countdown: +0 views since yesterday. As of Tuesday, August 25, 2026.",
   "keep": [
     "Fifteen seconds — the 15-second post out-engaged the 47-second one 4-to-1 (worth testing again, not yet proven)",
     "Post on the personal profile, not the band page"
@@ -96,7 +96,7 @@
       "why": "Every person reached now is a person who can be reminded on Wednesday.",
       "action_start": "Done — nothing to start.",
       "action_running": "Finished. The numbers are on the boost report.",
-      "days_past_end": 6,
+      "days_past_end": 7,
       "lifecycle": "ended",
       "closed": true
     },
@@ -113,7 +113,7 @@
       "why": "A local show gets decided in the last seventy-two hours — so with no paid behind them, the posts matter more, not less.",
       "action_start": "Nothing to start. Post twice a day, name the date, and skip the boost sheet entirely.",
       "action_running": "No boost to watch. Keep replying to every TAKE ME BACK comment by DM — that is the whole funnel now.",
-      "days_past_end": 3,
+      "days_past_end": 4,
       "lifecycle": "ended",
       "closed": true
     }
