@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>The Reel Book · Savoirfaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800&display=swap">
+<style>
+  :root{
+    --ink:#141210; --brown:#42210F; --verm:#D8451F; --verm-h:#EE5A32;
+    --card:#F3EFE4; --sleeve:#E9E3D5; --text:#2A2118; --soft:#6E655A;
+    --teal:#0F5B54; --gold:#B87A1E;
+    --fd:"Jost",Futura,"Avenir Next",Avenir,sans-serif;
+    --fb:"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; font-family:var(--fb); font-size:18px; line-height:1.65; color:var(--text);
+    background:linear-gradient(170deg,var(--ink) 0%,var(--ink) 26%,var(--brown) 55%,var(--verm) 88%,var(--verm-h) 100%);
+    background-attachment:fixed; min-height:100vh;
+  }
+  main{max-width:700px; margin:0 auto; padding:1.8rem 1.05rem 4rem}
+  .mast{color:var(--sleeve); text-align:center; margin-bottom:1.6rem}
+  .mast .date{font-family:var(--fd); font-weight:600; letter-spacing:.22em; text-transform:uppercase; font-size:.8rem; color:var(--verm-h)}
+  .mast h1{font-family:var(--fd); font-weight:800; text-transform:uppercase; font-size:clamp(2.1rem,9vw,3rem); letter-spacing:.03em; line-height:1.05; margin:.3rem 0 .45rem}
+  .mast p{margin:0 auto; max-width:46ch; opacity:.9; font-size:1.02rem}
+  .band{display:flex; align-items:center; gap:.6rem; margin:2.1rem 0 .85rem; color:var(--sleeve)}
+  .band h2{font-family:var(--fd); font-weight:800; text-transform:uppercase; letter-spacing:.13em; font-size:1.12rem; margin:0}
+  .band::after{content:""; flex:1; height:2px; background:rgba(233,227,213,.4); border-radius:2px}
+  .card{background:var(--card); border-radius:14px; margin:0 0 .85rem; box-shadow:0 4px 16px rgba(10,6,4,.4); padding:1.05rem 1.1rem}
+  .card h3{font-family:var(--fd); font-weight:700; font-size:1.1rem; margin:0 0 .45rem; color:var(--hue,var(--text))}
+  .card p{margin:.4rem 0; max-width:60ch}
+  .card ul{margin:.5rem 0 0; padding-left:1.15rem}
+  .card li{margin:.45rem 0; max-width:58ch}
+  .card li::marker{color:var(--hue,var(--verm))}
+  .h-verm{--hue:var(--verm)} .h-teal{--hue:var(--teal)} .h-gold{--hue:var(--gold)}
+  .do{font-weight:700; color:var(--hue,var(--text))}
+  .stop{background:#F6D9CD; border-radius:6px; padding:.12rem .4rem; font-weight:700; color:#B33313}
+  .good{color:var(--teal); font-weight:700}
+  .statrow{display:flex; flex-wrap:wrap; gap:.6rem; margin:.4rem 0 .2rem}
+  .chipstat{background:#EAE2D0; border-radius:10px; padding:.55rem .8rem; flex:1 1 140px; min-width:130px}
+  .chipstat .v{font-family:var(--fd); font-weight:800; font-size:1.5rem; font-variant-numeric:tabular-nums; color:var(--hue,var(--text)); line-height:1.15}
+  .chipstat .l{font-size:.8rem; color:var(--soft); line-height:1.3}
+  .tablewrap{overflow-x:auto; margin:.5rem 0 0}
+  table{border-collapse:collapse; font-size:.95rem; width:100%}
+  th{font-family:var(--fd); font-weight:700; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--soft); text-align:left; border-bottom:2px solid var(--hue,var(--verm)); padding:.35rem .5rem .35rem 0}
+  td{border-bottom:1px solid #DDD3BF; padding:.45rem .5rem .45rem 0; vertical-align:top}
+  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  a{color:var(--verm); font-weight:600; text-decoration-thickness:1px}
+  .movenum{
+    display:inline-grid; place-items:center; width:1.85rem; height:1.85rem; border-radius:50%;
+    background:var(--hue,var(--verm)); color:#FFF9F0; font-family:var(--fd); font-weight:800; font-size:1.02rem;
+    margin-right:.55rem; vertical-align:-.4rem;
+  }
+  footer{text-align:center; color:rgba(233,227,213,.85); font-size:.8rem; margin-top:2.2rem; font-family:var(--fd); letter-spacing:.13em; text-transform:uppercase; line-height:2}
+</style>
+</head>
+<body>
+<main>
+  <div class="mast">
+    <div class="date">Savoirfaire · Aug 26 2026</div>
+    <h1>📼 The Reel Book</h1>
+    <p>What your reels are doing, what's working, and the seven moves that make them work harder.</p>
+  </div>
+
+  <div class="band"><h2>🚨 The big picture</h2></div>
+  <div class="card h-verm">
+    <p><span class="do">Content is not the problem — the booking path is.</span> You post almost twice a day and people respond. But every view lands somewhere with no way to book you. The booking page and form we're building fix that — the job of everything below is to be worth pointing at that link the day it goes live.</p>
+  </div>
+
+  <div class="band"><h2>📊 The numbers</h2></div>
+  <div class="card h-teal">
+    <div class="statrow">
+      <div class="chipstat"><div class="v">~2,000</div><div class="l">Instagram followers</div></div>
+      <div class="chipstat"><div class="v">~5,900</div><div class="l">Facebook followers</div></div>
+      <div class="chipstat"><div class="v">12</div><div class="l">reels in 7 days</div></div>
+      <div class="chipstat"><div class="v">10.4%</div><div class="l">best engagement — “Cherokee”</div></div>
+    </div>
+    <ul>
+      <li><span class="good">Posting volume is already pro-level.</span> Almost twice a day.</li>
+      <li>Facebook is ~3× the Instagram audience — the new Artist Page is what lets it keep growing past the friend cap and finally shows us real numbers.</li>
+      <li>One cleanup: Instagram shows ~7,600 following vs ~2,000 followers. A deliberate unfollow pass makes the profile read stronger.</li>
+    </ul>
+  </div>
+
+  <div class="card h-teal">
+    <h3>Top reels this week</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Reel</th><th class="num">Plays</th><th class="num">Eng %</th><th class="num">Length</th></tr>
+      <tr><td>Mentor monologue</td><td class="num">275</td><td class="num">4.7</td><td class="num">56s</td></tr>
+      <tr><td>Elegy for a Duck</td><td class="num">246</td><td class="num">8.1</td><td class="num">89s</td></tr>
+      <tr><td>Cherokee (Ray Noble)</td><td class="num">230</td><td class="num">10.4</td><td class="num">120s</td></tr>
+      <tr><td>Sept 17 tickets</td><td class="num">230</td><td class="num">4.3</td><td class="num">27s</td></tr>
+      <tr><td>IWTNT</td><td class="num">226</td><td class="num">6.2</td><td class="num">41s</td></tr>
+      <tr><td>Afternoon in Paris</td><td class="num">214</td><td class="num">7.5</td><td class="num">132s</td></tr>
+      <tr><td>Butterflies (MJ)</td><td class="num">186</td><td class="num">8.6</td><td class="num">37s</td></tr>
+      <tr><td>DuSable throwback</td><td class="num">175</td><td class="num">10.3</td><td class="num">14s</td></tr>
+      <tr><td>West Coast Blues</td><td class="num">93</td><td class="num">5.4</td><td class="num">5:09</td></tr>
+      <tr><td>Photo montage</td><td class="num">66</td><td class="num">4.5</td><td class="num">15s</td></tr>
+      <tr><td>Katalyst family</td><td class="num">45</td><td class="num">6.7</td><td class="num">14s</td></tr>
+      <tr><td>So Hardcore (Busta)</td><td class="num">43</td><td class="num">9.3</td><td class="num">2:35</td></tr>
+    </table></div>
+    <p style="font-size:.9rem; color:var(--soft); margin-top:.6rem">Facebook: 10 public reels, 3,721 total views — top reel 897. Full Facebook analytics unlock now that the Artist Page exists.</p>
+  </div>
+
+  <div class="band"><h2>🎯 What the reels show</h2></div>
+  <div class="card h-gold">
+    <ul>
+      <li><span class="do">You talking to camera</span> (“I refuse to explain my value…”) — best of the week: 275 plays, 5 comments. People want <em>you</em>, not just the violin.</li>
+      <li><span class="do">Full tunes, labeled</span> (Cherokee, Elegy, Busta) — the deepest engagement: 10.4% and 8.1%.</li>
+      <li><span class="do">Story / throwback</span> (DuSable 2019) — 10.3% <span class="stop">but the TikTok watermark buries it on Instagram</span>.</li>
+      <li>Filler (photo montages, quote cards) — 45–66 plays. That's the floor; it drags the average down.</li>
+      <li>Across everything: on-screen text is a <em>title</em>, not a hook · captions are hashtags only · <span class="stop">no call-to-action anywhere</span>.</li>
+    </ul>
+  </div>
+
+  <div class="band"><h2>🎬 The seven moves</h2></div>
+  <div class="card h-verm"><p><span class="movenum">1</span><span class="do">The sandwich.</span> 5–10 seconds of you talking (a hook: “This tune got me thrown out of a lesson…”) → the performance → one line at the end: “book a date” / “tickets.”</p></div>
+  <div class="card h-teal"><p><span class="movenum">2</span><span class="do">Live in 30–90 seconds.</span> Keep the long full tunes as anchors — with a hook up front. Move the 14-second filler to Stories.</p></div>
+  <div class="card h-gold"><p><span class="movenum">3</span><span class="do">Text on screen = hook, not title.</span> “A violin isn't supposed to do this to a Busta Rhymes beat” beats the song name. Caption: hook first, hashtags last.</p></div>
+  <div class="card h-verm"><p><span class="movenum">4</span><span class="do">Alternate the two lanes.</span> Crossover (Busta, MJ) brings new fans; standards (Cherokee, Elegy) feed the people who already love you. Program them like a set list.</p></div>
+  <div class="card h-teal"><p><span class="movenum">5</span><span class="do">Weekly throwback.</span> The archive works (DuSable proved it) — just re-export without the TikTok watermark.</p></div>
+  <div class="card h-gold"><p><span class="movenum">6</span><span class="do">15 minutes a day in the comments.</span> Reply to every single one — it's the cheapest growth there is. Pin your 3 best reels (Cherokee, the monologue, DuSable).</p></div>
+  <div class="card h-verm"><p><span class="movenum">7</span><span class="do">One name, one link.</span> Same handle on Instagram + the new Artist Page, post natively to both, and every reel points at the same link-in-bio → the booking form, the day it's live.</p></div>
+
+  <footer>Savoirfaire · Chicago · Est. 1986<br>Prepared by A2G Systems · Aug 26 2026</footer>
+</main>
+</body>
+</html>
