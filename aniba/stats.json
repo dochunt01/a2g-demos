@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-04T07:00:14-06:00",
+  "generated_at": "2026-11-05T07:01:03-06:00",
   "sources": {
     "personal_reels": {
       "as_of": "2026-11-04",
-      "status": "scraped",
+      "status": "failed",
       "note": "Read from the public Reels grid at facebook.com/aniba.hotep/reels, logged out, on August 13, 2026.",
       "items": [
         {
@@ -3721,7 +3721,7 @@
     },
     "event": {
       "as_of": "2026-11-04",
-      "status": "scraped",
+      "status": "failed",
       "responded": 41,
       "history": [
         {
